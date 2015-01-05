@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Install and work with PostgreSQL in Rails</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Dec 12, 2012</span></p>
+              <h3><a href="">Install and work with PostgreSQL in Rails</a></h3>
+          	</header>
+            <p>How to install PostgreSQL on local (I&#8217;m using Ubuntu 12.10) and get it working with your Rails app.  </p>
+
+<p>Install PostgreSQL and development package<br />
+    $sudo apt-get install postgresql libpq-dev</p>
+
+<p>Change the postgresql configuration file <em>/etc/postgresql/9.1/main/pg_hba.conf</em> to solve this error<br />
+    FATAL: Peer authentication failed for user</p>
+
+<p>Replace <em>peer</em> to <strong>md5</strong>, otherwise you will receive a peer authentication issue<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>peer</em></p>
+
+<p>Result<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>md5</em></p>
+
+<p>Then reload postgresql to apply the change<br />
+    $sudo /etc/init.d/postgresql reload </p>
+
+<p>Enter the PostgreSQL console<br />
+    $sudo -u postgres psql postgres  </p>
+
+<p>Setup databases<br />
+    #Login to postgresql prompt as the postgres user
+    $sudo su postgres -c psql</p>
+
+<p>Create a postgresql user for your project<br />
+    postgres=# CREATE USER username with password &#8216;password&#8217;;</p>
+
+<p>Give your new user higher permissions<br />
+    postgres=# ALTER USER username superuser;</p>
+
+<p>Create the development and test databases<br />
+    postgres=# CREATE DATABASE projectname<em>development;
+    postgres=# CREATE DATABASE projectname</em>test;</p>
+
+<p>Give permissions to the user on the databases<br />
+    postgres=# GRANT all privileges on database projectname<em>development to username;
+    postgres=# GRANT all privileges on database projectname</em>test to username;</p>
+
+<p>Exit your postgresql session<br />
+    postgres=# \q </p>
+
+<p>If you need to alter the password<br />
+    <a href="http://www.postgresql.org/docs/8.0/static/sql-alteruser.html">ALTER USER username with password &#8216;new_password&#8217;;</a>  </p>
+
+<p>Update your Gemfile<br />
+    gem &#8216;pg&#8217;  </p>
+
+<p>Then<br />
+    $bundle install  </p>
+
+<p>Alter <strong>database.yml</strong> file to:<br />
+    development:
+      adapter: postgresql
+      encoding: unicode
+      database: projectname_development
+      pool: 5
+      username: username
+      password: password</p>
+
+<pre><code>test:
+  adapter: postgresql
+  encoding: unicode
+  database: projectname_test
+  pool: 5
+  username: username
+  password: password
+</code></pre>
+
+<p>Last<br />
+    $rake db:migrate  </p>
+
+<p>Additional resources:
+https://devcenter.heroku.com/articles/heroku-postgresql#local-setup<br />
+http://railscasts.com/episodes/342-migrating-to-postgresql  </p>
+
+<p>Other resources listing issues you may encounter:<br />
+http://mrfrosti.com/2011/11/postgresql-for-ruby-on-rails-on-ubuntu/  </p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/sql">sql</a>,                         <a href="/blog/categories/postgresql">postgresql</a>,                         <a href="/blog/categories/rails">rails</a>,                         <a href="/blog/categories/ruby">ruby</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

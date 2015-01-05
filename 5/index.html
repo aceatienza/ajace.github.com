@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-3-view">Procedural PHP part 3-View</a></h3>
+              </header>
+              
+              <p>Part 3 continues with generating the HTML for the report. Inside of Asana, tasks can be made into a &#8216;section&#8217; task, which gives the illusion of grouping for all tasks below it. The api does not provide this information however. In order to simulate this, tasks are added to groups and broken apart if it has a header, determined if the task&#8217;s name has a &#8216;:&#8217;. If a header is found, start a new group.</p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+</head>
+<body>
+    <div class="borders top"></div>
+    <div id="container"></p>
+
+<p>&lt;?php
+    echo &#8216;<header><img class="logo" src="img/BUlogo.gif"><h1 class="report-header">Account Report for &#8216;.dl(time()).&#8217;</h1></header>&#8217;;</p>
+
+<pre><code>foreach ($projects as $k=&gt;$p) {
+    echo '&lt;header class="project-header"&gt;&lt;h2&gt;Project: '.$p-&gt;name. '&lt;/h2&gt;&lt;/header&gt;';
+    $ic = 'clear';
+
+    $taskGroup = array();
+
+    foreach ($p-&gt;tasks as $m=&gt;$t) {
+        if ($t-&gt;header) {  
+            if(empty($taskGroup)){
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            } else {
+                // generate table with all tasks
+                echo '&lt;table class="tasks table table-bordered"&gt;';
+                echo '&lt;tbody&gt;';
+                foreach ($taskGroup as $k=&gt;$v) {
+                    echo '&lt;tr class="tasks-row"&gt;';
+                        echo '&lt;td class="tasks-area"&gt;';
+                            // Loop through subtasks here //
+                            echo '&lt;div class="' . $ic . '"&gt;';
+
+                                echo '&lt;h3&gt;' . $v-&gt;name . '&lt;/h3&gt;';  
+
+                                if($v-&gt;info) {
+                                    echo '&lt;div class="task-info"&gt;' . $v-&gt;info . '&lt;/div&gt;';
+                                }
+
+                                if ($v-&gt;notes!='') {
+                                    echo '&lt;ul&gt;';
+                                        echo '&lt;li&gt;';
+                                            echo '&lt;span class="notes"&gt;' . $v-&gt;notes . '  ' . '&lt;span class="dueon"&gt;' . comments_dueon($v-&gt;due_on) . '&lt;/span&gt;&lt;/span&gt;';
+                                        echo '&lt;/li&gt;';
+                                    echo '&lt;/ul&gt;';
+                                }
+
+                            echo '&lt;/div&gt;';
+                        echo '&lt;/td&gt;';
+
+                        echo '&lt;td class="assignee-area"&gt;';
+                            if ($v-&gt;state) {
+                                echo '&lt;div class="task-state"&gt;&lt;h3&gt;' . $v-&gt;state . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+
+                            $v-&gt;assignee = !empty($v-&gt;assignee) ? $v-&gt;assignee : '';
+                            if ($v-&gt;assignee) {
+                                 echo '&lt;div class="assigned"&gt;&lt;h3&gt;' . $v-&gt;assignee-&gt;name . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+                        echo '&lt;/td&gt;';
+                    echo '&lt;/tr&gt;';
+                } // end foreach
+                echo '&lt;/tbody&gt;';
+                echo '&lt;/table&gt;';
+
+                // clean out the array
+                $taskGroup = array();
+
+                // start a new header
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            }
+        } else {
+            // no header, add to group
+            $taskGroup[] = $t;
+        }
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-2">Procedural PHP part 2</a></h3>
+              </header>
+              
+              <p>Continuing from the <a href="'blog/2013/08/30/procedural-php/'">previous</a> part, the meat of the script is in cron_report.php. Continuing in procedural style, the script goes from top to bottom, with only one side step into the vetTask function.   </p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php
+    // include the Asana php library again
+    include &#8216;asana.php&#8217;;</p>
+
+<pre><code>// grab the key from SESSION if available
+if(isset($_SESSION['asana_api_key']) || $_POST['asana_api_key']) {
+    $key = $_SESSION['asana_api_key'] = $_POST['asana_api_key']; 
+
+    $asana = new Asana ($key);
+}
+
+
+function vetTask ($task) {
+    // ... arranges the tasks as either tasks, or as comments if it does not have a header
+}
+
+// some date functions here for formatting
+
+
+$projects = array();
+if(isset($_POST['selected_projects'])) {
+
+    // loop through all the projects chosen previously
+    foreach ($_POST['selected_projects'] as $key =&gt; $projectId) {
+
+        // get the project info from Asana
+        $ws = json_decode($asana-&gt;getProject($projectId));
+        if($asana-&gt;responseCode != 200 || is_null($ws)) {
+            echo "Error while trying to connect to Asana, response code: {$responseCode}";
+        }
+
+        $ws = $ws-&gt;data;
+
+        // get the project's tasks from Asana
+        $tasks = json_decode($asana-&gt;getProjectTasks($ws-&gt;id));
+        $arTasks = array();
+
+        // establish comments as specific streams in task objects
+        foreach($tasks-&gt;data as $m=&gt;$task) {
+            $task-&gt;story = json_decode($asana-&gt;getTaskStories($task-&gt;id));
+            $arTasks[] = vetTask($task);
+        }
+        $ws-&gt;tasks = $arTasks;
+
+        // add back to the projects array for the report
+        $projects[] = $ws;
+    }
+}
+
+// generate the View
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php">Procedural PHP part 1</a></h3>
+              </header>
+              
+              <p>My last project at Brooklyn United was to build a <a href="https://github.com/ajace/asanareporting">report</a> of a project/s from Asana&#8217;s api. Each Project has many tasks and each task can have many comments. Procedural programming is the &#8216;traditional&#8217; way of using PHP. That is, the script is evaluated basically from top to bottom. After getting a feel for the Asana api, I separated the script into 2 parts. The first part captures which projects the user (someone on the BU team) would like to generate a report for, and the actual report itself.</p>
+
+<p>&#8220;` php Index.php https://github.com/ajace/asanareporting/blob/master/index.php
+&lt;?php
+    // start a session
+    session_start();</p>
+
+<pre><code>// use the php api library provided by Asana
+include 'asana.php';
+
+if(isset($_POST['asana_api_key'])) {
+    $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
+} 
+
+if(isset($_SESSION['asana_api_key'])) {
+    $key = $_SESSION['asana_api_key']; 
+    $asana = new Asana($key);
+
+    $asanaProjectList = $asana-&gt;getProjects();
+    $asanaProjectList = json_decode($asanaProjectList);
+    $asanaProjectList = $asanaProjectList-&gt;data;
+}
+
+// the HTML form here which asks for a key in order to begin
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/25/sql-query-examples">SQL query examples for tables with relationships</a></h3>
+              </header>
+              
+              <p>Given these tables:<br />
+Faculty (facId, name, department, rank)<br />
+Class (classNumber, facId, schedule, room)<br />
+ENROLL (stuId, classNumber, grade)<br />
+Student (stuId, lastName, firstName, major, credits)  </p>
+
+<p>Student and Class is a &#8220;has many&#8221; relationship. Students have many classes and the reverse, Classes have many Students. ENROLL is the relation between the two in an E-R model, and also called a pivot table.<br />
+Find stuId and grade of all students taking any course taught by the Faculty member whose facId is F110. Arrange in order by stuId. 
+&#8220;` bash  </p>
+
+<p>SELECT Student.stuId, Student.lastName, ENROLL.grade major 
+    FROM Class, ENROLL, Student 
+    WHERE Class.facId=&#8221;F110&#8221; AND Class.classNumber=ENROLL.classNumber 
+    AND ENROLL.stuId=Student.stuId ORDER BY Student.stuId;</p>
+
+<p>or using JOIN</p>
+
+<p>SELECT Student.stuId, ENROLL.grade 
+    FROM Student LEFT JOIN ENROLL on (Student.stuId = ENROLL.stuId)
+    WHERE ENROLL.classNumber IN 
+        (SELECT Class.classNumber FROM Class WHERE facId=&#8221;F110&#8221;)
+            ORDER BY Student.stuId;</p>
+
+<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+| stuId | lastName | major |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+| S1002 | Chin     | B     |
+| S1010 | Burns    | NULL  |
+| S1020 | Rivera   | A     |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+&#8220;`</p>
+
+<p>Find IDs and names of all students taking ART 103A:
+&#8220;` bash<br />
+SELECT ENROLL.stuID, lastName, firstName 
+    FROM Student, ENROLL WHERE classNumber=&#8221;ART103A&#8221; 
+    AND ENROLL.stuId=Student.stuId;</p>
+
+<p>or using JOIN</p>
+
+<p>SELECT Student.stuId, lastName, firstName 
+    FROM Student JOIN ENROLL on ENROLL.stuId=Student.stuId 
+    WHERE ENROLL.classNumber=&#8221;Art103A&#8221;;</p>
+
+<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+| stuID | lastName | firstName |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+| S1001 | Smith    | Tom       |
+| S1002 | Chin     | Ann       |
+| S1010 | Burns    | Edward    |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+&#8220;`</p>
+
+<p>Find the class numbers of all the courses taught by Byrne of the math department:<br />
+&#8220;` bash
+SELECT Class.classNumber FROM Class, Faculty WHERE Class.facId = Faculty.facId AND Faculty.name = &#8220;Byrne&#8221;;</p>
+
+<pre><code>OR with a JOIN
+</code></pre>
+
+<p>SELECT Class.classNumber FROM Class JOIN Faculty ON Class.facId=Faculty.facId WHERE Faculty.name=&#8221;Byrne&#8221;;
+&#8220;`</p>
+
+<p>Find the names and IDs of all Faculty members who teach in class in Room H221:
+&#8220;` bash
+SELECT f.facId, f.name FROM Faculty f, Class c
+    WHERE f.facId=c.facId AND c.room = &#8220;H221&#8221;;</p>
+
+<pre><code>OR with JOIN
+</code></pre>
+
+<p>SELECT f.facId, f.name FROM Faculty f 
+    JOIN Class c ON f.facId=c.facId WHERE c.room = &#8220;H221&#8221;;
+&#8220;`</p>
+
+<p>Get an alphabetical list of names and IDs of all students in any class taught by F110.
+&#8220;` bash 
+SELECT s.stuId, s.lastName FROM Student s, ENROLL e, Class c
+WHERE s.stuId=e.stuId AND e.classNumber=c.classNumber 
+AND c.facId=&#8221;F110&#8221; GROUP BY s.lastName ORDER BY s.lastName;</p>
+
+<pre><code>OR using IN
+</code></pre>
+
+<p>SELECT lastName, firstName, stuId
+ FROM Student
+ WHERE stuId IN (SELECT stuId
+ FROM ENROLL 
+WHERE classNumber IN 
+(SELECT classNumber 
+FROM Class 
+WHERE facId=&#8217;F110&#8217;)) 
+ORDER by lastName, firstName ASC; 
+&#8220;`</p>
+
+<p>Find the name of all students enrolled in CSC201A. Using Exists:
+&#8220;` bash
+SELECT s.lastName, s.firstName FROM Student s 
+    WHERE Exists (SELECT * FROM ENROLL e
+    WHERE e.stuId=s.stuId And e.classNumber =&#8217;CSC201A&#8217;); </p>
+
+<pre><code>OR with a JOIN (can't use IN since the tables have been joined)
+</code></pre>
+
+<p>SELECT s.lastName, s.firstName FROM Student s JOIN ENROLL e ON s.stuId=e.stuId WHERE e.classNumber=&#8221;CSC201A&#8221;;
+&#8220;`</p>
+
+<p>Find the names of all students who are not enrolled in CSC201A. (Can&#8217;t use a join or an IN subquery)
+<code>bash
+SELECT lastName, firstName FROM Student
+ WHERE Not Exists (SELECT * FROM ENROLL
+WHERE Student.stuId = ENROLL.stuId And classNumber ='CSC201A');</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/09/amazon-ec2-sudo-unable-to-resolve-host-after-setting-elastic-ip">Amazon EC2 Sudo: unable to resolve host after setting elastic ip</a></h3>
+              </header>
+              
+              <p>I recently created a new instance on Amazon EC2 of an ubuntu server and associated an elastic ip. I&#8217;m not sure if it changed the ip I was using before. Either way, had to first get the private dns name. I used <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html#set_aws_credentials_linux">AWS cli tools</a> to get the ip-xx-xx-xx-xx.</p>
+
+<p><code>bash Logged in to instance
+$ ec2din</code></p>
+
+<p><code>bash
+$ sudo hostname ip-xx-xx-xx-xx    # temporary change for the current instance
+$ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use</code></p>
+
+              
+            </article>
+					
+                      <a class="next" href="/6" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/4" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

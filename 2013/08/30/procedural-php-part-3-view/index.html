@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Procedural PHP part 3-View</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Aug 8, 2013</span></p>
+              <h3><a href="">Procedural PHP part 3-View</a></h3>
+          	</header>
+            <p>Part 3 continues with generating the HTML for the report. Inside of Asana, tasks can be made into a &#8216;section&#8217; task, which gives the illusion of grouping for all tasks below it. The api does not provide this information however. In order to simulate this, tasks are added to groups and broken apart if it has a header, determined if the task&#8217;s name has a &#8216;:&#8217;. If a header is found, start a new group.</p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+</head>
+<body>
+    <div class="borders top"></div>
+    <div id="container"></p>
+
+<p>&lt;?php
+    echo &#8216;<header><img class="logo" src="img/BUlogo.gif"><h1 class="report-header">Account Report for &#8216;.dl(time()).&#8217;</h1></header>&#8217;;</p>
+
+<pre><code>foreach ($projects as $k=&gt;$p) {
+    echo '&lt;header class="project-header"&gt;&lt;h2&gt;Project: '.$p-&gt;name. '&lt;/h2&gt;&lt;/header&gt;';
+    $ic = 'clear';
+
+    $taskGroup = array();
+
+    foreach ($p-&gt;tasks as $m=&gt;$t) {
+        if ($t-&gt;header) {  
+            if(empty($taskGroup)){
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            } else {
+                // generate table with all tasks
+                echo '&lt;table class="tasks table table-bordered"&gt;';
+                echo '&lt;tbody&gt;';
+                foreach ($taskGroup as $k=&gt;$v) {
+                    echo '&lt;tr class="tasks-row"&gt;';
+                        echo '&lt;td class="tasks-area"&gt;';
+                            // Loop through subtasks here //
+                            echo '&lt;div class="' . $ic . '"&gt;';
+
+                                echo '&lt;h3&gt;' . $v-&gt;name . '&lt;/h3&gt;';  
+
+                                if($v-&gt;info) {
+                                    echo '&lt;div class="task-info"&gt;' . $v-&gt;info . '&lt;/div&gt;';
+                                }
+
+                                if ($v-&gt;notes!='') {
+                                    echo '&lt;ul&gt;';
+                                        echo '&lt;li&gt;';
+                                            echo '&lt;span class="notes"&gt;' . $v-&gt;notes . '  ' . '&lt;span class="dueon"&gt;' . comments_dueon($v-&gt;due_on) . '&lt;/span&gt;&lt;/span&gt;';
+                                        echo '&lt;/li&gt;';
+                                    echo '&lt;/ul&gt;';
+                                }
+
+                            echo '&lt;/div&gt;';
+                        echo '&lt;/td&gt;';
+
+                        echo '&lt;td class="assignee-area"&gt;';
+                            if ($v-&gt;state) {
+                                echo '&lt;div class="task-state"&gt;&lt;h3&gt;' . $v-&gt;state . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+
+                            $v-&gt;assignee = !empty($v-&gt;assignee) ? $v-&gt;assignee : '';
+                            if ($v-&gt;assignee) {
+                                 echo '&lt;div class="assigned"&gt;&lt;h3&gt;' . $v-&gt;assignee-&gt;name . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+                        echo '&lt;/td&gt;';
+                    echo '&lt;/tr&gt;';
+                } // end foreach
+                echo '&lt;/tbody&gt;';
+                echo '&lt;/table&gt;';
+
+                // clean out the array
+                $taskGroup = array();
+
+                // start a new header
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            }
+        } else {
+            // no header, add to group
+            $taskGroup[] = $t;
+        }
+</code></pre>
+
+<p>&#8220;`</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/php">php</a>,                         <a href="/blog/categories/procedural">procedural</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

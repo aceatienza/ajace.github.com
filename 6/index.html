@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/07/pass-in-an-array-of-values-in-a">Pass in an array of values in a </a></h3>
+              </header>
+              
+              
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/06/php-anonymous-function">PHP anonymous function</a></h3>
+              </header>
+              
+              <p>I recently went down the rabbit hole looking for a way to compare 2 objects both inside of deeply nested array objects and came across PHP&#8217;s anonymous functions. It&#8217;s similar (exactly the same?) to javascript&#8217;s anonymous function. Typical use as a callback function and possibly recursion.</p>
+
+<p>&#8220;` php PHP http://php.net/manual/en/functions.anonymous.php</p>
+
+<pre><code>&lt;?php
+echo preg_replace_callback('~-([a-z])~', function ($match) {
+    return strtoupper($match[1]);
+}, 'hello-world');
+// outputs helloWorld
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Another modified example:
+&#8220;` php SO http://stackoverflow.com/questions/4166198/find-array-key-in-objects-array-given-an-attribute-value</p>
+
+<pre><code>&lt;?php
+$neededObjects = array_filter( $input_array, function ($e) {
+        return $e-&gt;id == $id_that_you_need; // if true, return this value_
+    }       
+);  
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jul 7, 2013</span>
+                <h3 class="article-title"><a href="/2013/07/14/vim-cheatsheet">Vim Cheatsheet</a></h3>
+              </header>
+              
+              <p>These are the vim keys and commands which I have been using the most for web development (PHP, HTML, CSS, Javascript) and sys admin. Also, here&#8217;s my <a href="https://gist.github.com/ajace/6101976">.vimrc</a>  </p>
+
+<h2>FILES</h2>
+
+<p>:e scp://user@host/path/file    * open remote file in a local VIM
+:ls (or :buffers)   list of open files/buffers<br />
+:bn                 next buffer
+:bp                 previous buffer
+:b#                 (# is a number to move to, same as switching open windows in Ubuntu 13.04 with ALT+1, ALT+2, etc.)
+:bw                 buffer wipe (delete buffers)
+:e                  open a new buffer (open a new file and load into buffer)
+:b TAB              cycle through the open files/buffers list</p>
+
+<h2>SESSIONS</h2>
+
+<p>:mksession! ~/today.ses     to save the session and call it today
+vim -S ~/today.ses          to reload the previous session</p>
+
+<h2>TABS</h2>
+
+<p>:tabe [filename]    open file in new tab
+:tabc               close
+:tabn, :tabp        switch tabs</p>
+
+<h2>WINDOWS</h2>
+
+<p>Ctrl-E              scroll down
+Crtl-Y              scroll up  </p>
+
+<p>Ctrl-W s and Ctrl-W v to split the current window horizontally and vertically.</p>
+
+<p>Ctrl-W w to swhitch between open windows, and Ctrl-W h (or j or k or l) to navigate through open windows.</p>
+
+<p>Ctrl-W c to close the current window, and Ctrl-W o to close all windows except the current one</p>
+
+<h2>INDENTATION</h2>
+
+<p>== align the current line
+=i{ align the inner block
+=% align to the matching parenthesis/bracket under the cursor
+14== align the next 14 lines
+=G align to the end of the file</p>
+
+<h2>SEARCH</h2>
+
+<p>/word       will search forward word. add :set wrapscan in .vimrc so that this is the only thing you&#8217;ll need
+?word       will search backward for word
+n           next
+N           previous
+?word       reverse search for word
+*           will search for the next instance of the word under the cursor</p>
+
+<h1>will search for the previous instance of the word under the cursor</h1>
+
+<h2>GETTING AROUND IN THE FILE</h2>
+
+<p>G           jump to end of buffer
+gg          jump to beginning of buffer</p>
+
+<h1>G or #gg   jump to # (line number)</h1>
+
+<h2>COPY, CUT, PASTE, UNDO</h2>
+
+<ul>
+<li>select text in visual mode then
+y           yank (copy)
+d           same as cut
+p           paste after
+P           paste before</li>
+</ul>
+
+<h2>HISTORY</h2>
+
+<p>gi          jump back to last place you were in Insert mode
+u           undo
+Ctrl-R      redo</p>
+
+<h2>FOLDING</h2>
+
+<ul>
+<li>I don&#8217;t fold stuff</li>
+</ul>
+
+<h2>AUTOCOMPLETION</h2>
+
+<p>Ctrl-x Ctrl-o, then Ctrl-n to go select next suggestion</p>
+
+<h2>EXTRA NOTES</h2>
+
+<ul>
+<li>you can&#8217;t copy from a remote session to the clipboard</li>
+<li>commands have auto-complete</li>
+</ul>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">May 5, 2013</span>
+                <h3 class="article-title"><a href="/2013/05/09/wordpress-send-email-on-published-post">Wordpress: send email on published post</a></h3>
+              </header>
+              
+              <p>The <a href="http://nychuskies.com">NYC Huskies</a> site needs to send out an email of an author, typically <a href="http://twitter.com/1kates">Katie</a>, to our alumni listserv. It was previously sent using Subscribe2 but, since we don&#8217;t really use the subscription function for the site, it&#8217;s kind of overkill to use a plugin just for one simple function. The first version sends an email only on the original publication. The second sends an email on post updates.</p>
+
+<p>Send using <a href="http://codex.wordpress.org/Function_Reference/wp_mail">wp_mail()</a> and then <a href="http://codex.wordpress.org/Function_Reference/add_action">add_action()</a>  </p>
+
+<p>&#8220;` php functions.php
+        function notify<em>via</em>email( $post<em>id ) {
+            $post = get</em>post( $post_id );
+            $to = &#8216;example@example.org&#8217;;    </p>
+
+<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
+
+        &lt;-- note: you can also build an html email --&gt;
+        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
+
+        wp_mail( $to, $subject, $message );
+    }
+    add_action('draft_to_publish', 'notify_via_email');
+    add_action('pending_to_publish', 'notify_via_email');
+    add_action('new_to_publish', 'notify_via_email');
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>To send an email on updates as well as on first publish:  </p>
+
+<p>&#8220;` php functions.php
+        function notify<em>via</em>email( $post<em>id ) {
+            $post = get</em>post( $post_id );
+            $to = &#8216;example@example.org&#8217;;    </p>
+
+<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
+
+        &lt;-- note: you can also build an html email --&gt;
+        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
+
+        wp_mail( $to, $subject, $message );
+    }
+    add_action('publish_post', notify_via_email');
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Apr 4, 2013</span>
+                <h3 class="article-title"><a href="/2013/04/28/properly-installing-disqus-on-wordpress">Properly installing Disqus on Wordpress</a></h3>
+              </header>
+              
+              <p>I learned this the hard way when installing on <a href="http://nychuskies.com">NYC Huskies</a>. To properly install Disqus on Wordpress, you must register your site <strong>before</strong> you install the plugin.  </p>
+
+<p>If you do make the mistake of activating the plugin, to reset, go to &#8220;Plugin Settings&#8221; and scroll down to &#8220;Reset&#8221;. Deactivate and delete the plugin and redownload and install.  </p>
+
+<p>Unfortunately for me, it took the shortname for this site and I had to use a slightly different one. I&#8217;m not sure if Disqus releases these short names and I couldn&#8217;t find any mention on Disqus&#8217; support pages on how to claim.</p>
+
+              
+            </article>
+					
+                      <a class="next" href="/7" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/5" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

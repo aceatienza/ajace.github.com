@@ -1,0 +1,49 @@
+.row .center-block {
+	float: none;
+}
+
+.post-date {
+    font-size: .9em;
+    color: #aaa;
+    margin: 0
+}
+
+.article-title {
+	margin-top: 26px;
+}
+
+.description {
+}
+
+.homepage .article-title {
+	margin-top: 0;
+}
+
+.homepage article {
+	margin-bottom: 20px;
+}
+
+.projects {
+	background-color: black;
+	color: darkgray;
+}
+
+.projects article {
+	margin-top: 50px;
+}
+
+.projects .content {
+	margin-left: 25px;
+}
+
+.projects .content strong {
+	color: lightgray;
+}
+
+.projects .screenshot img {
+	width: 100%;
+}
+
+.projects .description p:not(:last-child) {
+	margin: 0;
+}

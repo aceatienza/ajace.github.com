@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Javascript Closures</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Sep 9, 2013</span></p>
+              <h3><a href="">Javascript Closures</a></h3>
+          	</header>
+            <p>I was recently working on a Drupal module where I needed to access the paths I had added to the Drupal javascript object (Drupal.behaviours.bmgseating). To do so, I needed to use a closure. Closures are functions that have access to variables from another functions scope. This is typically done by creating a function inside another function and therefore gives the inner function access to it&#8217;s outer function&#8217;s variables. This isn&#8217;t quite enough though, see the code below:  </p>
+
+<p>&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+  modulePath: Drupal.settings.bmgseating.modulePath,
+
+  getPaths: function() {
+        return this.modulePath;     //  undefined
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Calling getPaths() returns undefined. The inner function getPaths() does not have direct access. To allow the closure access to &#8216;this&#8217; object, and therefore the path, I needed to store it in another variable such as &#8216;that&#8217;.  </p>
+
+<p>In order to get the path to work:<br />
+&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+    modulePath: Drupal.settings.bmgseating.modulePath,
+
+    getPaths: function() {
+        var that = this;                // store in that so that we can return the path
+
+        return function(){
+            return that.modulePath;
+        };
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/javascript">javascript</a>,                         <a href="/blog/categories/closure">closure</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

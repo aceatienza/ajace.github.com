@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/09/installing-lamp-on-a-fresh-ubuntu-12-dot-10-install">Installing LAMP on a fresh Ubuntu 12.10 install</a></h3>
+              </header>
+              
+              <h2>update 8/18/2013</h2>
+
+<p>I&#8217;ve been having issues accessing index.php and figured out that my folder permissions were set incorrectly. I was getting &#8221; SoftException in &#8230;/index.php is writeable by group,&#8221; errors.  The fix:</p>
+
+<p><code>bash
+$ sudo chmod -R 755 ~/public_html/</code></p>
+
+<p>I recently bought a new <a href="http://www.samsung.com/us/computer/laptops/NP520U4C-A01UB">laptop</a>, good value (bought it for about $400 refurb from BestBuy), and I won&#8217;t feel {too} bad if someone steals it or it breaks from a fall. After setting up for Ruby and Rails, I setup LAMP. Last time I installed it was on my previous Thinkpad SL410 over a year ago which I haven&#8217;t had to touch since. On Ubuntu, the easiest way is to use tasksel.  </p>
+
+<pre><code>sudo apt-get install tasksel
+</code></pre>
+
+<p>&#8230;and then LAMP.</p>
+
+<pre><code>sudo tasksel install lamp-server
+</code></pre>
+
+<p>This time around I set it up to work inside my user directory and it was reading the code inside of my php files rather than parsing. To fix, open up &#8220;/etc/apache2/mods-enabled/php5.conf&#8221; and comment out the lines below. Change &#8216;Directory&#8217; folder accordingly if not in public_html.</p>
+
+<p>Comment out these lines:<br />
+    <IfModule mod_userdir.c>
+        <Directory /home/*/public_html>
+            php<em>admin</em>value engine Off
+        </Directory>
+    </IfModule></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/03/deploying-a-sinatra-app-to-heroku">Deploying a Sinatra app to Heroku</a></h3>
+              </header>
+              
+              <p>I deployed my Sinatra <a href="http://http://emailnewsletter.herokuapp.com/">email_newsletter</a> app to Heroku.  Two gotchas on deploying a Sinatra app to Heroku.  </p>
+
+<p>You must have a Gemfile and corresponding Gemfile.lock (easiest to use bundler for versioning your gems) and a config file (config.ru) in your source directory. Add this to the config file:</p>
+
+<p><code>require './email_newsletter'
+run Sinatra::Application</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Feb 2, 2013</span>
+                <h3 class="article-title"><a href="/2013/02/18/running-test-slash-unit-from-irb">Running test/unit from irb</a></h3>
+              </header>
+              
+              <p>Tests aren&#8217;t supposed to be run interactively but for learning, here&#8217;s an easy way outside of a rails environment.  </p>
+
+<p>&#8220;` console SO http://stackoverflow.com/a/10670587/1234748
+    $ irb</p>
+
+<blockquote>
+  <p>require &#8216;file.rb&#8217;
+  require &#8216;test_file.rb&#8217;</p>
+</blockquote>
+
+<pre><code>&gt; Test::Unit::AutoRunner.run
+</code></pre>
+
+<p>&#8220;`  </p>
+
+<p>or if building the test inside of irb  </p>
+
+<p><code>console SO http://stackoverflow.com/a/3850272/1234748
+    require 'test/unit'
+    extend Test::Unit::Assertions
+    assert_equal 5, 5                # &lt;= nil
+    assert_equal 5, 6                # &lt;= raises AssertionFailedError</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Feb 2, 2013</span>
+                <h3 class="article-title"><a href="/2013/02/10/learning-ruby">Learning Ruby</a></h3>
+              </header>
+              
+              <p>There are many suggestions on how to go about learning Ruby. Here are some resources I&#8217;ve found to be extremely helpful. If you haven&#8217;t taken a CS101 class, I do recommend starting off with <a href="http://tryruby.org/">TryRuby</a> and <a href="http://www.codecademy.com/tracks/ruby">Codecademy</a> and really understanding the basics of programming which transcend specific languages.</p>
+
+<p>then moving on to&#8230;</p>
+
+<p><a href="http://rubymonk.com/">Ruby Monk</a><br />
+<a href="http://rubykoans.com/">Ruby Koans</a><br />
+And the Newcomers section from <a href="http://ruby-doc.org/docs/Newcomers/ruby.html">Ruby Docs</a>.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/21/add-file-size-validation-for-carrierwave-uploads">Add file size validation for CarrierWave uploads</a></h3>
+              </header>
+              
+              <p>In creating my <a href="https://github.com/ajace/ats" title="Applicant Tracking System">Applicant Tracking System</a>, I came across an easy way to add file size validation on the uploaded attachment.  </p>
+
+<p>&#8220;` ruby File Size Validation http://stackoverflow.com/questions/6440943/custom-validation-for-file-size-in-rails-before-being-uploaded SO Source</p>
+
+<p>class Candidate &lt; ActiveRecord::Base
+    mount_uploader :resume, ResumeUploader</p>
+
+<pre><code>attr_accessible :resume
+
+validate :resume_size_validation, :if =&gt; "resume?"  
+
+def resume_size_validation
+    errors[:resume] &lt;&lt; "should be less than 2MB" if resume.size &gt; 2.megabytes
+end
+</code></pre>
+
+<p>end
+&#8220;`</p>
+
+<p>Previously, I was using this <a href="https://github.com/jnicklas/carrierwave/wiki/How-to%3A-Validate-attachment-file-size">method</a> without realizing that the uploaded file has a size attribute.</p>
+
+              
+            </article>
+					
+                      <a class="next" href="/9" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/7" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

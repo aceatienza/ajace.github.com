@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Procedural PHP part 4a-Generating the PDF</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Aug 8, 2013</span></p>
+              <h3><a href="">Procedural PHP part 4a-Generating the PDF</a></h3>
+          	</header>
+            <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
+
+<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php</p>
+
+<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+
+// code omitted
+
+$dompdf = new DOMPDF();
+
+// more code ommitted
+
+// start capturing
+ob_start();
+</code></pre>
+
+<p>?></p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+
+<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
+&lt;style type="text/css"&gt;
+    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
+&lt;/style&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;!-- code omitted --&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<p>&lt;?php</p>
+
+<pre><code>// get the contents from OB
+$output = ob_get_contents();
+
+// save it into a a file
+file_put_contents('tmp/report.html', $output);
+
+// flush the OB for nex time
+ob_end_flush();
+</code></pre>
+
+<p>?></p>
+
+<p>&#8220;`</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/php">php</a>,                         <a href="/blog/categories/procedural">procedural</a>,                         <a href="/blog/categories/javascript">javascript</a>,                         <a href="/blog/categories/pdf">pdf</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

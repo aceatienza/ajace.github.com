@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/15/add-github-repos-to-your-octopress-blog">Add Github repos to your Octopress blog</a></h3>
+              </header>
+              
+              <p>I wanted to automatically generate a full page for my Github projects rather than just inside of the asides. This is a hack and it needs additional styling but it works. DO NOT look at the source after its generated ;).  </p>
+
+<pre><code>$rake new_page["Projects"]
+</code></pre>
+
+<p>generates a folder of the same name in your source directory and an index.markdown file. Change it to a regular html file and add the snippets below which are also in your github.html aside.  </p>
+
+<pre><code>include_code source/Projects/index.html index.html
+</code></pre>
+
+<p>Update your navigation bar:  </p>
+
+<p><code>html source/_includes/custom/navigation.html
+&lt;ul class="main-navigation"&gt;
+  &lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></p>
+
+<p>Generate and preview to make sure everything is working.
+    $rake generate
+    $rake preview</p>
+
+<p>Now, if you have the Github aside loaded in your sidebar, this hack will prevent that from working at the same time because it loads the same script. I suggest turning that off.  </p>
+
+<p>If you know of a better way to iterate and show Github projects, please share.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/05/hashes-in-ruby">Hashes in Ruby</a></h3>
+              </header>
+              
+              <p>Hashes in Ruby</p>
+
+<p>Sources to learn from:<br />
+<a href="http://pine.fm/LearnToProgram/?Chapter=09">Learn to Program</a><br />
+<a href="http://ruby.railstutorial.org/book/ruby-on-rails-tutorial#sec-hashes_and_symbols">Rails Tutorial</a><br />
+<a href="http://rubykoans.com/">Ruby Koans</a><br />
+<a href="http://www.ruby-doc.org/core-1.9.3/Hash.html">Ruby API Class:Hash</a>  </p>
+
+<p>Things to remember:<br />
+When hashes are the last argument in a function call, the curly braces are optional.<br />
+<strong>each</strong> method for hashes takes a <strong>key: value</strong> pair  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/29/install-and-work-with-postgresql-in-rails">Install and work with PostgreSQL in Rails</a></h3>
+              </header>
+              
+              <p>How to install PostgreSQL on local (I&#8217;m using Ubuntu 12.10) and get it working with your Rails app.  </p>
+
+<p>Install PostgreSQL and development package<br />
+    $sudo apt-get install postgresql libpq-dev</p>
+
+<p>Change the postgresql configuration file <em>/etc/postgresql/9.1/main/pg_hba.conf</em> to solve this error<br />
+    FATAL: Peer authentication failed for user</p>
+
+<p>Replace <em>peer</em> to <strong>md5</strong>, otherwise you will receive a peer authentication issue<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>peer</em></p>
+
+<p>Result<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>md5</em></p>
+
+<p>Then reload postgresql to apply the change<br />
+    $sudo /etc/init.d/postgresql reload </p>
+
+<p>Enter the PostgreSQL console<br />
+    $sudo -u postgres psql postgres  </p>
+
+<p>Setup databases<br />
+    #Login to postgresql prompt as the postgres user
+    $sudo su postgres -c psql</p>
+
+<p>Create a postgresql user for your project<br />
+    postgres=# CREATE USER username with password &#8216;password&#8217;;</p>
+
+<p>Give your new user higher permissions<br />
+    postgres=# ALTER USER username superuser;</p>
+
+<p>Create the development and test databases<br />
+    postgres=# CREATE DATABASE projectname<em>development;
+    postgres=# CREATE DATABASE projectname</em>test;</p>
+
+<p>Give permissions to the user on the databases<br />
+    postgres=# GRANT all privileges on database projectname<em>development to username;
+    postgres=# GRANT all privileges on database projectname</em>test to username;</p>
+
+<p>Exit your postgresql session<br />
+    postgres=# \q </p>
+
+<p>If you need to alter the password<br />
+    <a href="http://www.postgresql.org/docs/8.0/static/sql-alteruser.html">ALTER USER username with password &#8216;new_password&#8217;;</a>  </p>
+
+<p>Update your Gemfile<br />
+    gem &#8216;pg&#8217;  </p>
+
+<p>Then<br />
+    $bundle install  </p>
+
+<p>Alter <strong>database.yml</strong> file to:<br />
+    development:
+      adapter: postgresql
+      encoding: unicode
+      database: projectname_development
+      pool: 5
+      username: username
+      password: password</p>
+
+<pre><code>test:
+  adapter: postgresql
+  encoding: unicode
+  database: projectname_test
+  pool: 5
+  username: username
+  password: password
+</code></pre>
+
+<p>Last<br />
+    $rake db:migrate  </p>
+
+<p>Additional resources:
+https://devcenter.heroku.com/articles/heroku-postgresql#local-setup<br />
+http://railscasts.com/episodes/342-migrating-to-postgresql  </p>
+
+<p>Other resources listing issues you may encounter:<br />
+http://mrfrosti.com/2011/11/postgresql-for-ruby-on-rails-on-ubuntu/  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/26/initial-error-with-rspec">initial error with Rspec</a></h3>
+              </header>
+              
+              <p>Quick setup summary:</p>
+
+<pre><code>$gem install rspec
+$rspec --init
+</code></pre>
+
+<p>add to Gemfile<br />
+    <code>group: development, :test do
+        gem 'rspec-rails'
+    end</code></p>
+
+<pre><code>$bundle install
+
+$rails generate rspec:install
+</code></pre>
+
+<p>enter in an example/text</p>
+
+<pre><code>$rspec
+</code></pre>
+
+<p>BOOM! ERROR:</p>
+
+<pre><code>&lt;code&gt;
+Failures:
+  1) Wolf is invalid without a name
+     Failure/Error: wolf = Wolf.new
+     ActiveRecord::StatementInvalid:
+       Could not find table 'wolves'
+     # ./spec/models/wolf_spec.rb:5:in `new'
+     # ./spec/models/wolf_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;'
+
+Finished in 0.05099 seconds
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/wolf_spec.rb:4 # Wolf is invalid without a name
+
+Randomized with seed 31269
+&lt;/code&gt;
+</code></pre>
+
+<p>I couldn&#8217;t quite figure out why ActiveRecord wasn&#8217;t updating the database even when I ran   </p>
+
+<pre><code>&lt;code&gt;
+$rake db:migrate
+==  CreateWolves: migrating ===================================================
+-- create_table(:wolves)
+   -&gt; 0.0370s
+==  CreateWolves: migrated (0.0371s) ==========================================
+&lt;/code&gt;
+</code></pre>
+
+<p>so I ran </p>
+
+<pre><code>$rake
+</code></pre>
+
+<p>and that works! I&#8217;m still not sure why that worked. I&#8217;ll get back to it.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/10/deploying-octopress-post-to-github-pages">Deploying Octopress post to GitHub Pages</a></h3>
+              </header>
+              
+              <p>So how do you properly commit changes to Github User Pages? First generate the blog/post by:  </p>
+
+<p><code>$rake generate</code></p>
+
+<p>*<strong>REMEMBER that in Octopress you are working out of your source directory. The generated blog is transferred to your **public</strong> directory. Publishing to Github pages with </p>
+
+<pre><code>$rake deploy  
+</code></pre>
+
+<p>copies your source folder to your deploy fold and then is pushed up to your <strong>master</strong> branch. Then remember to <strong>push</strong> all of your changes from your &#8216;source&#8217; folder to your &#8216;source&#8217; branch on Github.</p>
+
+<p><code>$git add .
+$git commit -m "message."
+$git push origin source</code></p>
+
+<p>I previously made the newbie mistake of pointing my remote to the master branch and consquently overwriting what I&#8217;ve deployed.</p>
+
+              
+            </article>
+					
+                      <a class="next" href="/10" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/8" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

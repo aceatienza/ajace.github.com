@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Wordpress-add additional classes to post</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Apr 4, 2013</span></p>
+              <h3><a href="">Wordpress-add additional classes to post</a></h3>
+          	</header>
+            <p>** Wordpress **</p>
+
+<p>I really like the colorful re-design of the upcoming Wordpress 2013 base <a href="twentythirteendemo.wordpress.com">theme</a>. Each post type has a different background-color. I wanted to do the same for my re-design of <a href="nychuskies.com">nychuskies.com</a>, but rather than different background-colors for each post, I wanted to alternate them regardless of post type. i.e. color1, color2, color3&#8230;repeat&#8230;color1, color2, color3, etc.  </p>
+
+<p>Example:  </p>
+
+<div style="background-color: #181028; color: #EDE8DA; width: 100%; text-align: center;">Post1 with color1</div>
+
+<p><div style="background-color: #54398A; color: #ffffff; width: 100%; text-align: center;">Post2 with color2</div>
+<div style="background-color: #EDE8DA; color: #54398A; width: 100%; text-align: center;">Post3 with color3</div></p>
+
+<p>First, I could have added the css classes via javascript:  </p>
+
+<p>Javascript
+<code>javascript
+$(#).each(function() {
+   $(this).addClass('last'); 
+});</code>  </p>
+
+<p>While this works, what I would rather do it the &#8216;Wordpress&#8217; way.</p>
+
+<p>PHP- simply pass in the name of the class you want to add as a parameter to post_class().
+<code>php
+&lt;?php post_class('class_name_here'); ?&gt;</code></p>
+
+<p>Now that we have that down. I added a counter that resets itself inside of &#8216;the Loop&#8217;:
+&#8220;` php
+    <div id="primary" class="site-content">
+        <div id="content" role="main">
+        <?php if ( have_posts() ) : ?></p>
+
+<pre><code>        &lt;?php $counter = 1; ?&gt;
+
+            &lt;?php /* Start the Loop */ ?&gt;
+            &lt;?php while ( have_posts() ) : the_post(); ?&gt;
+
+            &lt;?php if ($counter == 4)
+                $counter = 1;
+            ?&gt;
+
+            &lt;div class="article-color-template&lt;?php echo $counter ?&gt;"&gt; &lt;!-- template for different arctiles --&gt;
+
+                &lt;?php get_template_part( 'content', get_post_format() ); ?&gt;
+
+            &lt;/div&gt; &lt;!-- article-color-template --&gt;
+
+            &lt;?php $counter++; ?&gt;
+
+            &lt;?php endwhile; ?&gt;
+
+            &lt;/div&gt;&lt;!-- #content --&gt;
+        &lt;/div&gt;&lt;!-- #primary --&gt;
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>In my css file, I have 3 classes called &#8220;article-color-template1&#8221;, &#8220;article-color-template2&#8221;, etc.</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/php">php</a>,                         <a href="/blog/categories/wordpress">wordpress</a>,                         <a href="/blog/categories/javascript">javascript</a>,                         <a href="/blog/categories/css">css</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

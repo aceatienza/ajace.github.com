@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Nov 11, 2013</span>
+                <h3 class="article-title"><a href="/2013/11/01/sciencesourcevideo">Science Source Video</a></h3>
+              </header>
+              
+              <h4>Website build</h4>
+
+<p><ul>
+    <li>Setup, channels, EE templating</li>
+</ul></p>
+
+<h4>E-commerce functionality</h4>
+
+<p>Custom Expresso Store EE module, custom add to cart EE module, json report sent to Sciencesource api
+<ul>
+    <li>PHP, Javascript, JSON, Expression Engine</li>
+</ul></p>
+
+<h4>247 Admin notification EE module</h4>
+
+<p>Sends an email to admins for events such as a customer requesting 24/7 access or video contributors requesting cms access.<br />
+<ul>
+    <li>PHP, Expression Engine</li>
+</ul></p>
+
+<h4>Boolean search</h4>
+
+<p>Enables the use of boolean queries in a search for videos.
+<ul>
+    <li>Customized Solspace Super Search EE module, MySQL, PHP</li>
+</ul></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Oct 10, 2013</span>
+                <h3 class="article-title"><a href="/2013/10/01/zagat">Zagat</a></h3>
+              </header>
+              
+              <h4>New reports EE module</h4>
+
+<ul>
+<li>PHP, MySQL</li>
+</ul>
+
+<h4>Newsletter EE cookie plugin</h4>
+
+<ul>
+<li>PHP</li>
+</ul>
+
+<h4>Updated sidebar and search filters</h4>
+
+<ul>
+<li>PHP, EE templating</li>
+</ul>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/07/singleton-pattern">Singleton Pattern</a></h3>
+              </header>
+              
+              <p>Singleton is a design pattern which restricts instantiation to only one object.</p>
+
+<p>&#8220;` php Singleton Pattern http://www.phptherightway.com/pages/Design-Patterns.html
+public static function getInstance()
+    {
+        static $instance = null;
+        if (null === $instance) {
+            $instance = new static();
+        }</p>
+
+<pre><code>    return $instance;
+}
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/paros">Installing and running Paros on Ubuntu 13.04</a></h3>
+              </header>
+              
+              <p><a href="http://sourceforge.net/projects/paros/">Paros</a> is a&#8221;Java based HTTP/HTTPS proxy for assessing web application vulnerability&#8221;. It seems like a good tool not only to learn about web security, but also web development in general since you can step through each request, watch how assets reach the browser, and even edit requests live. There is currently no package for Paros in the Ubuntu repositories so I had to build it. Requirements:  </p>
+
+<ul>
+<li>JRE</li>
+<li>JDK</li>
+<li>Ant</li>
+</ul>
+
+<p>Extract Paros into a folder and go to the build directory and type ant.  </p>
+
+<p>&#8220;` bash</p>
+
+<p>ace: ~/paros/build $ ant</p>
+
+<p>Buildfile: /paros/build/build.xml</p>
+
+<p>init:
+    [mkdir] Created dir: /paros/build/build</p>
+
+<p>compile:
+    [javac] /paros/build/build.xml:23: warning: &#8216;includeantruntime&#8217; was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds</p>
+
+<pre><code>[javac] /paros/src/org/parosproxy/paros/extension/history/HistoryFilterDialog.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��23��
+
+[javac] /paros/src/org/parosproxy/paros/extension/history/LogPanel.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��4��
+</code></pre>
+
+<p>BUILD FAILED</p>
+
+<p>&#8220;`</p>
+
+<p>In my case, I simply went into HistoryFilterDialog.java and LogPanel.java and deleted everything after 2004. After the build is done, go to build/paros.</p>
+
+<p>&#8220;` bash
+$ chmod +x startserver.sh
+$ ./startserver.sh</p>
+
+<p>OR</p>
+
+<p>$ bash startserver.sh</p>
+
+<p>OR, since all that script really does</p>
+
+<p>$ java -jar paros.jar
+&#8220;`</p>
+
+<p>Paros defaults to listening in on localhost:8080 so configure your web browser accordingly or change the it under Options.
+In the Trap tab, click on what you would like to capture such as request or response.</p>
+
+<p>Then in Firefox, Edit > Preferences > Advanced > Network > Settings > Manual proxy configuration > HTTP Proxy: localhost Port: 8080. Last, type in any website to see and change the incoming HTTP.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/preventing-sql-injection">Preventing SQL Injection</a></h3>
+              </header>
+              
+              <p>SQL injection is the act of inserting sql queries as input by an attacker. Take a user login form as an example. Instead of inserting a username for the login, a hacker could put in <code>SELECT * FROM USER;</code> retrieving all information from the Users table.</p>
+
+<p>To prevent this, user input should be sanitized (should be sanitized all the time anyways), </p>
+
+<p>Use prepared statements. 
+[Example using PDO](link to asana report database)
+and the older
+<a href="$mysqli->prepare">Example using mysqli</a></p>
+
+<p>Frameworks will most likely provide this functionality for you. An example, the [Asset Tool] I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding. [link to Laravel api with PDO]</p>
+
+              
+            </article>
+					
+                      <a class="next" href="/4" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/2" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

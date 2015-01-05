@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>What is a javascript prototype</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Mar 3, 2013</span></p>
+              <h3><a href="">What is a javascript prototype</a></h3>
+          	</header>
+            <p>I was asked recently, &#8220;what is a javascript prototype?&#8221; and had no clue what it was {thank you Pace graduate level Web Devevelopment class for being slightly outdated and not teaching me this [sarcasm]}.  </p>
+
+<p>A javascript prototype is a way to add a method to classes after they&#8217;ve been created. Here&#8217;s the form:  </p>
+
+<p>&#8220;` javascript
+className.prototype.newMethod =</p>
+
+<p>function() {
+statements;
+};
+&#8220;`</p>
+
+<p>A more detailed example from Codecademy:<br />
+&#8220;` javascript Codecademy http://www.codecademy.com/courses/objects-ii</p>
+
+<p>function Cat(name, breed) {
+    this.name = name;
+    this.breed = breed;
+}</p>
+
+<p>var cheshire = new Cat(&#8220;Cheshire Cat&#8221;, &#8220;British Shorthair&#8221;);
+var gary = new Cat(&#8220;Gary&#8221;, &#8220;Domestic Shorthair&#8221;);</p>
+
+<p>// add a method &#8220;meow&#8221; to the Cat class that will allow
+// all cats to print &#8220;Meow!&#8221; to the console
+Cat.prototype.meow = function() {
+    console.log(&#8220;Meow!&#8221;);
+};</p>
+
+<p>cheshire.meow(); // Meow!
+gary.meow();  // Meow!
+&#8220;`  </p>
+
+<p>Prototypes in javascript are also used for inheritance:
+&#8220;` javascript
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}</p>
+
+<p>function Penguin(name) {
+    this.numLegs = 2;
+}</p>
+
+<p>// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal();
+&#8220;`</p>
+
+<p>A particularly helpful post <a href="http://web-design-weekly.com/2012/06/05/mastering-javascripts-prototype/">Mastering Javascript&#8217;s Prototype</a> for me since it compares ruby with javacript and <a href="http://stantona.github.io/blog/2012/12/12/a-tale-of-two-object-models-javascript-and-ruby/">A Tale of Two Object Models</a>.</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/javascript">javascript</a>,                         <a href="/blog/categories/Prototypes">Prototypes</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

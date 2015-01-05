@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Deploying Octopress post to GitHub Pages</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Dec 12, 2012</span></p>
+              <h3><a href="">Deploying Octopress post to GitHub Pages</a></h3>
+          	</header>
+            <p>So how do you properly commit changes to Github User Pages? First generate the blog/post by:  </p>
+
+<p><code>$rake generate</code></p>
+
+<p>*<strong>REMEMBER that in Octopress you are working out of your source directory. The generated blog is transferred to your **public</strong> directory. Publishing to Github pages with </p>
+
+<pre><code>$rake deploy  
+</code></pre>
+
+<p>copies your source folder to your deploy fold and then is pushed up to your <strong>master</strong> branch. Then remember to <strong>push</strong> all of your changes from your &#8216;source&#8217; folder to your &#8216;source&#8217; branch on Github.</p>
+
+<p><code>$git add .
+$git commit -m "message."
+$git push origin source</code></p>
+
+<p>I previously made the newbie mistake of pointing my remote to the master branch and consquently overwriting what I&#8217;ve deployed.</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/octopress">octopress</a>,                         <a href="/blog/categories/github-pages">github-pages</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

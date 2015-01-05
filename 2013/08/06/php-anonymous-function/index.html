@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>PHP anonymous function</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Aug 8, 2013</span></p>
+              <h3><a href="">PHP anonymous function</a></h3>
+          	</header>
+            <p>I recently went down the rabbit hole looking for a way to compare 2 objects both inside of deeply nested array objects and came across PHP&#8217;s anonymous functions. It&#8217;s similar (exactly the same?) to javascript&#8217;s anonymous function. Typical use as a callback function and possibly recursion.</p>
+
+<p>&#8220;` php PHP http://php.net/manual/en/functions.anonymous.php</p>
+
+<pre><code>&lt;?php
+echo preg_replace_callback('~-([a-z])~', function ($match) {
+    return strtoupper($match[1]);
+}, 'hello-world');
+// outputs helloWorld
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Another modified example:
+&#8220;` php SO http://stackoverflow.com/questions/4166198/find-array-key-in-objects-array-given-an-attribute-value</p>
+
+<pre><code>&lt;?php
+$neededObjects = array_filter( $input_array, function ($e) {
+        return $e-&gt;id == $id_that_you_need; // if true, return this value_
+    }       
+);  
+</code></pre>
+
+<p>&#8220;`</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/php">php</a>,                         <a href="/blog/categories/functional%20programming">functional programming</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

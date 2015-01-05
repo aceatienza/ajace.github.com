@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Apr 4, 2013</span>
+                <h3 class="article-title"><a href="/2013/04/13/wordpress-add-additional-classes-to-post">Wordpress-add additional classes to post</a></h3>
+              </header>
+              
+              <p>** Wordpress **</p>
+
+<p>I really like the colorful re-design of the upcoming Wordpress 2013 base <a href="twentythirteendemo.wordpress.com">theme</a>. Each post type has a different background-color. I wanted to do the same for my re-design of <a href="nychuskies.com">nychuskies.com</a>, but rather than different background-colors for each post, I wanted to alternate them regardless of post type. i.e. color1, color2, color3&#8230;repeat&#8230;color1, color2, color3, etc.  </p>
+
+<p>Example:  </p>
+
+<div style="background-color: #181028; color: #EDE8DA; width: 100%; text-align: center;">Post1 with color1</div>
+
+<p><div style="background-color: #54398A; color: #ffffff; width: 100%; text-align: center;">Post2 with color2</div>
+<div style="background-color: #EDE8DA; color: #54398A; width: 100%; text-align: center;">Post3 with color3</div></p>
+
+<p>First, I could have added the css classes via javascript:  </p>
+
+<p>Javascript
+<code>javascript
+$(#).each(function() {
+   $(this).addClass('last'); 
+});</code>  </p>
+
+<p>While this works, what I would rather do it the &#8216;Wordpress&#8217; way.</p>
+
+<p>PHP- simply pass in the name of the class you want to add as a parameter to post_class().
+<code>php
+&lt;?php post_class('class_name_here'); ?&gt;</code></p>
+
+<p>Now that we have that down. I added a counter that resets itself inside of &#8216;the Loop&#8217;:
+&#8220;` php
+    <div id="primary" class="site-content">
+        <div id="content" role="main">
+        <?php if ( have_posts() ) : ?></p>
+
+<pre><code>        &lt;?php $counter = 1; ?&gt;
+
+            &lt;?php /* Start the Loop */ ?&gt;
+            &lt;?php while ( have_posts() ) : the_post(); ?&gt;
+
+            &lt;?php if ($counter == 4)
+                $counter = 1;
+            ?&gt;
+
+            &lt;div class="article-color-template&lt;?php echo $counter ?&gt;"&gt; &lt;!-- template for different arctiles --&gt;
+
+                &lt;?php get_template_part( 'content', get_post_format() ); ?&gt;
+
+            &lt;/div&gt; &lt;!-- article-color-template --&gt;
+
+            &lt;?php $counter++; ?&gt;
+
+            &lt;?php endwhile; ?&gt;
+
+            &lt;/div&gt;&lt;!-- #content --&gt;
+        &lt;/div&gt;&lt;!-- #primary --&gt;
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>In my css file, I have 3 classes called &#8220;article-color-template1&#8221;, &#8220;article-color-template2&#8221;, etc.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/17/music-and-programming">music and programming</a></h3>
+              </header>
+              
+              <p>Certain genres of music seem to match my states of mind. So far, these work for me:  </p>
+
+<p>ruby == trance<br />
+sql  == dubstep<br />
+javascript == rock<br />
+php == alt rock  </p>
+
+<p>Wonder what other people listen to while they program?  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/17/mysql-cheatsheet">MySQL Cheatsheet</a></h3>
+              </header>
+              
+              <p>MySQL cheatsheet from <a href="http://dev.mysql.com/doc/refman/5.6/en/index.html">MySQL Reference Manual</a>, <a href="http://en.wikibooks.org/wiki/MySQL/CheatSheet">this wiki</a>, <a href="http://www.amazon.com/Databases-Illuminated-Second-Catherine-Ricardo/dp/1449606008">Databases Illuminated book</a>, and my own notes. </p>
+
+<h3>Query</h3>
+
+<pre><code>SELECT * FROM table  
+SELECT * FROM table1, table2, ...  
+SELECT field1, field2, ... FROM table1, table2, ...  
+SELECT ... FROM ... WHERE condition  
+SELECT ... FROM ... WHERE condition GROUP BY field  
+SELECT ... FROM ... WHERE condition GROUP BY field HAVING condition2  
+SELECT ... FROM ... WHERE condition ORDER BY field1, field2  
+SELECT ... FROM ... WHERE condition ORDER BY field1, field2 DESC  
+SELECT ... FROM ... WHERE condition LIMIT 10  
+SELECT DISTINCT field1 FROM ...  
+SELECT DISTINCT field1, field2 FROM ...  
+SELECT ... FROM t1 JOIN t2 ON t1.id1 = t2.id2 WHERE condition  
+SELECT ... FROM t1 LEFT JOIN t2 ON t1.id1 = t2.id2 WHERE condition  
+SELECT ... FROM t1 JOIN (t2 JOIN t3 ON ...) ON ...  
+SELECT ... FROM t1 JOIN t2 USING(id) WHERE condition  
+</code></pre>
+
+<h3>UPDATE, INSERT, DELETE</h3>
+
+<pre><code>UPDATE table1 SET field1=new_value1 WHERE condition  
+UPDATE table1, table2 SET field1=new_value1, field2=new_value2, ...  
+INSERT INTO table1 (field1, field2, ...) VALUES (value1, value2, ...)    
+INSERT table1 SET field1=value_1, field2=value_2 ...  
+DELETE FROM table1 / TRUNCATE table1  
+DELETE FROM table1 WHERE condition -- join:  
+DELETE FROM table1, table2 WHERE table1.id1 = table2.id2 AND condition WHERE table1.id1 = table2.id2 AND condition  
+</code></pre>
+
+<h3>Getting around</h3>
+
+<pre><code>SHOW [databases, tables]  
+SHOW FIELDS FROM table
+SHOW COLUMNS FROM table  
+DESCRIBE table  
+SHOW CREATE TABLE table  
+SHOW CREATE TRIGGER trigger  
+SHOW TRIGGERS LIKE '%update%'  
+</code></pre>
+
+<h3>CREATE, ALTER, DROP database</h3>
+
+<pre><code>CREATE DATABASE [IF NOT EXIST] database_name  
+DROP DATABASE database_name  
+USE database_name  
+</code></pre>
+
+<h3>CREATE, ALTER, DROP table</h3>
+
+<pre><code>CREATE TABLE table (field1 type1, field2 type2, ...)  
+CREATE TABLE table (field1 type1, field2 type2, ..., INDEX (field))  
+CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1))  
+CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1, field2))  
+CREATE TABLE table1 (fk_field1 type1, fk_field2 type2, ...,
+  FOREIGN KEY (fk_field1, fk_field2) REFERENCES table2 (t2_fieldA, t2_fieldB))  
+CREATE TABLE table IF NOT EXISTS (...)  
+CREATE TABLE new_tbl_name LIKE tbl_name  
+CREATE TEMPORARY TABLE table (...)  
+DROP TABLE table  
+DROP TABLE table1, table2  
+ALTER TABLE table MODIFY field1 type1  
+ALTER TABLE table MODIFY field1 type1 NOT NULL  
+ALTER TABLE table ADD INDEX (field);  
+ALTER TABLE table ADD PRIMARY KEY (field);  
+</code></pre>
+
+<h3>Keys</h3>
+
+<pre><code>CREATE TABLE table (..., PRIMARY KEY (field1, field2))  
+CREATE TABLE table (..., FOREIGN KEY (field1, field2) REFERENCES table2 (t2_field1, t2_field2))  
+ALTER TABLE table ADD PRIMARY KEY (field);  
+</code></pre>
+
+<h3>Load data from local file <a href="http://dev.mysql.com/doc/refman/5.0/en/loading-tables.html">reference</a></h3>
+
+<pre><code>mysql -u user -p --local-infile database  // must log in with '--local-infile'  
+
+mysql&gt; LOAD DATA LOCAL INFILE '/full_path/file.txt' INTO TABLE tablename;
+</code></pre>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/11/what-is-a-javascript-prototype">What is a javascript prototype</a></h3>
+              </header>
+              
+              <p>I was asked recently, &#8220;what is a javascript prototype?&#8221; and had no clue what it was {thank you Pace graduate level Web Devevelopment class for being slightly outdated and not teaching me this [sarcasm]}.  </p>
+
+<p>A javascript prototype is a way to add a method to classes after they&#8217;ve been created. Here&#8217;s the form:  </p>
+
+<p>&#8220;` javascript
+className.prototype.newMethod =</p>
+
+<p>function() {
+statements;
+};
+&#8220;`</p>
+
+<p>A more detailed example from Codecademy:<br />
+&#8220;` javascript Codecademy http://www.codecademy.com/courses/objects-ii</p>
+
+<p>function Cat(name, breed) {
+    this.name = name;
+    this.breed = breed;
+}</p>
+
+<p>var cheshire = new Cat(&#8220;Cheshire Cat&#8221;, &#8220;British Shorthair&#8221;);
+var gary = new Cat(&#8220;Gary&#8221;, &#8220;Domestic Shorthair&#8221;);</p>
+
+<p>// add a method &#8220;meow&#8221; to the Cat class that will allow
+// all cats to print &#8220;Meow!&#8221; to the console
+Cat.prototype.meow = function() {
+    console.log(&#8220;Meow!&#8221;);
+};</p>
+
+<p>cheshire.meow(); // Meow!
+gary.meow();  // Meow!
+&#8220;`  </p>
+
+<p>Prototypes in javascript are also used for inheritance:
+&#8220;` javascript
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}</p>
+
+<p>function Penguin(name) {
+    this.numLegs = 2;
+}</p>
+
+<p>// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal();
+&#8220;`</p>
+
+<p>A particularly helpful post <a href="http://web-design-weekly.com/2012/06/05/mastering-javascripts-prototype/">Mastering Javascript&#8217;s Prototype</a> for me since it compares ruby with javacript and <a href="http://stantona.github.io/blog/2012/12/12/a-tale-of-two-object-models-javascript-and-ruby/">A Tale of Two Object Models</a>.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/10/apache2-could-not-bind-address-port-80">Apache2: could not bind address port 80</a></h3>
+              </header>
+              
+              <pre><code>(98)Address already in use: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+Unable to open logs
+Action 'start' failed.
+The Apache error log may have more information.
+</code></pre>
+
+<p>find out what&#8217;s using port 80. In my case, I was playing around with nginx.</p>
+
+<pre><code>sudo netstat -tulpn| grep :80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      348/nginx       
+tcp6       0      0 :::8000                 :::*                    LISTEN      348/nginx       
+
+$ sudo killall -9 nginx
+$ sudo netstat -tulpn| grep :80  
+</code></pre>
+
+<p>all clear  </p>
+
+<pre><code>sudo /etc/init.d/apache2 start
+* Starting web server Apache2             [ OK ]
+</code></pre>
+
+              
+            </article>
+					
+                      <a class="next" href="/8" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/6" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

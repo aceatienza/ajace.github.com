@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Untitled Page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/session-hijacking">Session Hijacking</a></h3>
+              </header>
+              
+              <p>Session hijacking is the process of taking over an active session.</p>
+
+<p>Countermeasures
+* Sensitive data should be encrypted or have a digital signature</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/02/javascript-closures">Javascript Closures</a></h3>
+              </header>
+              
+              <p>I was recently working on a Drupal module where I needed to access the paths I had added to the Drupal javascript object (Drupal.behaviours.bmgseating). To do so, I needed to use a closure. Closures are functions that have access to variables from another functions scope. This is typically done by creating a function inside another function and therefore gives the inner function access to it&#8217;s outer function&#8217;s variables. This isn&#8217;t quite enough though, see the code below:  </p>
+
+<p>&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+  modulePath: Drupal.settings.bmgseating.modulePath,
+
+  getPaths: function() {
+        return this.modulePath;     //  undefined
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Calling getPaths() returns undefined. The inner function getPaths() does not have direct access. To allow the closure access to &#8216;this&#8217; object, and therefore the path, I needed to store it in another variable such as &#8216;that&#8217;.  </p>
+
+<p>In order to get the path to work:<br />
+&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+    modulePath: Drupal.settings.bmgseating.modulePath,
+
+    getPaths: function() {
+        var that = this;                // store in that so that we can return the path
+
+        return function(){
+            return that.modulePath;
+        };
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/01/cross-site-scripting-attack">Cross Site Scripting Attack</a></h3>
+              </header>
+              
+              <p>One of the most common uses of XSS attacks is to steal a user’s authentication information by
+reading the cookie with JavaScript. The setcookie function in PHP offers one level of protec-
+tion against that type of XSS attacks. The last parameter to the function is the often-overlooked
+httpOnly. Setting the cookie to use HTTP only means that JavaScript cannot read it. Do not rely on
+this option though; it is not supported in all browsers.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4-generating-the-pdf">Procedural PHP part 4a-Generating the PDF</a></h3>
+              </header>
+              
+              <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
+
+<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php</p>
+
+<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+
+// code omitted
+
+$dompdf = new DOMPDF();
+
+// more code ommitted
+
+// start capturing
+ob_start();
+</code></pre>
+
+<p>?></p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+
+<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
+&lt;style type="text/css"&gt;
+    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
+&lt;/style&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;!-- code omitted --&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<p>&lt;?php</p>
+
+<pre><code>// get the contents from OB
+$output = ob_get_contents();
+
+// save it into a a file
+file_put_contents('tmp/report.html', $output);
+
+// flush the OB for nex time
+ob_end_flush();
+</code></pre>
+
+<p>?></p>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4b-javascript">Procedural PHP part 4b-Javascript</a></h3>
+              </header>
+              
+              <p>The last part mixes in Javascript in order to activate the last script. I used Javascript so that the pdf button is not included in the pdf.</p>
+
+<p>&#8220;` javascript
+Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<pre><code>&lt;script&gt;
+    (function() { 
+
+        // create the button &amp; add to the page
+        var printBtn = document.createElement('button');
+        printBtn.setAttribute('id', 'pdf_button');
+        printBtn.textContent = 'PDF';
+
+        document.getElementById('container').appendChild(printBtn);
+
+        var filename = printBtn.getAttribute('value');
+
+        // add the event listener for the click
+        printBtn.onclick = function() { generatePDF(); };  
+
+        // send a GET request (no need for a POST since we are just activating a script)
+        var httpRequest;
+        function generatePDF() {
+            if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 8 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            if (!httpRequest) {
+              console.log("Can't do ajax");
+              return false;
+            }
+
+            httpRequest.onreadystatechange = alertContents;
+            httpRequest.open('GET', 'generate_pdf.php');
+            httpRequest.send();
+        }
+
+        // upon return, save the path to the new file as a new button
+        function alertContents() {
+            if (httpRequest.readyState === 4) {
+                if (httpRequest.status === 200) {
+                    var pdfBtn = document.getElementById('pdf_button');
+                    pdfBtn.parentNode.removeChild(pdfBtn);
+
+                    var downloadLink = document.createElement('a');
+                    downloadLink.setAttribute('href', httpRequest.responseText);
+                    downloadLink.innerHTML = '&lt;button id="pdf_button"&gt;Save PDF&lt;/button&gt;';
+
+                    document.getElementById('container').appendChild(downloadLink);
+                } else {
+                    console.log('There was a problem with the request.');
+                }
+            }
+        }
+    })(); // iife
+&lt;/script&gt;
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>And here is the script to generate the pdf. The reason for this is that there cannot be any output prior to dompdf.  </p>
+
+<h3>php generate<em>pdf.php https://github.com/ajace/asanareporting/blob/master/generate</em>pdf.php</h3>
+
+<p>&#8220;`
+&lt;?php
+    // require dompdf
+    require<em>once(&#8220;vendor/dompdf/dompdf/dompdf</em>config.inc.php&#8221;);
+    $dompdf = new DOMPDF();</p>
+
+<pre><code>function generate_pdf($input){
+    global  $dompdf;  
+    date_default_timezone_set('America/New_York');
+    $date = date('M j Y');
+    $filename = 'report_' . $date . '.pdf';
+
+    // load the previously generated html file
+    $dompdf-&gt;load_html(file_get_contents($input));
+    $dompdf-&gt;render();
+
+    // save the output temporarily
+    $output = $dompdf-&gt;output();
+
+    // save the file
+    file_put_contents('tmp/'.$filename, $output);  
+
+    // send back the path to the ajax request
+    echo 'tmp/'.$filename;  
+}
+
+// call the function
+generate_pdf('tmp/report.html');
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>This concludes the creation of the reporting tool. I came into this with an OOP mindset and had to adjust a little bit. The mixture of logic and html still take a bit of getting used to since I&#8217;ve built other projects in mvc frameworks. I did go ahead and build <a href="https://github.com/ajace/asanareporting/tree/master/oop_version">OO version</a> though to compare. It took much longer to build, but can be extended easier should BU&#8217;s users wish to re-arrange projects and tasks in the future.</p>
+
+              
+            </article>
+					
+                      <a class="next" href="/5" title=""><span class="title"><< Older</span></a>
+                                <a class="previous" href="/3" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

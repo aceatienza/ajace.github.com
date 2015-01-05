@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Procedural PHP part 2</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Aug 8, 2013</span></p>
+              <h3><a href="">Procedural PHP part 2</a></h3>
+          	</header>
+            <p>Continuing from the <a href="'blog/2013/08/30/procedural-php/'">previous</a> part, the meat of the script is in cron_report.php. Continuing in procedural style, the script goes from top to bottom, with only one side step into the vetTask function.   </p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php
+    // include the Asana php library again
+    include &#8216;asana.php&#8217;;</p>
+
+<pre><code>// grab the key from SESSION if available
+if(isset($_SESSION['asana_api_key']) || $_POST['asana_api_key']) {
+    $key = $_SESSION['asana_api_key'] = $_POST['asana_api_key']; 
+
+    $asana = new Asana ($key);
+}
+
+
+function vetTask ($task) {
+    // ... arranges the tasks as either tasks, or as comments if it does not have a header
+}
+
+// some date functions here for formatting
+
+
+$projects = array();
+if(isset($_POST['selected_projects'])) {
+
+    // loop through all the projects chosen previously
+    foreach ($_POST['selected_projects'] as $key =&gt; $projectId) {
+
+        // get the project info from Asana
+        $ws = json_decode($asana-&gt;getProject($projectId));
+        if($asana-&gt;responseCode != 200 || is_null($ws)) {
+            echo "Error while trying to connect to Asana, response code: {$responseCode}";
+        }
+
+        $ws = $ws-&gt;data;
+
+        // get the project's tasks from Asana
+        $tasks = json_decode($asana-&gt;getProjectTasks($ws-&gt;id));
+        $arTasks = array();
+
+        // establish comments as specific streams in task objects
+        foreach($tasks-&gt;data as $m=&gt;$task) {
+            $task-&gt;story = json_decode($asana-&gt;getTaskStories($task-&gt;id));
+            $arTasks[] = vetTask($task);
+        }
+        $ws-&gt;tasks = $arTasks;
+
+        // add back to the projects array for the report
+        $projects[] = $ws;
+    }
+}
+
+// generate the View
+</code></pre>
+
+<p>&#8220;`</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/php">php</a>,                         <a href="/blog/categories/procedural">procedural</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

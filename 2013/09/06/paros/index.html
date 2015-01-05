@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Installing and running Paros on Ubuntu 13.04</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Sep 9, 2013</span></p>
+              <h3><a href="">Installing and running Paros on Ubuntu 13.04</a></h3>
+          	</header>
+            <p><a href="http://sourceforge.net/projects/paros/">Paros</a> is a&#8221;Java based HTTP/HTTPS proxy for assessing web application vulnerability&#8221;. It seems like a good tool not only to learn about web security, but also web development in general since you can step through each request, watch how assets reach the browser, and even edit requests live. There is currently no package for Paros in the Ubuntu repositories so I had to build it. Requirements:  </p>
+
+<ul>
+<li>JRE</li>
+<li>JDK</li>
+<li>Ant</li>
+</ul>
+
+<p>Extract Paros into a folder and go to the build directory and type ant.  </p>
+
+<p>&#8220;` bash</p>
+
+<p>ace: ~/paros/build $ ant</p>
+
+<p>Buildfile: /paros/build/build.xml</p>
+
+<p>init:
+    [mkdir] Created dir: /paros/build/build</p>
+
+<p>compile:
+    [javac] /paros/build/build.xml:23: warning: &#8216;includeantruntime&#8217; was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds</p>
+
+<pre><code>[javac] /paros/src/org/parosproxy/paros/extension/history/HistoryFilterDialog.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��23��
+
+[javac] /paros/src/org/parosproxy/paros/extension/history/LogPanel.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��4��
+</code></pre>
+
+<p>BUILD FAILED</p>
+
+<p>&#8220;`</p>
+
+<p>In my case, I simply went into HistoryFilterDialog.java and LogPanel.java and deleted everything after 2004. After the build is done, go to build/paros.</p>
+
+<p>&#8220;` bash
+$ chmod +x startserver.sh
+$ ./startserver.sh</p>
+
+<p>OR</p>
+
+<p>$ bash startserver.sh</p>
+
+<p>OR, since all that script really does</p>
+
+<p>$ java -jar paros.jar
+&#8220;`</p>
+
+<p>Paros defaults to listening in on localhost:8080 so configure your web browser accordingly or change the it under Options.
+In the Trap tab, click on what you would like to capture such as request or response.</p>
+
+<p>Then in Firefox, Edit > Preferences > Advanced > Network > Settings > Manual proxy configuration > HTTP Proxy: localhost Port: 8080. Last, type in any website to see and change the incoming HTTP.</p>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/security">security</a>,                         <a href="/blog/categories/Paros">Paros</a>,                         <a href="/blog/categories/Ubuntu">Ubuntu</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>

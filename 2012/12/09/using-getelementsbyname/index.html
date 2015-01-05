@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Using getElementsByName</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-8 center-block">
+          <article>
+            <header>
+              <p><span class="post-date">Dec 12, 2012</span></p>
+              <h3><a href="">Using getElementsByName</a></h3>
+          	</header>
+            <p>Documentation on Mozilla wasn’t too clear for me on how to use getElementsByName. Was pulling my hair trying to validate a simple alert until I came across this post.</p>
+
+<h3>http://forums.techguy.org/web-design-development/795446-solved-form-validation-using-javascript.html Form Validation Using Javascript</h3>
+
+<pre><code>document.getElementsByName(‘email’) returns an array of elements, so
+
+document.getElementsByName(‘email’).value
+</code></pre>
+
+<p>and
+    document.getElementsByName(‘email’).value.indexOf(‘@’)</p>
+
+<p>both have no meaning. If you want to refer to that element you must either use an array index:</p>
+
+<pre><code>document.getElementsByName(‘email’)[0]
+</code></pre>
+
+          </article>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/Javascript">Javascript</a>                        </p>
+                
+          			</div>
+	   </div>
+    </div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>
