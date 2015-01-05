@@ -42,45 +42,34 @@
               <p><span class="post-date">Jan 1, 2015</span></p>
               <h3><a href="">From Octopress to Piecrust</a></h3>
           	</header>
-            <p>Templating: Liquid vs Twig
-Server: generate, watch, preview</p>
+            <p>I&#8217;ve been coding primarily in PHP since starting at Vector Media so finally got around to changing the static website generator that I&#8217;ve used.</p>
 
-<p>Missing built in SASS/LESS pre-processing so you&#8217;ll have to setup your own or extend the generate command to include compilation. There&#8217;s also Piecrust.</p>
+<iframe src="https://docs.google.com/spreadsheets/d/1IEYrmCdE34AvDftyyPaigu4qlI7H49RvrVhQswZwy34/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%"></iframe>
 
-<p>There are no command line helpers currently to easily generate a new post or a page ala &#8220;rake new<em>post&#8221; or &#8220;rake new</em>page&#8221;. Just create an empty template and simply copy it each time with a dashed date in front.</p>
-
-<pre><code>cp post_template.md 2015-01-01-spicy-bacon-is-good-on-everything.md
-</code></pre>
+<p>Sculpin notes:  </p>
 
 <ul>
-<li>possible to auto insert date from file name using Twig?
-Permalinks are inconsistent.</li>
+<li>Permalinks are inconsistent and would often times stop working</li>
 </ul>
 
-<p>permalink: blog/:year/:basename</p>
+<p>Piecrust notes:  </p>
 
-<p>would often times stop working</p>
+<ul>
+<li>determines the date from the filename and you must remove the date variable from the yaml header.  </li>
+<li><p>much different filenaming structure. I Copied all posts over from Octopress into /_content/posts, then changed the extension and the dash after the date to an underscore.</p>
 
-<p>Dates are formatted using Twig
-http://twig.sensiolabs.org/doc/filters/date.html</p>
+<p>rename -v &#8216;s/&#46;markdown/&#46;html/&#8217; *.markdown
+rename -v &#8216;s/(.{10})(.)/$1&#95;/&#8217; *.html</p></li>
+<li>&#8216;chef import&#8217; which I didn&#8217;t try that might work.</li>
+<li>Yaml header in the page or posts configuration is sensitive to tabs so it seems to always be better to use spaces. I use Sublime Text with the indent replacement setting to 4 spaces.</li>
+</ul>
 
-<p>Slight change to the file structure. Copied all posts over from Octopress into /_content/posts, then changed the extension and the dash after the date to an underscore.</p>
+<p>Things from Octopress which I miss:  </p>
 
-<pre><code>rename -v 's/\.markdown/\.html/' *.markdown
-rename -v 's/(.{10})(.)/$1\_/' *.html
-</code></pre>
-
-<p>Piecrust determines the date from the filename and you must remove the date variable from the yaml header.</p>
-
-<p>There is also &#8216;chef import&#8217; which I didn&#8217;t try that might work.</p>
-
-<p>Yaml header in the page or posts configuration is sensitive to tabs so it seems to always be better to use spaces. I use Sublime Text with the indent replacement setting to 4 spaces.</p>
-
-<p>TODOs to get back the same functionality as Octopress:<br />
-*  Search
-*  Disqus
-*  Newsfeed
-*  Active item in nav bar (javascript, possibly Twig)</p>
+<ul>
+<li>Search</li>
+<li>Disqus</li>
+</ul>
 
           </article>
                     <p class="categories">
