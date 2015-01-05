@@ -11,6 +11,20 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+    (function() {
+      var cx = '000861553144757390361:ilf0n_kvp6c';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.com/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+    </script>
 </head>
   <body>
     
@@ -31,6 +45,11 @@
         <li ><a href="/projects">Projects</a></li>
         <li ><a href="/about">About</a></li>
       </ul>
+      <form class="navbar-form navbar-right" action="/search_results" method="GET">
+        <div class="form-group">
+          <input class="form-control" name="q" placeholder="Search...">
+        </div>
+      </form>      
     </div>
   </div>
 </nav>
@@ -67,7 +86,8 @@ rename -v &#8216;s/(.{10})(.)/$1&#95;/&#8217; *.html</p></li>
 <p>Things from Octopress which I miss:  </p>
 
 <ul>
-<li>Search</li>
+<li>Programmer niceties (code styling, code embedding, etc)  </li>
+<li>Search - <a href="https://support.google.com/customsearch/answer/2630969?hl=en">easy enough</a></li>
 <li>Disqus</li>
 </ul>
 
