@@ -1,0 +1,1 @@
+Convention: screenshot filenames should be the domain in png format

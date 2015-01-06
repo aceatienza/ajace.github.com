@@ -40,10 +40,26 @@
 	color: lightgray;
 }
 
+.projects .screenshot {
+	margin-bottom: 20px;
+}
+
 .projects .screenshot img {
 	width: 100%;
 }
 
 .projects .description p:not(:last-child) {
 	margin: 0;
+}
+
+/*Google Search Fixes*/
+#gs_tti50 {
+	padding-top: 0;
+}
+.gsc-selected-option-container.gsc-inline-block {
+	width: 68px !important;
+	padding-left: 2px;
+}
+.gsc-selected-option {
+
 }

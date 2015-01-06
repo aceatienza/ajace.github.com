@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+        <title>Ace Atienza</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+    (function() {
+      var cx = '000861553144757390361:ilf0n_kvp6c';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.com/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+    </script>
+</head>
+  <body class="homepage">
+  	
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search_results" method="GET">
+        <div class="form-group">
+          <input class="form-control" name="q" placeholder="Search...">
+        </div>
+      </form>      
+    </div>
+  </div>
+</nav>
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-10 center-block">
+  				                                  <article>
+              <header>
+                <span class="post-date">Jan 1, 2015</span>
+                <h3 class="article-title"><a href="/2015/01/02/from-octopress-to-piecrust">From Octopress to Piecrust</a></h3>
+              </header>
+              
+              <p>I&#8217;ve been coding primarily in PHP since starting at Vector Media so finally got around to changing the static website generator that I&#8217;ve used.</p>
+
+<iframe src="https://docs.google.com/spreadsheets/d/1IEYrmCdE34AvDftyyPaigu4qlI7H49RvrVhQswZwy34/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%"></iframe>
+
+<p>Sculpin notes:  </p>
+
+<ul>
+<li>Permalinks are inconsistent and would often times stop working</li>
+</ul>
+
+<p>Piecrust notes:  </p>
+
+<ul>
+<li>determines the date from the filename and you must remove the date variable from the yaml header.  </li>
+<li><p>much different filenaming structure. I Copied all posts over from Octopress into /_content/posts, then changed the extension and the dash after the date to an underscore.</p>
+
+<p>rename -v &#8216;s/&#46;markdown/&#46;html/&#8217; *.markdown
+rename -v &#8216;s/(.{10})(.)/$1&#95;/&#8217; *.html</p></li>
+<li>&#8216;chef import&#8217; which I didn&#8217;t try that might work.</li>
+<li>Yaml header in the page or posts configuration is sensitive to tabs so it seems to always be better to use spaces. I use Sublime Text with the indent replacement setting to 4 spaces.  </li>
+<li>The date parser does not correctly pick up &#8216;2012-12-01&#8217;. I had to change it to typical the US format 12-01-2012.</li>
+</ul>
+
+<p>Things from Octopress which I miss:  </p>
+
+<ul>
+<li>Programmer niceties (code styling, code embedding, etc)  </li>
+<li>Search - <a href="https://support.google.com/customsearch/answer/2630969?hl=en">easy enough</a></li>
+<li>Disqus</li>
+</ul>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2014</span>
+                <h3 class="article-title"><a href="/2014/09/01/building-a-site-with-craft-cms">Building a site with Craft CMS</a></h3>
+              </header>
+              
+              <p>I received a chance to build <a href="/projects">TimWalkerPhotography</a> with <a href="http://buildwithcraft.com/">Craft</a> pre-2.0 and I really like it. On the front end, the UI is clean and easy to navigate. It already comes with Assets and Matrix which will be immediately familiar for those of us who also build in Expression Engine. On the backend, Craft is built on Yii and uses Twig for templating. It&#8217;s a quality product. The only thing missing for me before was Categories. That has been remedied in the 2.0 upgrade. One of the best things as well is upgrading&#8230;it only takes a single click! Plugin development was also straight forward. Documentation pretty much covers everything and if you need additional help, they&#8217;re quite active on their Google+ dev group. So to sum this up, I would build another site with Craft.</p>
+
+<figure>
+    <img src="/images/update.PNG" alt="update">
+    <figcaption>I held my breath during the upgrade but everything went smoothly</figcaption>
+</figure>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/07/singleton-pattern">Singleton Pattern</a></h3>
+              </header>
+              
+              <p>Singleton is a design pattern which restricts instantiation to only one object.</p>
+
+<p>&#8220;` php Singleton Pattern http://www.phptherightway.com/pages/Design-Patterns.html
+public static function getInstance()
+    {
+        static $instance = null;
+        if (null === $instance) {
+            $instance = new static();
+        }</p>
+
+<pre><code>    return $instance;
+}
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/session-hijacking">Session Hijacking</a></h3>
+              </header>
+              
+              <p>Session hijacking is the process of taking over an active session.</p>
+
+<p>Countermeasures
+* Sensitive data should be encrypted or have a digital signature</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/paros">Installing and running Paros on Ubuntu 13.04</a></h3>
+              </header>
+              
+              <p><a href="http://sourceforge.net/projects/paros/">Paros</a> is a&#8221;Java based HTTP/HTTPS proxy for assessing web application vulnerability&#8221;. It seems like a good tool not only to learn about web security, but also web development in general since you can step through each request, watch how assets reach the browser, and even edit requests live. There is currently no package for Paros in the Ubuntu repositories so I had to build it. Requirements:  </p>
+
+<ul>
+<li>JRE</li>
+<li>JDK</li>
+<li>Ant</li>
+</ul>
+
+<p>Extract Paros into a folder and go to the build directory and type ant.  </p>
+
+<p>&#8220;` bash</p>
+
+<p>ace: ~/paros/build $ ant</p>
+
+<p>Buildfile: /paros/build/build.xml</p>
+
+<p>init:
+    [mkdir] Created dir: /paros/build/build</p>
+
+<p>compile:
+    [javac] /paros/build/build.xml:23: warning: &#8216;includeantruntime&#8217; was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds</p>
+
+<pre><code>[javac] /paros/src/org/parosproxy/paros/extension/history/HistoryFilterDialog.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��23��
+
+[javac] /paros/src/org/parosproxy/paros/extension/history/LogPanel.java:2: error: unmappable character for encoding UTF8
+[javac]  * Created on 2004�~7��4��
+</code></pre>
+
+<p>BUILD FAILED</p>
+
+<p>&#8220;`</p>
+
+<p>In my case, I simply went into HistoryFilterDialog.java and LogPanel.java and deleted everything after 2004. After the build is done, go to build/paros.</p>
+
+<p>&#8220;` bash
+$ chmod +x startserver.sh
+$ ./startserver.sh</p>
+
+<p>OR</p>
+
+<p>$ bash startserver.sh</p>
+
+<p>OR, since all that script really does</p>
+
+<p>$ java -jar paros.jar
+&#8220;`</p>
+
+<p>Paros defaults to listening in on localhost:8080 so configure your web browser accordingly or change the it under Options.
+In the Trap tab, click on what you would like to capture such as request or response.</p>
+
+<p>Then in Firefox, Edit > Preferences > Advanced > Network > Settings > Manual proxy configuration > HTTP Proxy: localhost Port: 8080. Last, type in any website to see and change the incoming HTTP.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/preventing-sql-injection">Preventing SQL Injection</a></h3>
+              </header>
+              
+              <p>SQL injection is the act of inserting sql queries as input by an attacker. Take a user login form as an example. Instead of inserting a username for the login, a hacker could put in <code>SELECT * FROM USER;</code> retrieving all information from the Users table.</p>
+
+<p>To prevent this, user input should be sanitized (should be sanitized all the time anyways), </p>
+
+<p>Use prepared statements. 
+[Example using PDO](link to asana report database)
+and the older
+<a href="$mysqli->prepare">Example using mysqli</a></p>
+
+<p>Frameworks will most likely provide this functionality for you. An example, the [Asset Tool] I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding. [link to Laravel api with PDO]</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/02/javascript-closures">Javascript Closures</a></h3>
+              </header>
+              
+              <p>I was recently working on a Drupal module where I needed to access the paths I had added to the Drupal javascript object (Drupal.behaviours.bmgseating). To do so, I needed to use a closure. Closures are functions that have access to variables from another functions scope. This is typically done by creating a function inside another function and therefore gives the inner function access to it&#8217;s outer function&#8217;s variables. This isn&#8217;t quite enough though, see the code below:  </p>
+
+<p>&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+  modulePath: Drupal.settings.bmgseating.modulePath,
+
+  getPaths: function() {
+        return this.modulePath;     //  undefined
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Calling getPaths() returns undefined. The inner function getPaths() does not have direct access. To allow the closure access to &#8216;this&#8217; object, and therefore the path, I needed to store it in another variable such as &#8216;that&#8217;.  </p>
+
+<p>In order to get the path to work:<br />
+&#8220;` javascript bmgseating<em>app.js https://github.com/ajace/ticketmaster/blob/master/js/bmgseating</em>app.js</p>
+
+<pre><code>Drupal.behaviors.bmgseating = {
+
+    modulePath: Drupal.settings.bmgseating.modulePath,
+
+    getPaths: function() {
+        var that = this;                // store in that so that we can return the path
+
+        return function(){
+            return that.modulePath;
+        };
+    }
+};
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/01/cross-site-scripting-attack">Cross Site Scripting Attack</a></h3>
+              </header>
+              
+              <p>One of the most common uses of XSS attacks is to steal a user’s authentication information by
+reading the cookie with JavaScript. The setcookie function in PHP offers one level of protec-
+tion against that type of XSS attacks. The last parameter to the function is the often-overlooked
+httpOnly. Setting the cookie to use HTTP only means that JavaScript cannot read it. Do not rely on
+this option though; it is not supported in all browsers.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-2">Procedural PHP part 2</a></h3>
+              </header>
+              
+              <p>Continuing from the <a href="'blog/2013/08/30/procedural-php/'">previous</a> part, the meat of the script is in cron_report.php. Continuing in procedural style, the script goes from top to bottom, with only one side step into the vetTask function.   </p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php
+    // include the Asana php library again
+    include &#8216;asana.php&#8217;;</p>
+
+<pre><code>// grab the key from SESSION if available
+if(isset($_SESSION['asana_api_key']) || $_POST['asana_api_key']) {
+    $key = $_SESSION['asana_api_key'] = $_POST['asana_api_key']; 
+
+    $asana = new Asana ($key);
+}
+
+
+function vetTask ($task) {
+    // ... arranges the tasks as either tasks, or as comments if it does not have a header
+}
+
+// some date functions here for formatting
+
+
+$projects = array();
+if(isset($_POST['selected_projects'])) {
+
+    // loop through all the projects chosen previously
+    foreach ($_POST['selected_projects'] as $key =&gt; $projectId) {
+
+        // get the project info from Asana
+        $ws = json_decode($asana-&gt;getProject($projectId));
+        if($asana-&gt;responseCode != 200 || is_null($ws)) {
+            echo "Error while trying to connect to Asana, response code: {$responseCode}";
+        }
+
+        $ws = $ws-&gt;data;
+
+        // get the project's tasks from Asana
+        $tasks = json_decode($asana-&gt;getProjectTasks($ws-&gt;id));
+        $arTasks = array();
+
+        // establish comments as specific streams in task objects
+        foreach($tasks-&gt;data as $m=&gt;$task) {
+            $task-&gt;story = json_decode($asana-&gt;getTaskStories($task-&gt;id));
+            $arTasks[] = vetTask($task);
+        }
+        $ws-&gt;tasks = $arTasks;
+
+        // add back to the projects array for the report
+        $projects[] = $ws;
+    }
+}
+
+// generate the View
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4-generating-the-pdf">Procedural PHP part 4a-Generating the PDF</a></h3>
+              </header>
+              
+              <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
+
+<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php</p>
+
+<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+
+// code omitted
+
+$dompdf = new DOMPDF();
+
+// more code ommitted
+
+// start capturing
+ob_start();
+</code></pre>
+
+<p>?></p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+
+<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
+&lt;style type="text/css"&gt;
+    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
+&lt;/style&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;!-- code omitted --&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<p>&lt;?php</p>
+
+<pre><code>// get the contents from OB
+$output = ob_get_contents();
+
+// save it into a a file
+file_put_contents('tmp/report.html', $output);
+
+// flush the OB for nex time
+ob_end_flush();
+</code></pre>
+
+<p>?></p>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-3-view">Procedural PHP part 3-View</a></h3>
+              </header>
+              
+              <p>Part 3 continues with generating the HTML for the report. Inside of Asana, tasks can be made into a &#8216;section&#8217; task, which gives the illusion of grouping for all tasks below it. The api does not provide this information however. In order to simulate this, tasks are added to groups and broken apart if it has a header, determined if the task&#8217;s name has a &#8216;:&#8217;. If a header is found, start a new group.</p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+</head>
+<body>
+    <div class="borders top"></div>
+    <div id="container"></p>
+
+<p>&lt;?php
+    echo &#8216;<header><img class="logo" src="img/BUlogo.gif"><h1 class="report-header">Account Report for &#8216;.dl(time()).&#8217;</h1></header>&#8217;;</p>
+
+<pre><code>foreach ($projects as $k=&gt;$p) {
+    echo '&lt;header class="project-header"&gt;&lt;h2&gt;Project: '.$p-&gt;name. '&lt;/h2&gt;&lt;/header&gt;';
+    $ic = 'clear';
+
+    $taskGroup = array();
+
+    foreach ($p-&gt;tasks as $m=&gt;$t) {
+        if ($t-&gt;header) {  
+            if(empty($taskGroup)){
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            } else {
+                // generate table with all tasks
+                echo '&lt;table class="tasks table table-bordered"&gt;';
+                echo '&lt;tbody&gt;';
+                foreach ($taskGroup as $k=&gt;$v) {
+                    echo '&lt;tr class="tasks-row"&gt;';
+                        echo '&lt;td class="tasks-area"&gt;';
+                            // Loop through subtasks here //
+                            echo '&lt;div class="' . $ic . '"&gt;';
+
+                                echo '&lt;h3&gt;' . $v-&gt;name . '&lt;/h3&gt;';  
+
+                                if($v-&gt;info) {
+                                    echo '&lt;div class="task-info"&gt;' . $v-&gt;info . '&lt;/div&gt;';
+                                }
+
+                                if ($v-&gt;notes!='') {
+                                    echo '&lt;ul&gt;';
+                                        echo '&lt;li&gt;';
+                                            echo '&lt;span class="notes"&gt;' . $v-&gt;notes . '  ' . '&lt;span class="dueon"&gt;' . comments_dueon($v-&gt;due_on) . '&lt;/span&gt;&lt;/span&gt;';
+                                        echo '&lt;/li&gt;';
+                                    echo '&lt;/ul&gt;';
+                                }
+
+                            echo '&lt;/div&gt;';
+                        echo '&lt;/td&gt;';
+
+                        echo '&lt;td class="assignee-area"&gt;';
+                            if ($v-&gt;state) {
+                                echo '&lt;div class="task-state"&gt;&lt;h3&gt;' . $v-&gt;state . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+
+                            $v-&gt;assignee = !empty($v-&gt;assignee) ? $v-&gt;assignee : '';
+                            if ($v-&gt;assignee) {
+                                 echo '&lt;div class="assigned"&gt;&lt;h3&gt;' . $v-&gt;assignee-&gt;name . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+                        echo '&lt;/td&gt;';
+                    echo '&lt;/tr&gt;';
+                } // end foreach
+                echo '&lt;/tbody&gt;';
+                echo '&lt;/table&gt;';
+
+                // clean out the array
+                $taskGroup = array();
+
+                // start a new header
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            }
+        } else {
+            // no header, add to group
+            $taskGroup[] = $t;
+        }
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php">Procedural PHP part 1</a></h3>
+              </header>
+              
+              <p>My last project at Brooklyn United was to build a <a href="https://github.com/ajace/asanareporting">report</a> of a project/s from Asana&#8217;s api. Each Project has many tasks and each task can have many comments. Procedural programming is the &#8216;traditional&#8217; way of using PHP. That is, the script is evaluated basically from top to bottom. After getting a feel for the Asana api, I separated the script into 2 parts. The first part captures which projects the user (someone on the BU team) would like to generate a report for, and the actual report itself.</p>
+
+<p>&#8220;` php Index.php https://github.com/ajace/asanareporting/blob/master/index.php
+&lt;?php
+    // start a session
+    session_start();</p>
+
+<pre><code>// use the php api library provided by Asana
+include 'asana.php';
+
+if(isset($_POST['asana_api_key'])) {
+    $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
+} 
+
+if(isset($_SESSION['asana_api_key'])) {
+    $key = $_SESSION['asana_api_key']; 
+    $asana = new Asana($key);
+
+    $asanaProjectList = $asana-&gt;getProjects();
+    $asanaProjectList = json_decode($asanaProjectList);
+    $asanaProjectList = $asanaProjectList-&gt;data;
+}
+
+// the HTML form here which asks for a key in order to begin
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4b-javascript">Procedural PHP part 4b-Javascript</a></h3>
+              </header>
+              
+              <p>The last part mixes in Javascript in order to activate the last script. I used Javascript so that the pdf button is not included in the pdf.</p>
+
+<p>&#8220;` javascript
+Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<pre><code>&lt;script&gt;
+    (function() { 
+
+        // create the button &amp; add to the page
+        var printBtn = document.createElement('button');
+        printBtn.setAttribute('id', 'pdf_button');
+        printBtn.textContent = 'PDF';
+
+        document.getElementById('container').appendChild(printBtn);
+
+        var filename = printBtn.getAttribute('value');
+
+        // add the event listener for the click
+        printBtn.onclick = function() { generatePDF(); };  
+
+        // send a GET request (no need for a POST since we are just activating a script)
+        var httpRequest;
+        function generatePDF() {
+            if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 8 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            if (!httpRequest) {
+              console.log("Can't do ajax");
+              return false;
+            }
+
+            httpRequest.onreadystatechange = alertContents;
+            httpRequest.open('GET', 'generate_pdf.php');
+            httpRequest.send();
+        }
+
+        // upon return, save the path to the new file as a new button
+        function alertContents() {
+            if (httpRequest.readyState === 4) {
+                if (httpRequest.status === 200) {
+                    var pdfBtn = document.getElementById('pdf_button');
+                    pdfBtn.parentNode.removeChild(pdfBtn);
+
+                    var downloadLink = document.createElement('a');
+                    downloadLink.setAttribute('href', httpRequest.responseText);
+                    downloadLink.innerHTML = '&lt;button id="pdf_button"&gt;Save PDF&lt;/button&gt;';
+
+                    document.getElementById('container').appendChild(downloadLink);
+                } else {
+                    console.log('There was a problem with the request.');
+                }
+            }
+        }
+    })(); // iife
+&lt;/script&gt;
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>And here is the script to generate the pdf. The reason for this is that there cannot be any output prior to dompdf.  </p>
+
+<h3>php generate<em>pdf.php https://github.com/ajace/asanareporting/blob/master/generate</em>pdf.php</h3>
+
+<p>&#8220;`
+&lt;?php
+    // require dompdf
+    require<em>once(&#8220;vendor/dompdf/dompdf/dompdf</em>config.inc.php&#8221;);
+    $dompdf = new DOMPDF();</p>
+
+<pre><code>function generate_pdf($input){
+    global  $dompdf;  
+    date_default_timezone_set('America/New_York');
+    $date = date('M j Y');
+    $filename = 'report_' . $date . '.pdf';
+
+    // load the previously generated html file
+    $dompdf-&gt;load_html(file_get_contents($input));
+    $dompdf-&gt;render();
+
+    // save the output temporarily
+    $output = $dompdf-&gt;output();
+
+    // save the file
+    file_put_contents('tmp/'.$filename, $output);  
+
+    // send back the path to the ajax request
+    echo 'tmp/'.$filename;  
+}
+
+// call the function
+generate_pdf('tmp/report.html');
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>This concludes the creation of the reporting tool. I came into this with an OOP mindset and had to adjust a little bit. The mixture of logic and html still take a bit of getting used to since I&#8217;ve built other projects in mvc frameworks. I did go ahead and build <a href="https://github.com/ajace/asanareporting/tree/master/oop_version">OO version</a> though to compare. It took much longer to build, but can be extended easier should BU&#8217;s users wish to re-arrange projects and tasks in the future.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/25/sql-query-examples">SQL query examples for tables with relationships</a></h3>
+              </header>
+              
+              <p>Given these tables:<br />
+Faculty (facId, name, department, rank)<br />
+Class (classNumber, facId, schedule, room)<br />
+ENROLL (stuId, classNumber, grade)<br />
+Student (stuId, lastName, firstName, major, credits)  </p>
+
+<p>Student and Class is a &#8220;has many&#8221; relationship. Students have many classes and the reverse, Classes have many Students. ENROLL is the relation between the two in an E-R model, and also called a pivot table.<br />
+Find stuId and grade of all students taking any course taught by the Faculty member whose facId is F110. Arrange in order by stuId. 
+&#8220;` bash  </p>
+
+<p>SELECT Student.stuId, Student.lastName, ENROLL.grade major 
+    FROM Class, ENROLL, Student 
+    WHERE Class.facId=&#8221;F110&#8221; AND Class.classNumber=ENROLL.classNumber 
+    AND ENROLL.stuId=Student.stuId ORDER BY Student.stuId;</p>
+
+<p>or using JOIN</p>
+
+<p>SELECT Student.stuId, ENROLL.grade 
+    FROM Student LEFT JOIN ENROLL on (Student.stuId = ENROLL.stuId)
+    WHERE ENROLL.classNumber IN 
+        (SELECT Class.classNumber FROM Class WHERE facId=&#8221;F110&#8221;)
+            ORDER BY Student.stuId;</p>
+
+<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+| stuId | lastName | major |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+| S1002 | Chin     | B     |
+| S1010 | Burns    | NULL  |
+| S1020 | Rivera   | A     |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
+&#8220;`</p>
+
+<p>Find IDs and names of all students taking ART 103A:
+&#8220;` bash<br />
+SELECT ENROLL.stuID, lastName, firstName 
+    FROM Student, ENROLL WHERE classNumber=&#8221;ART103A&#8221; 
+    AND ENROLL.stuId=Student.stuId;</p>
+
+<p>or using JOIN</p>
+
+<p>SELECT Student.stuId, lastName, firstName 
+    FROM Student JOIN ENROLL on ENROLL.stuId=Student.stuId 
+    WHERE ENROLL.classNumber=&#8221;Art103A&#8221;;</p>
+
+<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+| stuID | lastName | firstName |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+| S1001 | Smith    | Tom       |
+| S1002 | Chin     | Ann       |
+| S1010 | Burns    | Edward    |
++&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+&#8220;`</p>
+
+<p>Find the class numbers of all the courses taught by Byrne of the math department:<br />
+&#8220;` bash
+SELECT Class.classNumber FROM Class, Faculty WHERE Class.facId = Faculty.facId AND Faculty.name = &#8220;Byrne&#8221;;</p>
+
+<pre><code>OR with a JOIN
+</code></pre>
+
+<p>SELECT Class.classNumber FROM Class JOIN Faculty ON Class.facId=Faculty.facId WHERE Faculty.name=&#8221;Byrne&#8221;;
+&#8220;`</p>
+
+<p>Find the names and IDs of all Faculty members who teach in class in Room H221:
+&#8220;` bash
+SELECT f.facId, f.name FROM Faculty f, Class c
+    WHERE f.facId=c.facId AND c.room = &#8220;H221&#8221;;</p>
+
+<pre><code>OR with JOIN
+</code></pre>
+
+<p>SELECT f.facId, f.name FROM Faculty f 
+    JOIN Class c ON f.facId=c.facId WHERE c.room = &#8220;H221&#8221;;
+&#8220;`</p>
+
+<p>Get an alphabetical list of names and IDs of all students in any class taught by F110.
+&#8220;` bash 
+SELECT s.stuId, s.lastName FROM Student s, ENROLL e, Class c
+WHERE s.stuId=e.stuId AND e.classNumber=c.classNumber 
+AND c.facId=&#8221;F110&#8221; GROUP BY s.lastName ORDER BY s.lastName;</p>
+
+<pre><code>OR using IN
+</code></pre>
+
+<p>SELECT lastName, firstName, stuId
+ FROM Student
+ WHERE stuId IN (SELECT stuId
+ FROM ENROLL 
+WHERE classNumber IN 
+(SELECT classNumber 
+FROM Class 
+WHERE facId=&#8217;F110&#8217;)) 
+ORDER by lastName, firstName ASC; 
+&#8220;`</p>
+
+<p>Find the name of all students enrolled in CSC201A. Using Exists:
+&#8220;` bash
+SELECT s.lastName, s.firstName FROM Student s 
+    WHERE Exists (SELECT * FROM ENROLL e
+    WHERE e.stuId=s.stuId And e.classNumber =&#8217;CSC201A&#8217;); </p>
+
+<pre><code>OR with a JOIN (can't use IN since the tables have been joined)
+</code></pre>
+
+<p>SELECT s.lastName, s.firstName FROM Student s JOIN ENROLL e ON s.stuId=e.stuId WHERE e.classNumber=&#8221;CSC201A&#8221;;
+&#8220;`</p>
+
+<p>Find the names of all students who are not enrolled in CSC201A. (Can&#8217;t use a join or an IN subquery)
+<code>bash
+SELECT lastName, firstName FROM Student
+ WHERE Not Exists (SELECT * FROM ENROLL
+WHERE Student.stuId = ENROLL.stuId And classNumber ='CSC201A');</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/09/amazon-ec2-sudo-unable-to-resolve-host-after-setting-elastic-ip">Amazon EC2 Sudo: unable to resolve host after setting elastic ip</a></h3>
+              </header>
+              
+              <p>I recently created a new instance on Amazon EC2 of an ubuntu server and associated an elastic ip. I&#8217;m not sure if it changed the ip I was using before. Either way, had to first get the private dns name. I used <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html#set_aws_credentials_linux">AWS cli tools</a> to get the ip-xx-xx-xx-xx.</p>
+
+<p><code>bash Logged in to instance
+$ ec2din</code></p>
+
+<p><code>bash
+$ sudo hostname ip-xx-xx-xx-xx    # temporary change for the current instance
+$ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/06/php-anonymous-function">PHP anonymous function</a></h3>
+              </header>
+              
+              <p>I recently went down the rabbit hole looking for a way to compare 2 objects both inside of deeply nested array objects and came across PHP&#8217;s anonymous functions. It&#8217;s similar (exactly the same?) to javascript&#8217;s anonymous function. Typical use as a callback function and possibly recursion.</p>
+
+<p>&#8220;` php PHP http://php.net/manual/en/functions.anonymous.php</p>
+
+<pre><code>&lt;?php
+echo preg_replace_callback('~-([a-z])~', function ($match) {
+    return strtoupper($match[1]);
+}, 'hello-world');
+// outputs helloWorld
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>Another modified example:
+&#8220;` php SO http://stackoverflow.com/questions/4166198/find-array-key-in-objects-array-given-an-attribute-value</p>
+
+<pre><code>&lt;?php
+$neededObjects = array_filter( $input_array, function ($e) {
+        return $e-&gt;id == $id_that_you_need; // if true, return this value_
+    }       
+);  
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jul 7, 2013</span>
+                <h3 class="article-title"><a href="/2013/07/14/vim-cheatsheet">Vim Cheatsheet</a></h3>
+              </header>
+              
+              <p>These are the vim keys and commands which I have been using the most for web development (PHP, HTML, CSS, Javascript) and sys admin. Also, here&#8217;s my <a href="https://gist.github.com/ajace/6101976">.vimrc</a>  </p>
+
+<h2>FILES</h2>
+
+<p>:e scp://user@host/path/file    * open remote file in a local VIM
+:ls (or :buffers)   list of open files/buffers<br />
+:bn                 next buffer
+:bp                 previous buffer
+:b#                 (# is a number to move to, same as switching open windows in Ubuntu 13.04 with ALT+1, ALT+2, etc.)
+:bw                 buffer wipe (delete buffers)
+:e                  open a new buffer (open a new file and load into buffer)
+:b TAB              cycle through the open files/buffers list</p>
+
+<h2>SESSIONS</h2>
+
+<p>:mksession! ~/today.ses     to save the session and call it today
+vim -S ~/today.ses          to reload the previous session</p>
+
+<h2>TABS</h2>
+
+<p>:tabe [filename]    open file in new tab
+:tabc               close
+:tabn, :tabp        switch tabs</p>
+
+<h2>WINDOWS</h2>
+
+<p>Ctrl-E              scroll down
+Crtl-Y              scroll up  </p>
+
+<p>Ctrl-W s and Ctrl-W v to split the current window horizontally and vertically.</p>
+
+<p>Ctrl-W w to swhitch between open windows, and Ctrl-W h (or j or k or l) to navigate through open windows.</p>
+
+<p>Ctrl-W c to close the current window, and Ctrl-W o to close all windows except the current one</p>
+
+<h2>INDENTATION</h2>
+
+<p>== align the current line
+=i{ align the inner block
+=% align to the matching parenthesis/bracket under the cursor
+14== align the next 14 lines
+=G align to the end of the file</p>
+
+<h2>SEARCH</h2>
+
+<p>/word       will search forward word. add :set wrapscan in .vimrc so that this is the only thing you&#8217;ll need
+?word       will search backward for word
+n           next
+N           previous
+?word       reverse search for word
+*           will search for the next instance of the word under the cursor</p>
+
+<h1>will search for the previous instance of the word under the cursor</h1>
+
+<h2>GETTING AROUND IN THE FILE</h2>
+
+<p>G           jump to end of buffer
+gg          jump to beginning of buffer</p>
+
+<h1>G or #gg   jump to # (line number)</h1>
+
+<h2>COPY, CUT, PASTE, UNDO</h2>
+
+<ul>
+<li>select text in visual mode then
+y           yank (copy)
+d           same as cut
+p           paste after
+P           paste before</li>
+</ul>
+
+<h2>HISTORY</h2>
+
+<p>gi          jump back to last place you were in Insert mode
+u           undo
+Ctrl-R      redo</p>
+
+<h2>FOLDING</h2>
+
+<ul>
+<li>I don&#8217;t fold stuff</li>
+</ul>
+
+<h2>AUTOCOMPLETION</h2>
+
+<p>Ctrl-x Ctrl-o, then Ctrl-n to go select next suggestion</p>
+
+<h2>EXTRA NOTES</h2>
+
+<ul>
+<li>you can&#8217;t copy from a remote session to the clipboard</li>
+<li>commands have auto-complete</li>
+</ul>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">May 5, 2013</span>
+                <h3 class="article-title"><a href="/2013/05/09/wordpress-send-email-on-published-post">Wordpress: send email on published post</a></h3>
+              </header>
+              
+              <p>The <a href="http://nychuskies.com">NYC Huskies</a> site needs to send out an email of an author, typically <a href="http://twitter.com/1kates">Katie</a>, to our alumni listserv. It was previously sent using Subscribe2 but, since we don&#8217;t really use the subscription function for the site, it&#8217;s kind of overkill to use a plugin just for one simple function. The first version sends an email only on the original publication. The second sends an email on post updates.</p>
+
+<p>Send using <a href="http://codex.wordpress.org/Function_Reference/wp_mail">wp_mail()</a> and then <a href="http://codex.wordpress.org/Function_Reference/add_action">add_action()</a>  </p>
+
+<p>&#8220;` php functions.php
+        function notify<em>via</em>email( $post<em>id ) {
+            $post = get</em>post( $post_id );
+            $to = &#8216;example@example.org&#8217;;    </p>
+
+<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
+
+        &lt;-- note: you can also build an html email --&gt;
+        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
+
+        wp_mail( $to, $subject, $message );
+    }
+    add_action('draft_to_publish', 'notify_via_email');
+    add_action('pending_to_publish', 'notify_via_email');
+    add_action('new_to_publish', 'notify_via_email');
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>To send an email on updates as well as on first publish:  </p>
+
+<p>&#8220;` php functions.php
+        function notify<em>via</em>email( $post<em>id ) {
+            $post = get</em>post( $post_id );
+            $to = &#8216;example@example.org&#8217;;    </p>
+
+<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
+
+        &lt;-- note: you can also build an html email --&gt;
+        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
+
+        wp_mail( $to, $subject, $message );
+    }
+    add_action('publish_post', notify_via_email');
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Apr 4, 2013</span>
+                <h3 class="article-title"><a href="/2013/04/28/properly-installing-disqus-on-wordpress">Properly installing Disqus on Wordpress</a></h3>
+              </header>
+              
+              <p>I learned this the hard way when installing on <a href="http://nychuskies.com">NYC Huskies</a>. To properly install Disqus on Wordpress, you must register your site <strong>before</strong> you install the plugin.  </p>
+
+<p>If you do make the mistake of activating the plugin, to reset, go to &#8220;Plugin Settings&#8221; and scroll down to &#8220;Reset&#8221;. Deactivate and delete the plugin and redownload and install.  </p>
+
+<p>Unfortunately for me, it took the shortname for this site and I had to use a slightly different one. I&#8217;m not sure if Disqus releases these short names and I couldn&#8217;t find any mention on Disqus&#8217; support pages on how to claim.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Apr 4, 2013</span>
+                <h3 class="article-title"><a href="/2013/04/13/wordpress-add-additional-classes-to-post">Wordpress-add additional classes to post</a></h3>
+              </header>
+              
+              <p>** Wordpress **</p>
+
+<p>I really like the colorful re-design of the upcoming Wordpress 2013 base <a href="twentythirteendemo.wordpress.com">theme</a>. Each post type has a different background-color. I wanted to do the same for my re-design of <a href="nychuskies.com">nychuskies.com</a>, but rather than different background-colors for each post, I wanted to alternate them regardless of post type. i.e. color1, color2, color3&#8230;repeat&#8230;color1, color2, color3, etc.  </p>
+
+<p>Example:  </p>
+
+<div style="background-color: #181028; color: #EDE8DA; width: 100%; text-align: center;">Post1 with color1</div>
+
+<p><div style="background-color: #54398A; color: #ffffff; width: 100%; text-align: center;">Post2 with color2</div>
+<div style="background-color: #EDE8DA; color: #54398A; width: 100%; text-align: center;">Post3 with color3</div></p>
+
+<p>First, I could have added the css classes via javascript:  </p>
+
+<p>Javascript
+<code>javascript
+$(#).each(function() {
+   $(this).addClass('last'); 
+});</code>  </p>
+
+<p>While this works, what I would rather do it the &#8216;Wordpress&#8217; way.</p>
+
+<p>PHP- simply pass in the name of the class you want to add as a parameter to post_class().
+<code>php
+&lt;?php post_class('class_name_here'); ?&gt;</code></p>
+
+<p>Now that we have that down. I added a counter that resets itself inside of &#8216;the Loop&#8217;:
+&#8220;` php
+    <div id="primary" class="site-content">
+        <div id="content" role="main">
+        <?php if ( have_posts() ) : ?></p>
+
+<pre><code>        &lt;?php $counter = 1; ?&gt;
+
+            &lt;?php /* Start the Loop */ ?&gt;
+            &lt;?php while ( have_posts() ) : the_post(); ?&gt;
+
+            &lt;?php if ($counter == 4)
+                $counter = 1;
+            ?&gt;
+
+            &lt;div class="article-color-template&lt;?php echo $counter ?&gt;"&gt; &lt;!-- template for different arctiles --&gt;
+
+                &lt;?php get_template_part( 'content', get_post_format() ); ?&gt;
+
+            &lt;/div&gt; &lt;!-- article-color-template --&gt;
+
+            &lt;?php $counter++; ?&gt;
+
+            &lt;?php endwhile; ?&gt;
+
+            &lt;/div&gt;&lt;!-- #content --&gt;
+        &lt;/div&gt;&lt;!-- #primary --&gt;
+</code></pre>
+
+<p>&#8220;`</p>
+
+<p>In my css file, I have 3 classes called &#8220;article-color-template1&#8221;, &#8220;article-color-template2&#8221;, etc.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/17/music-and-programming">music and programming</a></h3>
+              </header>
+              
+              <p>Certain genres of music seem to match my states of mind. So far, these work for me:  </p>
+
+<p>ruby == trance<br />
+sql  == dubstep<br />
+javascript == rock<br />
+php == alt rock  </p>
+
+<p>Wonder what other people listen to while they program?  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/17/mysql-cheatsheet">MySQL Cheatsheet</a></h3>
+              </header>
+              
+              <p>MySQL cheatsheet from <a href="http://dev.mysql.com/doc/refman/5.6/en/index.html">MySQL Reference Manual</a>, <a href="http://en.wikibooks.org/wiki/MySQL/CheatSheet">this wiki</a>, <a href="http://www.amazon.com/Databases-Illuminated-Second-Catherine-Ricardo/dp/1449606008">Databases Illuminated book</a>, and my own notes. </p>
+
+<h3>Query</h3>
+
+<pre><code>SELECT * FROM table  
+SELECT * FROM table1, table2, ...  
+SELECT field1, field2, ... FROM table1, table2, ...  
+SELECT ... FROM ... WHERE condition  
+SELECT ... FROM ... WHERE condition GROUP BY field  
+SELECT ... FROM ... WHERE condition GROUP BY field HAVING condition2  
+SELECT ... FROM ... WHERE condition ORDER BY field1, field2  
+SELECT ... FROM ... WHERE condition ORDER BY field1, field2 DESC  
+SELECT ... FROM ... WHERE condition LIMIT 10  
+SELECT DISTINCT field1 FROM ...  
+SELECT DISTINCT field1, field2 FROM ...  
+SELECT ... FROM t1 JOIN t2 ON t1.id1 = t2.id2 WHERE condition  
+SELECT ... FROM t1 LEFT JOIN t2 ON t1.id1 = t2.id2 WHERE condition  
+SELECT ... FROM t1 JOIN (t2 JOIN t3 ON ...) ON ...  
+SELECT ... FROM t1 JOIN t2 USING(id) WHERE condition  
+</code></pre>
+
+<h3>UPDATE, INSERT, DELETE</h3>
+
+<pre><code>UPDATE table1 SET field1=new_value1 WHERE condition  
+UPDATE table1, table2 SET field1=new_value1, field2=new_value2, ...  
+INSERT INTO table1 (field1, field2, ...) VALUES (value1, value2, ...)    
+INSERT table1 SET field1=value_1, field2=value_2 ...  
+DELETE FROM table1 / TRUNCATE table1  
+DELETE FROM table1 WHERE condition -- join:  
+DELETE FROM table1, table2 WHERE table1.id1 = table2.id2 AND condition WHERE table1.id1 = table2.id2 AND condition  
+</code></pre>
+
+<h3>Getting around</h3>
+
+<pre><code>SHOW [databases, tables]  
+SHOW FIELDS FROM table
+SHOW COLUMNS FROM table  
+DESCRIBE table  
+SHOW CREATE TABLE table  
+SHOW CREATE TRIGGER trigger  
+SHOW TRIGGERS LIKE '%update%'  
+</code></pre>
+
+<h3>CREATE, ALTER, DROP database</h3>
+
+<pre><code>CREATE DATABASE [IF NOT EXIST] database_name  
+DROP DATABASE database_name  
+USE database_name  
+</code></pre>
+
+<h3>CREATE, ALTER, DROP table</h3>
+
+<pre><code>CREATE TABLE table (field1 type1, field2 type2, ...)  
+CREATE TABLE table (field1 type1, field2 type2, ..., INDEX (field))  
+CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1))  
+CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1, field2))  
+CREATE TABLE table1 (fk_field1 type1, fk_field2 type2, ...,
+  FOREIGN KEY (fk_field1, fk_field2) REFERENCES table2 (t2_fieldA, t2_fieldB))  
+CREATE TABLE table IF NOT EXISTS (...)  
+CREATE TABLE new_tbl_name LIKE tbl_name  
+CREATE TEMPORARY TABLE table (...)  
+DROP TABLE table  
+DROP TABLE table1, table2  
+ALTER TABLE table MODIFY field1 type1  
+ALTER TABLE table MODIFY field1 type1 NOT NULL  
+ALTER TABLE table ADD INDEX (field);  
+ALTER TABLE table ADD PRIMARY KEY (field);  
+</code></pre>
+
+<h3>Keys</h3>
+
+<pre><code>CREATE TABLE table (..., PRIMARY KEY (field1, field2))  
+CREATE TABLE table (..., FOREIGN KEY (field1, field2) REFERENCES table2 (t2_field1, t2_field2))  
+ALTER TABLE table ADD PRIMARY KEY (field);  
+</code></pre>
+
+<h3>Load data from local file <a href="http://dev.mysql.com/doc/refman/5.0/en/loading-tables.html">reference</a></h3>
+
+<pre><code>mysql -u user -p --local-infile database  // must log in with '--local-infile'  
+
+mysql&gt; LOAD DATA LOCAL INFILE '/full_path/file.txt' INTO TABLE tablename;
+</code></pre>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/11/what-is-a-javascript-prototype">What is a javascript prototype</a></h3>
+              </header>
+              
+              <p>I was asked recently, &#8220;what is a javascript prototype?&#8221; and had no clue what it was {thank you Pace graduate level Web Devevelopment class for being slightly outdated and not teaching me this [sarcasm]}.  </p>
+
+<p>A javascript prototype is a way to add a method to classes after they&#8217;ve been created. Here&#8217;s the form:  </p>
+
+<p>&#8220;` javascript
+className.prototype.newMethod =</p>
+
+<p>function() {
+statements;
+};
+&#8220;`</p>
+
+<p>A more detailed example from Codecademy:<br />
+&#8220;` javascript Codecademy http://www.codecademy.com/courses/objects-ii</p>
+
+<p>function Cat(name, breed) {
+    this.name = name;
+    this.breed = breed;
+}</p>
+
+<p>var cheshire = new Cat(&#8220;Cheshire Cat&#8221;, &#8220;British Shorthair&#8221;);
+var gary = new Cat(&#8220;Gary&#8221;, &#8220;Domestic Shorthair&#8221;);</p>
+
+<p>// add a method &#8220;meow&#8221; to the Cat class that will allow
+// all cats to print &#8220;Meow!&#8221; to the console
+Cat.prototype.meow = function() {
+    console.log(&#8220;Meow!&#8221;);
+};</p>
+
+<p>cheshire.meow(); // Meow!
+gary.meow();  // Meow!
+&#8220;`  </p>
+
+<p>Prototypes in javascript are also used for inheritance:
+&#8220;` javascript
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}</p>
+
+<p>function Penguin(name) {
+    this.numLegs = 2;
+}</p>
+
+<p>// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal();
+&#8220;`</p>
+
+<p>A particularly helpful post <a href="http://web-design-weekly.com/2012/06/05/mastering-javascripts-prototype/">Mastering Javascript&#8217;s Prototype</a> for me since it compares ruby with javacript and <a href="http://stantona.github.io/blog/2012/12/12/a-tale-of-two-object-models-javascript-and-ruby/">A Tale of Two Object Models</a>.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/10/apache2-could-not-bind-address-port-80">Apache2: could not bind address port 80</a></h3>
+              </header>
+              
+              <pre><code>(98)Address already in use: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+Unable to open logs
+Action 'start' failed.
+The Apache error log may have more information.
+</code></pre>
+
+<p>find out what&#8217;s using port 80. In my case, I was playing around with nginx.</p>
+
+<pre><code>sudo netstat -tulpn| grep :80
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      348/nginx       
+tcp6       0      0 :::8000                 :::*                    LISTEN      348/nginx       
+
+$ sudo killall -9 nginx
+$ sudo netstat -tulpn| grep :80  
+</code></pre>
+
+<p>all clear  </p>
+
+<pre><code>sudo /etc/init.d/apache2 start
+* Starting web server Apache2             [ OK ]
+</code></pre>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/09/installing-lamp-on-a-fresh-ubuntu-12-dot-10-install">Installing LAMP on a fresh Ubuntu 12.10 install</a></h3>
+              </header>
+              
+              <h2>update 8/18/2013</h2>
+
+<p>I&#8217;ve been having issues accessing index.php and figured out that my folder permissions were set incorrectly. I was getting &#8221; SoftException in &#8230;/index.php is writeable by group,&#8221; errors.  The fix:</p>
+
+<p><code>bash
+$ sudo chmod -R 755 ~/public_html/</code></p>
+
+<p>I recently bought a new <a href="http://www.samsung.com/us/computer/laptops/NP520U4C-A01UB">laptop</a>, good value (bought it for about $400 refurb from BestBuy), and I won&#8217;t feel {too} bad if someone steals it or it breaks from a fall. After setting up for Ruby and Rails, I setup LAMP. Last time I installed it was on my previous Thinkpad SL410 over a year ago which I haven&#8217;t had to touch since. On Ubuntu, the easiest way is to use tasksel.  </p>
+
+<pre><code>sudo apt-get install tasksel
+</code></pre>
+
+<p>&#8230;and then LAMP.</p>
+
+<pre><code>sudo tasksel install lamp-server
+</code></pre>
+
+<p>This time around I set it up to work inside my user directory and it was reading the code inside of my php files rather than parsing. To fix, open up &#8220;/etc/apache2/mods-enabled/php5.conf&#8221; and comment out the lines below. Change &#8216;Directory&#8217; folder accordingly if not in public_html.</p>
+
+<p>Comment out these lines:<br />
+    <IfModule mod_userdir.c>
+        <Directory /home/*/public_html>
+            php<em>admin</em>value engine Off
+        </Directory>
+    </IfModule></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Mar 3, 2013</span>
+                <h3 class="article-title"><a href="/2013/03/03/deploying-a-sinatra-app-to-heroku">Deploying a Sinatra app to Heroku</a></h3>
+              </header>
+              
+              <p>I deployed my Sinatra <a href="http://http://emailnewsletter.herokuapp.com/">email_newsletter</a> app to Heroku.  Two gotchas on deploying a Sinatra app to Heroku.  </p>
+
+<p>You must have a Gemfile and corresponding Gemfile.lock (easiest to use bundler for versioning your gems) and a config file (config.ru) in your source directory. Add this to the config file:</p>
+
+<p><code>require './email_newsletter'
+run Sinatra::Application</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Feb 2, 2013</span>
+                <h3 class="article-title"><a href="/2013/02/18/running-test-slash-unit-from-irb">Running test/unit from irb</a></h3>
+              </header>
+              
+              <p>Tests aren&#8217;t supposed to be run interactively but for learning, here&#8217;s an easy way outside of a rails environment.  </p>
+
+<p>&#8220;` console SO http://stackoverflow.com/a/10670587/1234748
+    $ irb</p>
+
+<blockquote>
+  <p>require &#8216;file.rb&#8217;
+  require &#8216;test_file.rb&#8217;</p>
+</blockquote>
+
+<pre><code>&gt; Test::Unit::AutoRunner.run
+</code></pre>
+
+<p>&#8220;`  </p>
+
+<p>or if building the test inside of irb  </p>
+
+<p><code>console SO http://stackoverflow.com/a/3850272/1234748
+    require 'test/unit'
+    extend Test::Unit::Assertions
+    assert_equal 5, 5                # &lt;= nil
+    assert_equal 5, 6                # &lt;= raises AssertionFailedError</code></p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Feb 2, 2013</span>
+                <h3 class="article-title"><a href="/2013/02/10/learning-ruby">Learning Ruby</a></h3>
+              </header>
+              
+              <p>There are many suggestions on how to go about learning Ruby. Here are some resources I&#8217;ve found to be extremely helpful. If you haven&#8217;t taken a CS101 class, I do recommend starting off with <a href="http://tryruby.org/">TryRuby</a> and <a href="http://www.codecademy.com/tracks/ruby">Codecademy</a> and really understanding the basics of programming which transcend specific languages.</p>
+
+<p>then moving on to&#8230;</p>
+
+<p><a href="http://rubymonk.com/">Ruby Monk</a><br />
+<a href="http://rubykoans.com/">Ruby Koans</a><br />
+And the Newcomers section from <a href="http://ruby-doc.org/docs/Newcomers/ruby.html">Ruby Docs</a>.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/21/add-file-size-validation-for-carrierwave-uploads">Add file size validation for CarrierWave uploads</a></h3>
+              </header>
+              
+              <p>In creating my <a href="https://github.com/ajace/ats" title="Applicant Tracking System">Applicant Tracking System</a>, I came across an easy way to add file size validation on the uploaded attachment.  </p>
+
+<p>&#8220;` ruby File Size Validation http://stackoverflow.com/questions/6440943/custom-validation-for-file-size-in-rails-before-being-uploaded SO Source</p>
+
+<p>class Candidate &lt; ActiveRecord::Base
+    mount_uploader :resume, ResumeUploader</p>
+
+<pre><code>attr_accessible :resume
+
+validate :resume_size_validation, :if =&gt; "resume?"  
+
+def resume_size_validation
+    errors[:resume] &lt;&lt; "should be less than 2MB" if resume.size &gt; 2.megabytes
+end
+</code></pre>
+
+<p>end
+&#8220;`</p>
+
+<p>Previously, I was using this <a href="https://github.com/jnicklas/carrierwave/wiki/How-to%3A-Validate-attachment-file-size">method</a> without realizing that the uploaded file has a size attribute.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/15/add-github-repos-to-your-octopress-blog">Add Github repos to your Octopress blog</a></h3>
+              </header>
+              
+              <p>I wanted to automatically generate a full page for my Github projects rather than just inside of the asides. This is a hack and it needs additional styling but it works. DO NOT look at the source after its generated ;).  </p>
+
+<pre><code>$rake new_page["Projects"]
+</code></pre>
+
+<p>generates a folder of the same name in your source directory and an index.markdown file. Change it to a regular html file and add the snippets below which are also in your github.html aside.  </p>
+
+<pre><code>include_code source/Projects/index.html index.html
+</code></pre>
+
+<p>Update your navigation bar:  </p>
+
+<p><code>html source/_includes/custom/navigation.html
+&lt;ul class="main-navigation"&gt;
+  &lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></p>
+
+<p>Generate and preview to make sure everything is working.
+    $rake generate
+    $rake preview</p>
+
+<p>Now, if you have the Github aside loaded in your sidebar, this hack will prevent that from working at the same time because it loads the same script. I suggest turning that off.  </p>
+
+<p>If you know of a better way to iterate and show Github projects, please share.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2013</span>
+                <h3 class="article-title"><a href="/2013/01/05/hashes-in-ruby">Hashes in Ruby</a></h3>
+              </header>
+              
+              <p>Hashes in Ruby</p>
+
+<p>Sources to learn from:<br />
+<a href="http://pine.fm/LearnToProgram/?Chapter=09">Learn to Program</a><br />
+<a href="http://ruby.railstutorial.org/book/ruby-on-rails-tutorial#sec-hashes_and_symbols">Rails Tutorial</a><br />
+<a href="http://rubykoans.com/">Ruby Koans</a><br />
+<a href="http://www.ruby-doc.org/core-1.9.3/Hash.html">Ruby API Class:Hash</a>  </p>
+
+<p>Things to remember:<br />
+When hashes are the last argument in a function call, the curly braces are optional.<br />
+<strong>each</strong> method for hashes takes a <strong>key: value</strong> pair  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/29/install-and-work-with-postgresql-in-rails">Install and work with PostgreSQL in Rails</a></h3>
+              </header>
+              
+              <p>How to install PostgreSQL on local (I&#8217;m using Ubuntu 12.10) and get it working with your Rails app.  </p>
+
+<p>Install PostgreSQL and development package<br />
+    $sudo apt-get install postgresql libpq-dev</p>
+
+<p>Change the postgresql configuration file <em>/etc/postgresql/9.1/main/pg_hba.conf</em> to solve this error<br />
+    FATAL: Peer authentication failed for user</p>
+
+<p>Replace <em>peer</em> to <strong>md5</strong>, otherwise you will receive a peer authentication issue<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>peer</em></p>
+
+<p>Result<br />
+    # &#8220;local&#8221; is for Unix domain socket connections only
+    local   all             all                                     <em>md5</em></p>
+
+<p>Then reload postgresql to apply the change<br />
+    $sudo /etc/init.d/postgresql reload </p>
+
+<p>Enter the PostgreSQL console<br />
+    $sudo -u postgres psql postgres  </p>
+
+<p>Setup databases<br />
+    #Login to postgresql prompt as the postgres user
+    $sudo su postgres -c psql</p>
+
+<p>Create a postgresql user for your project<br />
+    postgres=# CREATE USER username with password &#8216;password&#8217;;</p>
+
+<p>Give your new user higher permissions<br />
+    postgres=# ALTER USER username superuser;</p>
+
+<p>Create the development and test databases<br />
+    postgres=# CREATE DATABASE projectname<em>development;
+    postgres=# CREATE DATABASE projectname</em>test;</p>
+
+<p>Give permissions to the user on the databases<br />
+    postgres=# GRANT all privileges on database projectname<em>development to username;
+    postgres=# GRANT all privileges on database projectname</em>test to username;</p>
+
+<p>Exit your postgresql session<br />
+    postgres=# \q </p>
+
+<p>If you need to alter the password<br />
+    <a href="http://www.postgresql.org/docs/8.0/static/sql-alteruser.html">ALTER USER username with password &#8216;new_password&#8217;;</a>  </p>
+
+<p>Update your Gemfile<br />
+    gem &#8216;pg&#8217;  </p>
+
+<p>Then<br />
+    $bundle install  </p>
+
+<p>Alter <strong>database.yml</strong> file to:<br />
+    development:
+      adapter: postgresql
+      encoding: unicode
+      database: projectname_development
+      pool: 5
+      username: username
+      password: password</p>
+
+<pre><code>test:
+  adapter: postgresql
+  encoding: unicode
+  database: projectname_test
+  pool: 5
+  username: username
+  password: password
+</code></pre>
+
+<p>Last<br />
+    $rake db:migrate  </p>
+
+<p>Additional resources:
+https://devcenter.heroku.com/articles/heroku-postgresql#local-setup<br />
+http://railscasts.com/episodes/342-migrating-to-postgresql  </p>
+
+<p>Other resources listing issues you may encounter:<br />
+http://mrfrosti.com/2011/11/postgresql-for-ruby-on-rails-on-ubuntu/  </p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/26/initial-error-with-rspec">initial error with Rspec</a></h3>
+              </header>
+              
+              <p>Quick setup summary:</p>
+
+<pre><code>$gem install rspec
+$rspec --init
+</code></pre>
+
+<p>add to Gemfile<br />
+    <code>group: development, :test do
+        gem 'rspec-rails'
+    end</code></p>
+
+<pre><code>$bundle install
+
+$rails generate rspec:install
+</code></pre>
+
+<p>enter in an example/text</p>
+
+<pre><code>$rspec
+</code></pre>
+
+<p>BOOM! ERROR:</p>
+
+<pre><code>&lt;code&gt;
+Failures:
+  1) Wolf is invalid without a name
+     Failure/Error: wolf = Wolf.new
+     ActiveRecord::StatementInvalid:
+       Could not find table 'wolves'
+     # ./spec/models/wolf_spec.rb:5:in `new'
+     # ./spec/models/wolf_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;'
+
+Finished in 0.05099 seconds
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/wolf_spec.rb:4 # Wolf is invalid without a name
+
+Randomized with seed 31269
+&lt;/code&gt;
+</code></pre>
+
+<p>I couldn&#8217;t quite figure out why ActiveRecord wasn&#8217;t updating the database even when I ran   </p>
+
+<pre><code>&lt;code&gt;
+$rake db:migrate
+==  CreateWolves: migrating ===================================================
+-- create_table(:wolves)
+   -&gt; 0.0370s
+==  CreateWolves: migrated (0.0371s) ==========================================
+&lt;/code&gt;
+</code></pre>
+
+<p>so I ran </p>
+
+<pre><code>$rake
+</code></pre>
+
+<p>and that works! I&#8217;m still not sure why that worked. I&#8217;ll get back to it.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/10/deploying-octopress-post-to-github-pages">Deploying Octopress post to GitHub Pages</a></h3>
+              </header>
+              
+              <p>So how do you properly commit changes to Github User Pages? First generate the blog/post by:  </p>
+
+<p><code>$rake generate</code></p>
+
+<p>*<strong>REMEMBER that in Octopress you are working out of your source directory. The generated blog is transferred to your **public</strong> directory. Publishing to Github pages with </p>
+
+<pre><code>$rake deploy  
+</code></pre>
+
+<p>copies your source folder to your deploy fold and then is pushed up to your <strong>master</strong> branch. Then remember to <strong>push</strong> all of your changes from your &#8216;source&#8217; folder to your &#8216;source&#8217; branch on Github.</p>
+
+<p><code>$git add .
+$git commit -m "message."
+$git push origin source</code></p>
+
+<p>I previously made the newbie mistake of pointing my remote to the master branch and consquently overwriting what I&#8217;ve deployed.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Dec 12, 2012</span>
+                <h3 class="article-title"><a href="/2012/12/09/using-getelementsbyname">Using getElementsByName</a></h3>
+              </header>
+              
+              <p>Documentation on Mozilla wasn’t too clear for me on how to use getElementsByName. Was pulling my hair trying to validate a simple alert until I came across this post.</p>
+
+<h3>http://forums.techguy.org/web-design-development/795446-solved-form-validation-using-javascript.html Form Validation Using Javascript</h3>
+
+<pre><code>document.getElementsByName(‘email’) returns an array of elements, so
+
+document.getElementsByName(‘email’).value
+</code></pre>
+
+<p>and
+    document.getElementsByName(‘email’).value.indexOf(‘@’)</p>
+
+<p>both have no meaning. If you want to refer to that element you must either use an array index:</p>
+
+<pre><code>document.getElementsByName(‘email’)[0]
+</code></pre>
+
+              
+            </article>
+					
+                                <a class="previous" href="/tag/ruby" title=""><span class="title">Newer >></span></a>
+          
+  			</div>
+  	</div>
+
+    <footer>
+	<div class="container">
+					</div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  </body>
+</html>
