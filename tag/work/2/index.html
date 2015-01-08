@@ -59,6 +59,16 @@
   				                                  <article>
               <header>
                 <span class="post-date">Jan 1, 2015</span>
+                <h3 class="article-title"><a href="/2015/01/07/ee-determine-status-change">Expression Engine: determining if a entry&#039;s status has been updated</a></h3>
+              </header>
+              
+              <p>In the <a href="/projects#shipping-confirmation-module">shipping confirmation module</a>, I had to determine when an admin updated an order entry&#8217;s status to &#8216;shipped&#8217;, which would trigger an email to the customer.  Going through the docs, I thought the proper hook to use was <a href="https://ellislab.com/expressionengine/user-guide/development/extension_hooks/api/channel_entries/#entry-submission-ready">entry&#95;submission&#95;ready</a> since it says, &#8220;Additional processing after all data has been validated, just prior to insertion / update&#8221; but this is not the case. An entry&#8217;s status inside of the $meta array and hence the channel_titles status field are already updated by this point. Instead, you must use &#8216;entry&#95;submission&#95;start&#8217; and directly query the channel titles table and compare that with the POST input.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Jan 1, 2015</span>
                 <h3 class="article-title"><a href="/2015/01/02/from-octopress-to-piecrust">From Octopress to Piecrust</a></h3>
               </header>
               
@@ -150,6 +160,25 @@ public static function getInstance()
 					                        <article>
               <header>
                 <span class="post-date">Sep 9, 2013</span>
+                <h3 class="article-title"><a href="/2013/09/06/preventing-sql-injection">Preventing SQL Injection</a></h3>
+              </header>
+              
+              <p>SQL injection is the act of inserting sql queries as input by an attacker. Take a user login form as an example. Instead of inserting a username for the login, a hacker could put in <code>SELECT * FROM USER;</code> retrieving all information from the Users table.</p>
+
+<p>To prevent this, user input should be sanitized (should be sanitized all the time anyways), </p>
+
+<p>Use prepared statements. 
+[Example using PDO](link to asana report database)
+and the older
+<a href="$mysqli->prepare">Example using mysqli</a></p>
+
+<p>Frameworks will most likely provide this functionality for you. An example, the [Asset Tool] I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding. [link to Laravel api with PDO]</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Sep 9, 2013</span>
                 <h3 class="article-title"><a href="/2013/09/06/paros">Installing and running Paros on Ubuntu 13.04</a></h3>
               </header>
               
@@ -205,25 +234,6 @@ $ ./startserver.sh</p>
 In the Trap tab, click on what you would like to capture such as request or response.</p>
 
 <p>Then in Firefox, Edit > Preferences > Advanced > Network > Settings > Manual proxy configuration > HTTP Proxy: localhost Port: 8080. Last, type in any website to see and change the incoming HTTP.</p>
-
-              
-            </article>
-					                        <article>
-              <header>
-                <span class="post-date">Sep 9, 2013</span>
-                <h3 class="article-title"><a href="/2013/09/06/preventing-sql-injection">Preventing SQL Injection</a></h3>
-              </header>
-              
-              <p>SQL injection is the act of inserting sql queries as input by an attacker. Take a user login form as an example. Instead of inserting a username for the login, a hacker could put in <code>SELECT * FROM USER;</code> retrieving all information from the Users table.</p>
-
-<p>To prevent this, user input should be sanitized (should be sanitized all the time anyways), </p>
-
-<p>Use prepared statements. 
-[Example using PDO](link to asana report database)
-and the older
-<a href="$mysqli->prepare">Example using mysqli</a></p>
-
-<p>Frameworks will most likely provide this functionality for you. An example, the [Asset Tool] I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding. [link to Laravel api with PDO]</p>
 
               
             </article>
@@ -355,199 +365,6 @@ if(isset($_POST['selected_projects'])) {
 					                        <article>
               <header>
                 <span class="post-date">Aug 8, 2013</span>
-                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4-generating-the-pdf">Procedural PHP part 4a-Generating the PDF</a></h3>
-              </header>
-              
-              <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
-
-<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
-
-<p>&lt;?php</p>
-
-<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
-
-// code omitted
-
-$dompdf = new DOMPDF();
-
-// more code ommitted
-
-// start capturing
-ob_start();
-</code></pre>
-
-<p>?></p>
-
-<p><!DOCTYPE html>
-<html>
-<head>
-    <title>Asana API</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
-
-<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
-&lt;style type="text/css"&gt;
-    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
-&lt;/style&gt;
-</code></pre>
-
-<p></head>
-<body></p>
-
-<pre><code>&lt;!-- code omitted --&gt;
-</code></pre>
-
-<p></body>
-</html></p>
-
-<p>&lt;?php</p>
-
-<pre><code>// get the contents from OB
-$output = ob_get_contents();
-
-// save it into a a file
-file_put_contents('tmp/report.html', $output);
-
-// flush the OB for nex time
-ob_end_flush();
-</code></pre>
-
-<p>?></p>
-
-<p>&#8220;`</p>
-
-              
-            </article>
-					                        <article>
-              <header>
-                <span class="post-date">Aug 8, 2013</span>
-                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-3-view">Procedural PHP part 3-View</a></h3>
-              </header>
-              
-              <p>Part 3 continues with generating the HTML for the report. Inside of Asana, tasks can be made into a &#8216;section&#8217; task, which gives the illusion of grouping for all tasks below it. The api does not provide this information however. In order to simulate this, tasks are added to groups and broken apart if it has a header, determined if the task&#8217;s name has a &#8216;:&#8217;. If a header is found, start a new group.</p>
-
-<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
-
-<p><!DOCTYPE html>
-<html>
-<head>
-    <title>Asana API</title>
-</head>
-<body>
-    <div class="borders top"></div>
-    <div id="container"></p>
-
-<p>&lt;?php
-    echo &#8216;<header><img class="logo" src="img/BUlogo.gif"><h1 class="report-header">Account Report for &#8216;.dl(time()).&#8217;</h1></header>&#8217;;</p>
-
-<pre><code>foreach ($projects as $k=&gt;$p) {
-    echo '&lt;header class="project-header"&gt;&lt;h2&gt;Project: '.$p-&gt;name. '&lt;/h2&gt;&lt;/header&gt;';
-    $ic = 'clear';
-
-    $taskGroup = array();
-
-    foreach ($p-&gt;tasks as $m=&gt;$t) {
-        if ($t-&gt;header) {  
-            if(empty($taskGroup)){
-                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
-                $ic = 'indented';
-            } else {
-                // generate table with all tasks
-                echo '&lt;table class="tasks table table-bordered"&gt;';
-                echo '&lt;tbody&gt;';
-                foreach ($taskGroup as $k=&gt;$v) {
-                    echo '&lt;tr class="tasks-row"&gt;';
-                        echo '&lt;td class="tasks-area"&gt;';
-                            // Loop through subtasks here //
-                            echo '&lt;div class="' . $ic . '"&gt;';
-
-                                echo '&lt;h3&gt;' . $v-&gt;name . '&lt;/h3&gt;';  
-
-                                if($v-&gt;info) {
-                                    echo '&lt;div class="task-info"&gt;' . $v-&gt;info . '&lt;/div&gt;';
-                                }
-
-                                if ($v-&gt;notes!='') {
-                                    echo '&lt;ul&gt;';
-                                        echo '&lt;li&gt;';
-                                            echo '&lt;span class="notes"&gt;' . $v-&gt;notes . '  ' . '&lt;span class="dueon"&gt;' . comments_dueon($v-&gt;due_on) . '&lt;/span&gt;&lt;/span&gt;';
-                                        echo '&lt;/li&gt;';
-                                    echo '&lt;/ul&gt;';
-                                }
-
-                            echo '&lt;/div&gt;';
-                        echo '&lt;/td&gt;';
-
-                        echo '&lt;td class="assignee-area"&gt;';
-                            if ($v-&gt;state) {
-                                echo '&lt;div class="task-state"&gt;&lt;h3&gt;' . $v-&gt;state . '&lt;/h3&gt;&lt;/div&gt;';
-                            }
-
-                            $v-&gt;assignee = !empty($v-&gt;assignee) ? $v-&gt;assignee : '';
-                            if ($v-&gt;assignee) {
-                                 echo '&lt;div class="assigned"&gt;&lt;h3&gt;' . $v-&gt;assignee-&gt;name . '&lt;/h3&gt;&lt;/div&gt;';
-                            }
-                        echo '&lt;/td&gt;';
-                    echo '&lt;/tr&gt;';
-                } // end foreach
-                echo '&lt;/tbody&gt;';
-                echo '&lt;/table&gt;';
-
-                // clean out the array
-                $taskGroup = array();
-
-                // start a new header
-                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
-                $ic = 'indented';
-            }
-        } else {
-            // no header, add to group
-            $taskGroup[] = $t;
-        }
-</code></pre>
-
-<p>&#8220;`</p>
-
-              
-            </article>
-					                        <article>
-              <header>
-                <span class="post-date">Aug 8, 2013</span>
-                <h3 class="article-title"><a href="/2013/08/30/procedural-php">Procedural PHP part 1</a></h3>
-              </header>
-              
-              <p>My last project at Brooklyn United was to build a <a href="https://github.com/ajace/asanareporting">report</a> of a project/s from Asana&#8217;s api. Each Project has many tasks and each task can have many comments. Procedural programming is the &#8216;traditional&#8217; way of using PHP. That is, the script is evaluated basically from top to bottom. After getting a feel for the Asana api, I separated the script into 2 parts. The first part captures which projects the user (someone on the BU team) would like to generate a report for, and the actual report itself.</p>
-
-<p>&#8220;` php Index.php https://github.com/ajace/asanareporting/blob/master/index.php
-&lt;?php
-    // start a session
-    session_start();</p>
-
-<pre><code>// use the php api library provided by Asana
-include 'asana.php';
-
-if(isset($_POST['asana_api_key'])) {
-    $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
-} 
-
-if(isset($_SESSION['asana_api_key'])) {
-    $key = $_SESSION['asana_api_key']; 
-    $asana = new Asana($key);
-
-    $asanaProjectList = $asana-&gt;getProjects();
-    $asanaProjectList = json_decode($asanaProjectList);
-    $asanaProjectList = $asanaProjectList-&gt;data;
-}
-
-// the HTML form here which asks for a key in order to begin
-</code></pre>
-
-<p>&#8220;`</p>
-
-              
-            </article>
-					                        <article>
-              <header>
-                <span class="post-date">Aug 8, 2013</span>
                 <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4b-javascript">Procedural PHP part 4b-Javascript</a></h3>
               </header>
               
@@ -650,6 +467,199 @@ generate_pdf('tmp/report.html');
 <p>&#8220;`</p>
 
 <p>This concludes the creation of the reporting tool. I came into this with an OOP mindset and had to adjust a little bit. The mixture of logic and html still take a bit of getting used to since I&#8217;ve built other projects in mvc frameworks. I did go ahead and build <a href="https://github.com/ajace/asanareporting/tree/master/oop_version">OO version</a> though to compare. It took much longer to build, but can be extended easier should BU&#8217;s users wish to re-arrange projects and tasks in the future.</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php">Procedural PHP part 1</a></h3>
+              </header>
+              
+              <p>My last project at Brooklyn United was to build a <a href="https://github.com/ajace/asanareporting">report</a> of a project/s from Asana&#8217;s api. Each Project has many tasks and each task can have many comments. Procedural programming is the &#8216;traditional&#8217; way of using PHP. That is, the script is evaluated basically from top to bottom. After getting a feel for the Asana api, I separated the script into 2 parts. The first part captures which projects the user (someone on the BU team) would like to generate a report for, and the actual report itself.</p>
+
+<p>&#8220;` php Index.php https://github.com/ajace/asanareporting/blob/master/index.php
+&lt;?php
+    // start a session
+    session_start();</p>
+
+<pre><code>// use the php api library provided by Asana
+include 'asana.php';
+
+if(isset($_POST['asana_api_key'])) {
+    $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
+} 
+
+if(isset($_SESSION['asana_api_key'])) {
+    $key = $_SESSION['asana_api_key']; 
+    $asana = new Asana($key);
+
+    $asanaProjectList = $asana-&gt;getProjects();
+    $asanaProjectList = json_decode($asanaProjectList);
+    $asanaProjectList = $asanaProjectList-&gt;data;
+}
+
+// the HTML form here which asks for a key in order to begin
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-3-view">Procedural PHP part 3-View</a></h3>
+              </header>
+              
+              <p>Part 3 continues with generating the HTML for the report. Inside of Asana, tasks can be made into a &#8216;section&#8217; task, which gives the illusion of grouping for all tasks below it. The api does not provide this information however. In order to simulate this, tasks are added to groups and broken apart if it has a header, determined if the task&#8217;s name has a &#8216;:&#8217;. If a header is found, start a new group.</p>
+
+<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+</head>
+<body>
+    <div class="borders top"></div>
+    <div id="container"></p>
+
+<p>&lt;?php
+    echo &#8216;<header><img class="logo" src="img/BUlogo.gif"><h1 class="report-header">Account Report for &#8216;.dl(time()).&#8217;</h1></header>&#8217;;</p>
+
+<pre><code>foreach ($projects as $k=&gt;$p) {
+    echo '&lt;header class="project-header"&gt;&lt;h2&gt;Project: '.$p-&gt;name. '&lt;/h2&gt;&lt;/header&gt;';
+    $ic = 'clear';
+
+    $taskGroup = array();
+
+    foreach ($p-&gt;tasks as $m=&gt;$t) {
+        if ($t-&gt;header) {  
+            if(empty($taskGroup)){
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            } else {
+                // generate table with all tasks
+                echo '&lt;table class="tasks table table-bordered"&gt;';
+                echo '&lt;tbody&gt;';
+                foreach ($taskGroup as $k=&gt;$v) {
+                    echo '&lt;tr class="tasks-row"&gt;';
+                        echo '&lt;td class="tasks-area"&gt;';
+                            // Loop through subtasks here //
+                            echo '&lt;div class="' . $ic . '"&gt;';
+
+                                echo '&lt;h3&gt;' . $v-&gt;name . '&lt;/h3&gt;';  
+
+                                if($v-&gt;info) {
+                                    echo '&lt;div class="task-info"&gt;' . $v-&gt;info . '&lt;/div&gt;';
+                                }
+
+                                if ($v-&gt;notes!='') {
+                                    echo '&lt;ul&gt;';
+                                        echo '&lt;li&gt;';
+                                            echo '&lt;span class="notes"&gt;' . $v-&gt;notes . '  ' . '&lt;span class="dueon"&gt;' . comments_dueon($v-&gt;due_on) . '&lt;/span&gt;&lt;/span&gt;';
+                                        echo '&lt;/li&gt;';
+                                    echo '&lt;/ul&gt;';
+                                }
+
+                            echo '&lt;/div&gt;';
+                        echo '&lt;/td&gt;';
+
+                        echo '&lt;td class="assignee-area"&gt;';
+                            if ($v-&gt;state) {
+                                echo '&lt;div class="task-state"&gt;&lt;h3&gt;' . $v-&gt;state . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+
+                            $v-&gt;assignee = !empty($v-&gt;assignee) ? $v-&gt;assignee : '';
+                            if ($v-&gt;assignee) {
+                                 echo '&lt;div class="assigned"&gt;&lt;h3&gt;' . $v-&gt;assignee-&gt;name . '&lt;/h3&gt;&lt;/div&gt;';
+                            }
+                        echo '&lt;/td&gt;';
+                    echo '&lt;/tr&gt;';
+                } // end foreach
+                echo '&lt;/tbody&gt;';
+                echo '&lt;/table&gt;';
+
+                // clean out the array
+                $taskGroup = array();
+
+                // start a new header
+                echo '&lt;header class="task-group-header"&gt;&lt;h2&gt;' . $t-&gt;name . '&lt;/h2&gt;&lt;/header&gt;';
+                $ic = 'indented';
+            }
+        } else {
+            // no header, add to group
+            $taskGroup[] = $t;
+        }
+</code></pre>
+
+<p>&#8220;`</p>
+
+              
+            </article>
+					                        <article>
+              <header>
+                <span class="post-date">Aug 8, 2013</span>
+                <h3 class="article-title"><a href="/2013/08/30/procedural-php-part-4-generating-the-pdf">Procedural PHP part 4a-Generating the PDF</a></h3>
+              </header>
+              
+              <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
+
+<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+
+<p>&lt;?php</p>
+
+<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+
+// code omitted
+
+$dompdf = new DOMPDF();
+
+// more code ommitted
+
+// start capturing
+ob_start();
+</code></pre>
+
+<p>?></p>
+
+<p><!DOCTYPE html>
+<html>
+<head>
+    <title>Asana API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+
+<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
+&lt;style type="text/css"&gt;
+    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
+&lt;/style&gt;
+</code></pre>
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;!-- code omitted --&gt;
+</code></pre>
+
+<p></body>
+</html></p>
+
+<p>&lt;?php</p>
+
+<pre><code>// get the contents from OB
+$output = ob_get_contents();
+
+// save it into a a file
+file_put_contents('tmp/report.html', $output);
+
+// flush the OB for nex time
+ob_end_flush();
+</code></pre>
+
+<p>?></p>
+
+<p>&#8220;`</p>
 
               
             </article>
