@@ -1,3 +1,21 @@
+.table th, .table td { 
+     border-top: none; 
+}
+
+.table>tbody>tr>th {
+	border: 1px solid #ddd; 
+}
+
+.table>tbody>tr>td {
+	border-top: none;
+	border-right: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+}
+
+.status-table .btn {
+	white-space: normal;
+}
+
 .row .center-block {
 	float: none;
 }
@@ -56,6 +74,10 @@
 	position: fixed;
 	right: 10px;
 	bottom: 10px;
+}
+
+.status-title {
+	text-align: center;
 }
 
 /* Google Search / Bootstrap Fixes */
