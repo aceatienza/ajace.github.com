@@ -52,7 +52,7 @@
 	margin: 0;
 }
 
-/*Google Search Fixes*/
+/* Google Search / Bootstrap Fixes */
 #gs_tti50 {
 	padding-top: 0;
 }
@@ -60,6 +60,8 @@
 	width: 68px !important;
 	padding-left: 2px;
 }
-.gsc-selected-option {
-
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus, .gsc-search-button 
+{
+  box-sizing: content-box;
+  line-height: normal;
 }

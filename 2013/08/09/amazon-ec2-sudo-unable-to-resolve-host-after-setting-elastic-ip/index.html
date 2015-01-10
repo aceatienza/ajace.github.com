@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ace Atienza&#039;s Web Development blog">
@@ -14,21 +14,21 @@
 
     <!-- Google Search -->
     <script>
-    (function() {
-      var cx = '000861553144757390361:ilf0n_kvp6c';
-      var gcse = document.createElement('script');
-      gcse.type = 'text/javascript';
-      gcse.async = true;
-      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-          '//www.google.com/cse/cse.js?cx=' + cx;
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(gcse, s);
-    })();
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
     </script>
 </head>
-  <body>
-    
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -53,15 +53,15 @@
     </div>
   </div>
 </nav>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-sm-8 center-block">
-          <article>
-            <header>
-              <p><span class="post-date">Aug 8, 2013</span></p>
-              <h3><a href="">Amazon EC2 Sudo: unable to resolve host after setting elastic ip</a></h3>
-          	</header>
-            <p>I recently created a new instance on Amazon EC2 of an ubuntu server and associated an elastic ip. I&#8217;m not sure if it changed the ip I was using before. Either way, had to first get the private dns name. I used <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html#set_aws_credentials_linux">AWS cli tools</a> to get the ip-xx-xx-xx-xx.</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <p><span class="post-date">Aug 8, 2013</span></p>
+            <h3><a href="">Amazon EC2 Sudo: unable to resolve host after setting elastic ip</a></h3>
+        	</header>
+          <p>I recently created a new instance on Amazon EC2 of an ubuntu server and associated an elastic ip. I&#8217;m not sure if it changed the ip I was using before. Either way, had to first get the private dns name. I used <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html#set_aws_credentials_linux">AWS cli tools</a> to get the ip-xx-xx-xx-xx.</p>
 
 <pre class="bash">
 # Logged in to instance
@@ -71,16 +71,19 @@ $ sudo hostname ip-xx-xx-xx-xx    # temporary change for the current instance
 $ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use
 </pre>
 
-          </article>
-                            <p class="tags">
-            Tags:
-                        <a href="/blog/tags/ec2">ec2</a>,                         <a href="/blog/tags/sudo">sudo</a>,                         <a href="/blog/tags/hostname">hostname</a>                        </p>
-        
-          			</div>
-	   </div>
-    </div>
+        </article>
 
-    <footer>
+                <p class="tags">
+          Tags:
+                    <a href="/blog/tags/ec2">ec2</a>,                     <a href="/blog/tags/sudo">sudo</a>,                     <a href="/blog/tags/hostname">hostname</a>                    </p>
+      
+          <nav class="article">
+                                  </nav>
+			</div>
+   </div>
+  </div>
+
+<footer>
 	<div class="container">
 					</div>
 </footer>
@@ -90,5 +93,6 @@ $ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use
 <script src="/js/main.js"></script>
 
 
-  </body>
+
+</body>
 </html>

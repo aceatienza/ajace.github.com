@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ace Atienza&#039;s Web Development blog">
@@ -14,21 +14,21 @@
 
     <!-- Google Search -->
     <script>
-    (function() {
-      var cx = '000861553144757390361:ilf0n_kvp6c';
-      var gcse = document.createElement('script');
-      gcse.type = 'text/javascript';
-      gcse.async = true;
-      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-          '//www.google.com/cse/cse.js?cx=' + cx;
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(gcse, s);
-    })();
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
     </script>
 </head>
-  <body>
-    
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -53,26 +53,29 @@
     </div>
   </div>
 </nav>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-sm-8 center-block">
-          <article>
-            <header>
-              <p><span class="post-date">Jan 1, 2015</span></p>
-              <h3><a href="">Expression Engine: determining if a entry&#039;s status has been updated</a></h3>
-          	</header>
-            <p>In the <a href="/projects#shipping-confirmation-module">shipping confirmation module</a>, I had to determine when an admin updated an order entry&#8217;s status to &#8216;shipped&#8217;, which would trigger an email to the customer.  Going through the docs, I thought the proper hook to use was <a href="https://ellislab.com/expressionengine/user-guide/development/extension_hooks/api/channel_entries/#entry-submission-ready">entry&#95;submission&#95;ready</a> since it says, &#8220;Additional processing after all data has been validated, just prior to insertion / update&#8221; but this is not the case. An entry&#8217;s status inside of the $meta array and hence the channel_titles status field are already updated by this point. Instead, you must use &#8216;entry&#95;submission&#95;start&#8217; and directly query the channel titles table and compare that with the POST input.</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <p><span class="post-date">Jan 1, 2015</span></p>
+            <h3><a href="">Expression Engine: determining if a entry&#039;s status has been updated</a></h3>
+        	</header>
+          <p>In the <a href="/projects#shipping-confirmation-module">shipping confirmation module</a>, I had to determine when an admin updated an order entry&#8217;s status to &#8216;shipped&#8217;, which would trigger an email to the customer.  Going through the docs, I thought the proper hook to use was <a href="https://ellislab.com/expressionengine/user-guide/development/extension_hooks/api/channel_entries/#entry-submission-ready">entry&#95;submission&#95;ready</a> since it says, &#8220;Additional processing after all data has been validated, just prior to insertion / update&#8221; but this is not the case. An entry&#8217;s status inside of the $meta array and hence the channel_titles status field are already updated by this point. Instead, you must use &#8216;entry&#95;submission&#95;start&#8217; and directly query the channel titles table and compare that with the POST input.</p>
 
-          </article>
-                            <p class="tags">
-            Tags:
-                        <a href="/blog/tags/expression%20engine">expression engine</a>,                         <a href="/blog/tags/php">php</a>                        </p>
-        
-          			</div>
-	   </div>
-    </div>
+        </article>
 
-    <footer>
+                <p class="tags">
+          Tags:
+                    <a href="/blog/tags/expression%20engine">expression engine</a>,                     <a href="/blog/tags/php">php</a>                    </p>
+      
+          <nav class="article">
+                                  </nav>
+			</div>
+   </div>
+  </div>
+
+<footer>
 	<div class="container">
 					</div>
 </footer>
@@ -82,5 +85,6 @@
 <script src="/js/main.js"></script>
 
 
-  </body>
+
+</body>
 </html>
