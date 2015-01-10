@@ -52,6 +52,12 @@
 	margin: 0;
 }
 
+.status {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+}
+
 /* Google Search / Bootstrap Fixes */
 #gs_tti50 {
 	padding-top: 0;
@@ -64,4 +70,11 @@ input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus, .gs
 {
   box-sizing: content-box;
   line-height: normal;
+}
+
+/* Helpers */
+@media screen and (max-width: 768px) {
+	.hide-on-mobile {		
+		display: none;
+	}
 }
