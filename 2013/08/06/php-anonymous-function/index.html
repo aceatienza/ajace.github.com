@@ -63,28 +63,21 @@
           	</header>
             <p>I recently went down the rabbit hole looking for a way to compare 2 objects both inside of deeply nested array objects and came across PHP&#8217;s anonymous functions. It&#8217;s similar (exactly the same?) to javascript&#8217;s anonymous function. Typical use as a callback function and possibly recursion.</p>
 
-<p>&#8220;` php PHP http://php.net/manual/en/functions.anonymous.php</p>
-
-<pre><code>&lt;?php
+<pre class="php">
 echo preg_replace_callback('~-([a-z])~', function ($match) {
     return strtoupper($match[1]);
 }, 'hello-world');
 // outputs helloWorld
-</code></pre>
-
-<p>&#8220;`</p>
+</pre>
 
 <p>Another modified example:
-&#8220;` php SO http://stackoverflow.com/questions/4166198/find-array-key-in-objects-array-given-an-attribute-value</p>
-
-<pre><code>&lt;?php
-$neededObjects = array_filter( $input_array, function ($e) {
-        return $e-&gt;id == $id_that_you_need; // if true, return this value_
-    }       
-);  
-</code></pre>
-
-<p>&#8220;`</p>
+<a href="http://stackoverflow.com/questions/4166198/find-array-key-in-objects-array-given-an-attribute-value">SO</a><br />
+<pre class="php">
+$neededObjects = array<em>filter( $input</em>array, function ($e) {
+        return $e->id == $id<em>that</em>you<em>need; // if true, return this value</em>
+    }<br />
+);
+</pre></p>
 
           </article>
                             <p class="tags">

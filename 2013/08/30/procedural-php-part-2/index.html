@@ -63,61 +63,59 @@
           	</header>
             <p>Continuing from the <a href="'blog/2013/08/30/procedural-php/'">previous</a> part, the meat of the script is in cron_report.php. Continuing in procedural style, the script goes from top to bottom, with only one side step into the vetTask function.   </p>
 
-<p>&#8220;` php cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+<p><a href="https://github.com/ajace/asanareporting/blob/master/cron_report.php">cron_report.php</a>  </p>
 
-<p>&lt;?php
+<pre class="php">
     // include the Asana php library again
-    include &#8216;asana.php&#8217;;</p>
+    include 'asana.php';
 
-<pre><code>// grab the key from SESSION if available
-if(isset($_SESSION['asana_api_key']) || $_POST['asana_api_key']) {
-    $key = $_SESSION['asana_api_key'] = $_POST['asana_api_key']; 
+    // grab the key from SESSION if available
+    if(isset($_SESSION['asana_api_key']) || $_POST['asana_api_key']) {
+        $key = $_SESSION['asana_api_key'] = $_POST['asana_api_key']; 
 
-    $asana = new Asana ($key);
-}
-
-
-function vetTask ($task) {
-    // ... arranges the tasks as either tasks, or as comments if it does not have a header
-}
-
-// some date functions here for formatting
-
-
-$projects = array();
-if(isset($_POST['selected_projects'])) {
-
-    // loop through all the projects chosen previously
-    foreach ($_POST['selected_projects'] as $key =&gt; $projectId) {
-
-        // get the project info from Asana
-        $ws = json_decode($asana-&gt;getProject($projectId));
-        if($asana-&gt;responseCode != 200 || is_null($ws)) {
-            echo "Error while trying to connect to Asana, response code: {$responseCode}";
-        }
-
-        $ws = $ws-&gt;data;
-
-        // get the project's tasks from Asana
-        $tasks = json_decode($asana-&gt;getProjectTasks($ws-&gt;id));
-        $arTasks = array();
-
-        // establish comments as specific streams in task objects
-        foreach($tasks-&gt;data as $m=&gt;$task) {
-            $task-&gt;story = json_decode($asana-&gt;getTaskStories($task-&gt;id));
-            $arTasks[] = vetTask($task);
-        }
-        $ws-&gt;tasks = $arTasks;
-
-        // add back to the projects array for the report
-        $projects[] = $ws;
+        $asana = new Asana ($key);
     }
-}
 
-// generate the View
-</code></pre>
 
-<p>&#8220;`</p>
+    function vetTask ($task) {
+        // ... arranges the tasks as either tasks, or as comments if it does not have a header
+    }
+
+    // some date functions here for formatting
+
+
+    $projects = array();
+    if(isset($_POST['selected_projects'])) {
+
+        // loop through all the projects chosen previously
+        foreach ($_POST['selected_projects'] as $key => $projectId) {
+        
+            // get the project info from Asana
+            $ws = json_decode($asana->getProject($projectId));
+            if($asana->responseCode != 200 || is_null($ws)) {
+                echo "Error while trying to connect to Asana, response code: {$responseCode}";
+            }
+
+            $ws = $ws->data;
+
+            // get the project's tasks from Asana
+            $tasks = json_decode($asana->getProjectTasks($ws->id));
+            $arTasks = array();
+
+            // establish comments as specific streams in task objects
+            foreach($tasks->data as $m=>$task) {
+                $task->story = json_decode($asana->getTaskStories($task->id));
+                $arTasks[] = vetTask($task);
+            }
+            $ws->tasks = $arTasks;
+
+            // add back to the projects array for the report
+            $projects[] = $ws;
+        }
+    }
+
+    // generate the View
+</pre>
 
           </article>
                             <p class="tags">

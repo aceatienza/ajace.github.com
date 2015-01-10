@@ -63,13 +63,18 @@
           	</header>
             <p>The last part mixes in Javascript in order to activate the last script. I used Javascript so that the pdf button is not included in the pdf.</p>
 
-<p>&#8220;` javascript
-Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+<p><a href="https://github.com/ajace/asanareporting/blob/master/cron_report.php">Cron_report.php</a>  </p>
 
-<pre><code>&lt;script&gt;
+<pre class="javascript">
     (function() { 
+usly generated html file
+    $dompdf->load_html(file_get_contents($input));
+    $dompdf->render();
 
-        // create the button &amp; add to the page
+    // save the output temporarily
+    $output = $dompdf->output();
+
+        // create the button & add to the page
         var printBtn = document.createElement('button');
         printBtn.setAttribute('id', 'pdf_button');
         printBtn.textContent = 'PDF';
@@ -89,7 +94,7 @@ Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>
             } else if (window.ActiveXObject) { // IE 8 and older
                 httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
             }
-
+            
             if (!httpRequest) {
               console.log("Can't do ajax");
               return false;
@@ -118,46 +123,34 @@ Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>
             }
         }
     })(); // iife
-&lt;/script&gt;
-</code></pre>
-
-<p>&#8220;`</p>
+</pre>
 
 <p>And here is the script to generate the pdf. The reason for this is that there cannot be any output prior to dompdf.  </p>
 
-<h3>php generate<em>pdf.php https://github.com/ajace/asanareporting/blob/master/generate</em>pdf.php</h3>
+<p><a href="https://github.com/ajace/asanareporting/blob/master/generate_pdf.php">generate_pdf.php</a>
+<pre class="php">
+// require dompdf
+require<em>once("vendor/dompdf/dompdf/dompdf</em>config.inc.php");
+$dompdf = new DOMPDF();  </p>
 
-<p>&#8220;`
-&lt;?php
-    // require dompdf
-    require<em>once(&#8220;vendor/dompdf/dompdf/dompdf</em>config.inc.php&#8221;);
-    $dompdf = new DOMPDF();</p>
-
-<pre><code>function generate_pdf($input){
-    global  $dompdf;  
-    date_default_timezone_set('America/New_York');
+<p>function generate<em>pdf($input){
+    global  $dompdf;<br />
+    date</em>default<em>timezone</em>set('America/New<em>York');
     $date = date('M j Y');
-    $filename = 'report_' . $date . '.pdf';
-
+    $filename = 'report</em>' . $date . '.pdf';<br />
     // load the previously generated html file
-    $dompdf-&gt;load_html(file_get_contents($input));
-    $dompdf-&gt;render();
-
+    $dompdf->load<em>html(file</em>get<em>contents($input));
+    $dompdf->render();
     // save the output temporarily
-    $output = $dompdf-&gt;output();
-
+    $output = $dompdf->output();<br />
     // save the file
-    file_put_contents('tmp/'.$filename, $output);  
-
+  file</em>put<em>contents('tmp/'.$filename, $output);<br />
     // send back the path to the ajax request
-    echo 'tmp/'.$filename;  
-}
-
+    echo 'tmp/'.$filename;<br />
+}<br />
 // call the function
-generate_pdf('tmp/report.html');
-</code></pre>
-
-<p>&#8220;`</p>
+generate</em>pdf('tmp/report.html');
+</pre></p>
 
 <p>This concludes the creation of the reporting tool. I came into this with an OOP mindset and had to adjust a little bit. The mixture of logic and html still take a bit of getting used to since I&#8217;ve built other projects in mvc frameworks. I did go ahead and build <a href="https://github.com/ajace/asanareporting/tree/master/oop_version">OO version</a> though to compare. It took much longer to build, but can be extended easier should BU&#8217;s users wish to re-arrange projects and tasks in the future.</p>
 

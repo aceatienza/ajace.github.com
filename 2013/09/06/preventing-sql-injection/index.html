@@ -63,14 +63,13 @@
           	</header>
             <p>SQL injection is the act of inserting sql queries as input by an attacker. Take a user login form as an example. Instead of inserting a username for the login, a hacker could put in <code>SELECT * FROM USER;</code> retrieving all information from the Users table.</p>
 
-<p>To prevent this, user input should be sanitized (should be sanitized all the time anyways), </p>
+<p>Countermeasures  </p>
 
-<p>Use prepared statements. 
-[Example using PDO](link to asana report database)
-and the older
-<a href="$mysqli->prepare">Example using mysqli</a></p>
+<ul>
+<li>Sanitize input and use prepared statements (PDO in php) </li>
+</ul>
 
-<p>Frameworks will most likely provide this functionality for you. An example, the [Asset Tool] I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding. [link to Laravel api with PDO]</p>
+<p>Frameworks will most likely provide this functionality for you. An example, the <a href="https://github.com/ajace/asset-tools">Asset Tool</a> I recently built in Laravel is protected from SQL injection because Laravel&#8217;s Fluent query builder and Eloquent ORM use PDO parameter binding.</p>
 
           </article>
                             <p class="tags">

@@ -63,12 +63,13 @@
           	</header>
             <p>I recently created a new instance on Amazon EC2 of an ubuntu server and associated an elastic ip. I&#8217;m not sure if it changed the ip I was using before. Either way, had to first get the private dns name. I used <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html#set_aws_credentials_linux">AWS cli tools</a> to get the ip-xx-xx-xx-xx.</p>
 
-<p><code>bash Logged in to instance
-$ ec2din</code></p>
+<pre class="bash">
+# Logged in to instance
+$ ec2din
 
-<p><code>bash
 $ sudo hostname ip-xx-xx-xx-xx    # temporary change for the current instance
-$ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use</code></p>
+$ echo 'ip-xx-xx-xx-xx' | sudo tee /etc/hostname    # adding it for future use
+</pre>
 
           </article>
                             <p class="tags">

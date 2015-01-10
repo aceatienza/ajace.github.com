@@ -71,43 +71,41 @@
 
 <p>Extract Paros into a folder and go to the build directory and type ant.  </p>
 
-<p>&#8220;` bash</p>
+<pre class="bash">
+ace: ~/paros/build $ ant
 
-<p>ace: ~/paros/build $ ant</p>
+Buildfile: /paros/build/build.xml
 
-<p>Buildfile: /paros/build/build.xml</p>
+init:
+    [mkdir] Created dir: /paros/build/build
 
-<p>init:
-    [mkdir] Created dir: /paros/build/build</p>
+compile:
+    [javac] /paros/build/build.xml:23: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    
+    [javac] /paros/src/org/parosproxy/paros/extension/history/HistoryFilterDialog.java:2: error: unmappable character for encoding UTF8
+    [javac]  * Created on 2004�~7��23��
+    
+    [javac] /paros/src/org/parosproxy/paros/extension/history/LogPanel.java:2: error: unmappable character for encoding UTF8
+    [javac]  * Created on 2004�~7��4��
 
-<p>compile:
-    [javac] /paros/build/build.xml:23: warning: &#8216;includeantruntime&#8217; was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds</p>
 
-<pre><code>[javac] /paros/src/org/parosproxy/paros/extension/history/HistoryFilterDialog.java:2: error: unmappable character for encoding UTF8
-[javac]  * Created on 2004�~7��23��
-
-[javac] /paros/src/org/parosproxy/paros/extension/history/LogPanel.java:2: error: unmappable character for encoding UTF8
-[javac]  * Created on 2004�~7��4��
-</code></pre>
-
-<p>BUILD FAILED</p>
-
-<p>&#8220;`</p>
+BUILD FAILED
+</pre>
 
 <p>In my case, I simply went into HistoryFilterDialog.java and LogPanel.java and deleted everything after 2004. After the build is done, go to build/paros.</p>
 
-<p>&#8220;` bash
+<pre class="bash">
 $ chmod +x startserver.sh
-$ ./startserver.sh</p>
+$ ./startserver.sh
 
-<p>OR</p>
+OR
 
-<p>$ bash startserver.sh</p>
+$ bash startserver.sh
 
-<p>OR, since all that script really does</p>
+OR, since all that script really does
 
-<p>$ java -jar paros.jar
-&#8220;`</p>
+$ java -jar paros.jar
+</pre>
 
 <p>Paros defaults to listening in on localhost:8080 so configure your web browser accordingly or change the it under Options.
 In the Trap tab, click on what you would like to capture such as request or response.</p>

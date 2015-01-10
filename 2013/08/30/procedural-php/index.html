@@ -63,31 +63,27 @@
           	</header>
             <p>My last project at Brooklyn United was to build a <a href="https://github.com/ajace/asanareporting">report</a> of a project/s from Asana&#8217;s api. Each Project has many tasks and each task can have many comments. Procedural programming is the &#8216;traditional&#8217; way of using PHP. That is, the script is evaluated basically from top to bottom. After getting a feel for the Asana api, I separated the script into 2 parts. The first part captures which projects the user (someone on the BU team) would like to generate a report for, and the actual report itself.</p>
 
-<p>&#8220;` php Index.php https://github.com/ajace/asanareporting/blob/master/index.php
-&lt;?php
-    // start a session
-    session_start();</p>
+<p><a href="https://github.com/ajace/asanareporting/blob/master/index.php">Asana Reporting</a>  </p>
 
-<pre><code>// use the php api library provided by Asana
-include 'asana.php';
+<pre class="php">  
+    session_start();
 
-if(isset($_POST['asana_api_key'])) {
-    $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
-} 
+    // use the php api library provided by Asana
+    include 'asana.php';
 
-if(isset($_SESSION['asana_api_key'])) {
-    $key = $_SESSION['asana_api_key']; 
-    $asana = new Asana($key);
+    if(isset($_POST['asana_api_key'])) {
+        $_SESSION['asana_api_key'] = $_POST['asana_api_key'];
+    } 
 
-    $asanaProjectList = $asana-&gt;getProjects();
-    $asanaProjectList = json_decode($asanaProjectList);
-    $asanaProjectList = $asanaProjectList-&gt;data;
-}
+    if(isset($_SESSION['asana_api_key'])) {
+        $key = $_SESSION['asana_api_key']; 
+        $asana = new Asana($key);
 
-// the HTML form here which asks for a key in order to begin
-</code></pre>
-
-<p>&#8220;`</p>
+        $asanaProjectList = $asana->getProjects();
+        $asanaProjectList = json_decode($asanaProjectList);
+        $asanaProjectList = $asanaProjectList->data;
+    }
+</pre>
 
           </article>
                             <p class="tags">

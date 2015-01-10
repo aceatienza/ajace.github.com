@@ -62,117 +62,118 @@
               <h3><a href="">SQL query examples for tables with relationships</a></h3>
           	</header>
             <p>Given these tables:<br />
+<pre class="bash">
 Faculty (facId, name, department, rank)<br />
 Class (classNumber, facId, schedule, room)<br />
 ENROLL (stuId, classNumber, grade)<br />
-Student (stuId, lastName, firstName, major, credits)  </p>
+Student (stuId, lastName, firstName, major, credits)<br />
+</pre>
+Student and Class is a &#8220;has many&#8221; relationship. Students have many classes and the reverse, Classes have many Students. ENROLL is the relation between the two in an E-R model, and also called a pivot table.<br />
+Find stuId and grade of all students taking any course taught by the Faculty member whose facId is F110. Arrange in order by stuId. </p>
 
-<p>Student and Class is a &#8220;has many&#8221; relationship. Students have many classes and the reverse, Classes have many Students. ENROLL is the relation between the two in an E-R model, and also called a pivot table.<br />
-Find stuId and grade of all students taking any course taught by the Faculty member whose facId is F110. Arrange in order by stuId. 
-&#8220;` bash  </p>
-
-<p>SELECT Student.stuId, Student.lastName, ENROLL.grade major 
+<p><code class="bash">
+SELECT Student.stuId, Student.lastName, ENROLL.grade major 
     FROM Class, ENROLL, Student 
-    WHERE Class.facId=&#8221;F110&#8221; AND Class.classNumber=ENROLL.classNumber 
-    AND ENROLL.stuId=Student.stuId ORDER BY Student.stuId;</p>
+    WHERE Class.facId="F110" AND Class.classNumber=ENROLL.classNumber 
+    AND ENROLL.stuId=Student.stuId ORDER BY Student.stuId;
+</code></p>
 
 <p>or using JOIN</p>
 
-<p>SELECT Student.stuId, ENROLL.grade 
+<pre class="bash">
+SELECT Student.stuId, ENROLL.grade 
     FROM Student LEFT JOIN ENROLL on (Student.stuId = ENROLL.stuId)
     WHERE ENROLL.classNumber IN 
-        (SELECT Class.classNumber FROM Class WHERE facId=&#8221;F110&#8221;)
-            ORDER BY Student.stuId;</p>
+        (SELECT Class.classNumber FROM Class WHERE facId="F110")
+            ORDER BY Student.stuId;
 
-<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
++-------+----------+-------+
 | stuId | lastName | major |
-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
++-------+----------+-------+
 | S1002 | Chin     | B     |
 | S1010 | Burns    | NULL  |
 | S1020 | Rivera   | A     |
-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;-+
-&#8220;`</p>
++-------+----------+-------+
+</pre>
 
-<p>Find IDs and names of all students taking ART 103A:
-&#8220;` bash<br />
+<p>Find IDs and names of all students taking ART 103A:</p>
+
+<p><code class="bash">
 SELECT ENROLL.stuID, lastName, firstName 
-    FROM Student, ENROLL WHERE classNumber=&#8221;ART103A&#8221; 
-    AND ENROLL.stuId=Student.stuId;</p>
+    FROM Student, ENROLL WHERE classNumber="ART103A" 
+    AND ENROLL.nstuId=Student.stuId;</code>  </p>
 
-<p>or using JOIN</p>
-
-<p>SELECT Student.stuId, lastName, firstName 
+<p>or using JOIN<br />
+<code class="bash">
+SELECT Student.stuId, lastName, firstName 
     FROM Student JOIN ENROLL on ENROLL.stuId=Student.stuId 
-    WHERE ENROLL.classNumber=&#8221;Art103A&#8221;;</p>
+    WHERE ENROLL.classNumber="Art103A";
+</code></p>
 
-<p>+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
+<pre class="bash">
++-------+----------+-----------+
 | stuID | lastName | firstName |
-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
++-------+----------+-----------+
 | S1001 | Smith    | Tom       |
 | S1002 | Chin     | Ann       |
 | S1010 | Burns    | Edward    |
-+&#8212;&#8212;&#8212;-+&#8212;&#8212;&#8212;&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;-+
-&#8220;`</p>
++-------+----------+-----------+
+</pre>
 
 <p>Find the class numbers of all the courses taught by Byrne of the math department:<br />
-&#8220;` bash
-SELECT Class.classNumber FROM Class, Faculty WHERE Class.facId = Faculty.facId AND Faculty.name = &#8220;Byrne&#8221;;</p>
+<code class="bash">
+SELECT Class.classNumber FROM Class, Faculty WHERE Class.facId = Faculty.facId AND Faculty.name = "Byrne";</code></p>
 
-<pre><code>OR with a JOIN
-</code></pre>
+<p>OR with a JOIN</p>
 
-<p>SELECT Class.classNumber FROM Class JOIN Faculty ON Class.facId=Faculty.facId WHERE Faculty.name=&#8221;Byrne&#8221;;
-&#8220;`</p>
+<p><code class="bash">SELECT Class.classNumber FROM Class JOIN Faculty ON Class.facId=Faculty.facId WHERE Faculty.name="Byrne";
+</code></p>
 
 <p>Find the names and IDs of all Faculty members who teach in class in Room H221:
-&#8220;` bash
-SELECT f.facId, f.name FROM Faculty f, Class c
-    WHERE f.facId=c.facId AND c.room = &#8220;H221&#8221;;</p>
+<code class="bash">SELECT f.facId, f.name FROM Faculty f, Class c
+    WHERE f.facId=c.facId AND c.room = "H221";</code></p>
 
-<pre><code>OR with JOIN
-</code></pre>
+<p>OR with JOIN  </p>
 
-<p>SELECT f.facId, f.name FROM Faculty f 
-    JOIN Class c ON f.facId=c.facId WHERE c.room = &#8220;H221&#8221;;
-&#8220;`</p>
+<p><code class="bash">SELECT f.facId, f.name FROM Faculty f 
+    JOIN Class c ON f.facId=c.facId WHERE c.room = "H221";
+</code></p>
 
 <p>Get an alphabetical list of names and IDs of all students in any class taught by F110.
-&#8220;` bash 
+<code class="bash">
 SELECT s.stuId, s.lastName FROM Student s, ENROLL e, Class c
 WHERE s.stuId=e.stuId AND e.classNumber=c.classNumber 
-AND c.facId=&#8221;F110&#8221; GROUP BY s.lastName ORDER BY s.lastName;</p>
+AND c.facId="F110" GROUP BY s.lastName ORDER BY s.lastName;</code></p>
 
-<pre><code>OR using IN
-</code></pre>
+<p>OR using IN</p>
 
-<p>SELECT lastName, firstName, stuId
+<p><code class="bash">SELECT lastName, firstName, stuId
  FROM Student
  WHERE stuId IN (SELECT stuId
  FROM ENROLL 
 WHERE classNumber IN 
 (SELECT classNumber 
 FROM Class 
-WHERE facId=&#8217;F110&#8217;)) 
+WHERE facId='F110')) 
 ORDER by lastName, firstName ASC; 
-&#8220;`</p>
+</code></p>
 
 <p>Find the name of all students enrolled in CSC201A. Using Exists:
-&#8220;` bash
+<code class="bash">
 SELECT s.lastName, s.firstName FROM Student s 
     WHERE Exists (SELECT * FROM ENROLL e
-    WHERE e.stuId=s.stuId And e.classNumber =&#8217;CSC201A&#8217;); </p>
+    WHERE e.stuId=s.stuId And e.classNumber ='CSC201A');</code></p>
 
-<pre><code>OR with a JOIN (can't use IN since the tables have been joined)
-</code></pre>
+<p>OR with a JOIN (can&#8217;t use IN since the tables have been joined)</p>
 
-<p>SELECT s.lastName, s.firstName FROM Student s JOIN ENROLL e ON s.stuId=e.stuId WHERE e.classNumber=&#8221;CSC201A&#8221;;
-&#8220;`</p>
+<p><code class="bash">SELECT s.lastName, s.firstName FROM Student s JOIN ENROLL e ON s.stuId=e.stuId WHERE e.classNumber="CSC201A";</code></p>
 
 <p>Find the names of all students who are not enrolled in CSC201A. (Can&#8217;t use a join or an IN subquery)
-<code>bash
+<code class="bash">
 SELECT lastName, firstName FROM Student
  WHERE Not Exists (SELECT * FROM ENROLL
-WHERE Student.stuId = ENROLL.stuId And classNumber ='CSC201A');</code></p>
+WHERE Student.stuId = ENROLL.stuId And classNumber ='CSC201A');
+</code></p>
 
           </article>
                             <p class="tags">

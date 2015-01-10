@@ -65,43 +65,35 @@
 
 <p>Send using <a href="http://codex.wordpress.org/Function_Reference/wp_mail">wp_mail()</a> and then <a href="http://codex.wordpress.org/Function_Reference/add_action">add_action()</a>  </p>
 
-<p>&#8220;` php functions.php
-        function notify<em>via</em>email( $post<em>id ) {
-            $post = get</em>post( $post_id );
-            $to = &#8216;example@example.org&#8217;;    </p>
-
-<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
-
-        &lt;-- note: you can also build an html email --&gt;
-        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
-
-        wp_mail( $to, $subject, $message );
-    }
-    add_action('draft_to_publish', 'notify_via_email');
-    add_action('pending_to_publish', 'notify_via_email');
-    add_action('new_to_publish', 'notify_via_email');
-</code></pre>
-
-<p>&#8220;`</p>
+<p>functions.php
+<pre class="php">
+function notify<em>via</em>email( $post<em>id ) {
+    $post = get</em>post( $post<em>id );
+    $to = 'example@example.org';<br />
+    $subject = get</em>bloginfo('name') . $post->post<em>title;
+    <-- note: you can also build an html email -->
+    $message = $post->post</em>title . ' was published on ' . get<em>bloginfo( 'name' ) . ' as of ' . $post->post</em>date . '. You may view it at ' . get<em>permalink( $post</em>id ) . '.';
+    wp<em>mail( $to, $subject, $message );
+}
+add</em>action('draft<em>to</em>publish', 'notify<em>via</em>email');
+add<em>action('pending</em>to<em>publish', 'notify</em>via<em>email');
+add</em>action('new<em>to</em>publish', 'notify<em>via</em>email');
+</pre></p>
 
 <p>To send an email on updates as well as on first publish:  </p>
 
-<p>&#8220;` php functions.php
-        function notify<em>via</em>email( $post<em>id ) {
-            $post = get</em>post( $post_id );
-            $to = &#8216;example@example.org&#8217;;    </p>
-
-<pre><code>        $subject = get_bloginfo('name') . $post-&gt;post_title;
-
-        &lt;-- note: you can also build an html email --&gt;
-        $message = $post-&gt;post_title . ' was published on ' . get_bloginfo( 'name' ) . ' as of ' . $post-&gt;post_date . '. You may view it at ' . get_permalink( $post_id ) . '.';
-
-        wp_mail( $to, $subject, $message );
-    }
-    add_action('publish_post', notify_via_email');
-</code></pre>
-
-<p>&#8220;`</p>
+<p>functions.php
+<pre class="php">
+function notify<em>via</em>email( $post<em>id ) {
+    $post = get</em>post( $post<em>id );
+    $to = 'example@example.org';
+    $subject = get</em>bloginfo('name') . $post->post<em>title;
+    <-- note: you can also build an html email -->
+    $message = $post->post</em>title . ' was published on ' . get<em>bloginfo( 'name' ) . ' as of ' . $post->post</em>date . '. You may view it at ' . get<em>permalink( $post</em>id ) . '.';
+    wp<em>mail( $to, $subject, $message );
+}
+add</em>action('publish<em>post', notify</em>via_email');
+</pre></p>
 
           </article>
                             <p class="tags">

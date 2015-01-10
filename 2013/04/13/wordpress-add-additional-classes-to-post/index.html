@@ -75,19 +75,21 @@
 <p>First, I could have added the css classes via javascript:  </p>
 
 <p>Javascript
-<code>javascript
+<pre class="javascript">
 $(#).each(function() {
    $(this).addClass('last'); 
-});</code>  </p>
+});
+</parameter></p>
 
-<p>While this works, what I would rather do it the &#8216;Wordpress&#8217; way.</p>
+<p>While this works, what I would rather do it the 'Wordpress' way.</p>
 
-<p>PHP- simply pass in the name of the class you want to add as a parameter to post_class().
-<code>php
-&lt;?php post_class('class_name_here'); ?&gt;</code></p>
+<p>PHP- simply pass in the name of the class you want to add as a parameter to post<em>class().
+<pre class="php">
+post</em>class('class<em>name</em>here'); ?>
+</pre></p>
 
 <p>Now that we have that down. I added a counter that resets itself inside of &#8216;the Loop&#8217;:
-&#8220;` php
+<pre class="php">
     <div id="primary" class="site-content">
         <div id="content" role="main">
         <?php if ( have_posts() ) : ?></p>
@@ -115,7 +117,7 @@ $(#).each(function() {
         &lt;/div&gt;&lt;!-- #primary --&gt;
 </code></pre>
 
-<p>&#8220;`</p>
+<p></pre></p>
 
 <p>In my css file, I have 3 classes called &#8220;article-color-template1&#8221;, &#8220;article-color-template2&#8221;, etc.</p>
 

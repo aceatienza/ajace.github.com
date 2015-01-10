@@ -62,8 +62,8 @@
               <h3><a href="">Cross Site Scripting Attack</a></h3>
           	</header>
             <p>One of the most common uses of XSS attacks is to steal a user’s authentication information by
-reading the cookie with JavaScript. The setcookie function in PHP offers one level of protec-
-tion against that type of XSS attacks. The last parameter to the function is the often-overlooked
+reading the cookie with JavaScript. The <code>setcookie()</code> function in PHP offers one level of protec-
+tion against this type of XSS attack. The last parameter to the function is the often-overlooked
 httpOnly. Setting the cookie to use HTTP only means that JavaScript cannot read it. Do not rely on
 this option though; it is not supported in all browsers.</p>
 

@@ -63,60 +63,33 @@
           	</header>
             <p>In order to generate pdfs, I imported Dompdf using Composer. The first part is to generate the html, which we will then feed into Dompdf. To do this, I used <a href="http://php.net/manual/en/book.outcontrol.php">Output Buffering</a>. </p>
 
-<p>&#8220;` php Cron<em>report.php https://github.com/ajace/asanareporting/blob/master/cron</em>report.php</p>
+<pre class="php"> Cron_report.php https://github.com/ajace/asanareporting/blob/master/cron_report.php
 
-<p>&lt;?php</p>
+    require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
 
-<pre><code>require_once("vendor/dompdf/dompdf/dompdf_config.inc.php");
+    // code omitted
 
-// code omitted
+    $dompdf = new DOMPDF();
 
-$dompdf = new DOMPDF();
+    // more code ommitted
 
-// more code ommitted
+    // start capturing
+    ob_start();
 
-// start capturing
-ob_start();
-</code></pre>
+    // close php
 
-<p>?></p>
+    // output html / omitted, see file
 
-<p><!DOCTYPE html>
-<html>
-<head>
-    <title>Asana API</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+    // get the contents from OB
+    $output = ob_get_contents();
 
-<pre><code>&lt;!-- To keep the style in tact for the pdf the css needs to be in the html. --&gt;
-&lt;style type="text/css"&gt;
-    body{font-family:Arial;font-size:12px;margin:0}h1{font-weight:bold;font-size:22px}h2{font-weight:bold;font-size:20px}h3{font-weight:bold;font-size:14px;margin:0px}table{width:720px;border:1px solid #e7e7e7;border-radius:10px;border-spacing:0}table td{border:1px solid #e7e7e7}table tr:first-child{border-top:0}table tr:last-child{border-bottom:0}tbody{margin:0px;padding:0px}#container{width:800px;margin-top:20px;margin-left:auto;margin-right:auto;margin-bottom:60px}#pdf_button{position:fixed;top:50px;right:60px;cursor:pointer}.logo{float:left}.report-header{float:left;margin-left:20px;margin-bottom:40px}.project-header{padding-left:20px;clear:both}.tasks{background-color:#f8f8f8}.task-group-header{padding-left:20px;color:#2f95ba}.tasks-area{width:500px;max-width:500px;border-left:0;border-top:0;border-bottom:0}.task-info{font-family:"Times New Roman",Georgia,Serif;margin-top:5px}.assignee-area{border:none;color:#2f95ba;vertical-align:top;padding:10px}.time{font-family:Arial;color:#2f95ba;text-transform:uppercase;padding-left:5px}.hot{color:#900}.cold{color:#0a0}.clear{margin-right:0px}.dueon{font-family:"Arial";color:#2f95ba;padding-left:5px}.notes{margin:10px 0px 10px 0px;font-style:italic;color:#6f6f6f;word-wrap:break-word}.assigned{margin-top:5px}.borders{background-color:#2f95ba}.borders.top{height:20px}.borders.bottom{height:40px}.table-bordered{border-radius:10px 10px 10px 10px}.table td{padding:10px 10px 10px 20px}
-&lt;/style&gt;
-</code></pre>
+    // save it into a a file
+    file_put_contents('tmp/report.html', $output);
 
-<p></head>
-<body></p>
+    // flush the OB for nex time
+    ob_end_flush();
 
-<pre><code>&lt;!-- code omitted --&gt;
-</code></pre>
-
-<p></body>
-</html></p>
-
-<p>&lt;?php</p>
-
-<pre><code>// get the contents from OB
-$output = ob_get_contents();
-
-// save it into a a file
-file_put_contents('tmp/report.html', $output);
-
-// flush the OB for nex time
-ob_end_flush();
-</code></pre>
-
-<p>?></p>
-
-<p>&#8220;`</p>
+</pre>
 
           </article>
                             <p class="tags">

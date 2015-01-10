@@ -63,97 +63,92 @@
           	</header>
             <p>These are the vim keys and commands which I have been using the most for web development (PHP, HTML, CSS, Javascript) and sys admin. Also, here&#8217;s my <a href="https://gist.github.com/ajace/6101976">.vimrc</a>  </p>
 
-<h2>FILES</h2>
-
-<p>:e scp://user@host/path/file    * open remote file in a local VIM
+<p><strong>FILES</strong><br />
+<pre class="bash">
+:e scp://user@host/path/file    * open remote file in a local VIM
 :ls (or :buffers)   list of open files/buffers<br />
 :bn                 next buffer
 :bp                 previous buffer
-:b#                 (# is a number to move to, same as switching open windows in Ubuntu 13.04 with ALT+1, ALT+2, etc.)
+:b#                 (&#35; is a number to move to, same as switching open windows in Ubuntu 13.04 with ALT+1, ALT+2, etc.)
 :bw                 buffer wipe (delete buffers)
 :e                  open a new buffer (open a new file and load into buffer)
-:b TAB              cycle through the open files/buffers list</p>
+:b TAB              cycle through the open files/buffers list
+</pre></p>
 
-<h2>SESSIONS</h2>
+<p><strong>SESSIONS</strong><br />
+<pre class="bash">
+:mksession! ~/today.ses     to save the session and call it today
+vim -S ~/today.ses          to reload the previous session
+</pre></p>
 
-<p>:mksession! ~/today.ses     to save the session and call it today
-vim -S ~/today.ses          to reload the previous session</p>
-
-<h2>TABS</h2>
-
-<p>:tabe [filename]    open file in new tab
+<p><strong>TABS</strong><br />
+<pre class="bash">
+:tabe [filename]    open file in new tab
 :tabc               close
-:tabn, :tabp        switch tabs</p>
+:tabn, :tabp        switch tabs
+</pre></p>
 
-<h2>WINDOWS</h2>
+<p><strong>WINDOWS</strong><br />
+<pre>
+<kbd>Ctrl-E</kbd>               scroll down
+<kbd>Crtl-Y</kbd>               scroll up<br />
+<kbd>Ctrl-W s</kbd> and <kbd>Ctrl-W v</kbd> to split the current window horizontally and vertically.
+<kbd>Ctrl-W w</kbd> to swhitch between open windows, and <kbd>Ctrl-W h</kbd> (or j or k or l) to navigate through open windows.
+<kbd>Ctrl-W c</kbd> to close the current window, and <kbd>Ctrl-W o</kbd> to close all windows except the current one
+</pre></p>
 
-<p>Ctrl-E              scroll down
-Crtl-Y              scroll up  </p>
-
-<p>Ctrl-W s and Ctrl-W v to split the current window horizontally and vertically.</p>
-
-<p>Ctrl-W w to swhitch between open windows, and Ctrl-W h (or j or k or l) to navigate through open windows.</p>
-
-<p>Ctrl-W c to close the current window, and Ctrl-W o to close all windows except the current one</p>
-
-<h2>INDENTATION</h2>
-
-<p>== align the current line
+<p><strong>INDENTATION</strong><br />
+<pre class="bash">
+== align the current line
 =i{ align the inner block
 =% align to the matching parenthesis/bracket under the cursor
 14== align the next 14 lines
-=G align to the end of the file</p>
+=G align to the end of the file
+</pre></p>
 
-<h2>SEARCH</h2>
-
-<p>/word       will search forward word. add :set wrapscan in .vimrc so that this is the only thing you&#8217;ll need
-?word       will search backward for word
+<p><strong>SEARCH</strong><br />
+<pre class="bash">
+/word    will search forward word. add :set wrapscan in .vimrc so that this is the only thing you'll need
+?word  will search backward for word
 n           next
 N           previous
 ?word       reverse search for word
-*           will search for the next instance of the word under the cursor</p>
+*       will search for the next instance of the word under the cursor
+&#35;      will search for the previous instance of the word under the cursor
+</pre></p>
 
-<h1>will search for the previous instance of the word under the cursor</h1>
+<p><strong>GETTING AROUND IN THE FILE</strong><br />
+<pre class="bash">
+G           jump to end of buffer
+gg          jump to beginning of buffer
+&#35;G or &#35;gg   jump to &#35; (line number)
+</pre></p>
 
-<h2>GETTING AROUND IN THE FILE</h2>
-
-<p>G           jump to end of buffer
-gg          jump to beginning of buffer</p>
-
-<h1>G or #gg   jump to # (line number)</h1>
-
-<h2>COPY, CUT, PASTE, UNDO</h2>
-
-<ul>
-<li>select text in visual mode then
+<p><strong>COPY, CUT, PASTE, UNDO</strong><br />
+<pre class="bash">
+* select text in visual mode then
 y           yank (copy)
 d           same as cut
 p           paste after
-P           paste before</li>
-</ul>
+P           paste before
+</pre></p>
 
-<h2>HISTORY</h2>
-
-<p>gi          jump back to last place you were in Insert mode
+<p><strong>HISTORY</strong><br />
+<pre class="bash">
+gi          jump back to last place you were in Insert mode
 u           undo
-Ctrl-R      redo</p>
+Ctrl-R      redo
+</pre></p>
 
-<h2>FOLDING</h2>
+<p><strong>FOLDING</strong><br />
+-  I don&#8217;t fold stuff</p>
 
-<ul>
-<li>I don&#8217;t fold stuff</li>
-</ul>
+<p><strong>AUTOCOMPLETION</strong><br />
+Ctrl-x Ctrl-o, then Ctrl-n to go select next suggestion  </p>
 
-<h2>AUTOCOMPLETION</h2>
-
-<p>Ctrl-x Ctrl-o, then Ctrl-n to go select next suggestion</p>
-
-<h2>EXTRA NOTES</h2>
-
-<ul>
-<li>you can&#8217;t copy from a remote session to the clipboard</li>
-<li>commands have auto-complete</li>
-</ul>
+<p><strong>EXTRA NOTES</strong><br />
+- you can&#8217;t copy from a remote session to the clipboard
+- commands have auto-complete</p>
 
           </article>
                             <p class="tags">
