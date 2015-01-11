@@ -33,7 +33,7 @@
 .description {
 }
 
-.homepage .article-title {
+.article-title {
 	margin-top: 0;
 }
 
@@ -78,6 +78,14 @@
 
 .status-title {
 	text-align: center;
+}
+
+#disqus_thread, .tags {
+	margin-top: 30px;
+}
+
+#disqus_thread #discovery {
+	display: none !important;
 }
 
 /* Google Search / Bootstrap Fixes */
