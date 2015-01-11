@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+    <meta name="keywords" content="SQL, MySQL">    <title>SQL query examples for tables with relationships</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+</head>
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search_results" method="GET">
+        <div class="form-group">
+          <input class="form-control" name="q" placeholder="Search...">
+        </div>
+      </form>      
+    </div>
+  </div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <span class="post-date">Aug 25, 2013</span>
+            <h3 class="article-title">SQL query examples for tables with relationships</h3>
+        	</header>
+          <p>Given these tables:<br />
+<pre class="bash">
+Faculty (facId, name, department, rank)<br />
+Class (classNumber, facId, schedule, room)<br />
+ENROLL (stuId, classNumber, grade)<br />
+Student (stuId, lastName, firstName, major, credits)<br />
+</pre>
+Student and Class is a &#8220;has many&#8221; relationship. Students have many classes and the reverse, Classes have many Students. ENROLL is the relation between the two in an E-R model, and also called a pivot table.<br />
+Find stuId and grade of all students taking any course taught by the Faculty member whose facId is F110. Arrange in order by stuId. </p>
+
+<p><code class="bash">
+SELECT Student.stuId, Student.lastName, ENROLL.grade major 
+    FROM Class, ENROLL, Student 
+    WHERE Class.facId="F110" AND Class.classNumber=ENROLL.classNumber 
+    AND ENROLL.stuId=Student.stuId ORDER BY Student.stuId;
+</code></p>
+
+<p>or using JOIN</p>
+
+<pre class="bash">
+SELECT Student.stuId, ENROLL.grade 
+    FROM Student LEFT JOIN ENROLL on (Student.stuId = ENROLL.stuId)
+    WHERE ENROLL.classNumber IN 
+        (SELECT Class.classNumber FROM Class WHERE facId="F110")
+            ORDER BY Student.stuId;
+
++-------+----------+-------+
+| stuId | lastName | major |
++-------+----------+-------+
+| S1002 | Chin     | B     |
+| S1010 | Burns    | NULL  |
+| S1020 | Rivera   | A     |
++-------+----------+-------+
+</pre>
+
+<p>Find IDs and names of all students taking ART 103A:</p>
+
+<p><code class="bash">
+SELECT ENROLL.stuID, lastName, firstName 
+    FROM Student, ENROLL WHERE classNumber="ART103A" 
+    AND ENROLL.nstuId=Student.stuId;</code>  </p>
+
+<p>or using JOIN<br />
+<code class="bash">
+SELECT Student.stuId, lastName, firstName 
+    FROM Student JOIN ENROLL on ENROLL.stuId=Student.stuId 
+    WHERE ENROLL.classNumber="Art103A";
+</code></p>
+
+<pre class="bash">
++-------+----------+-----------+
+| stuID | lastName | firstName |
++-------+----------+-----------+
+| S1001 | Smith    | Tom       |
+| S1002 | Chin     | Ann       |
+| S1010 | Burns    | Edward    |
++-------+----------+-----------+
+</pre>
+
+<p>Find the class numbers of all the courses taught by Byrne of the math department:<br />
+<code class="bash">
+SELECT Class.classNumber FROM Class, Faculty WHERE Class.facId = Faculty.facId AND Faculty.name = "Byrne";</code></p>
+
+<p>OR with a JOIN</p>
+
+<p><code class="bash">SELECT Class.classNumber FROM Class JOIN Faculty ON Class.facId=Faculty.facId WHERE Faculty.name="Byrne";
+</code></p>
+
+<p>Find the names and IDs of all Faculty members who teach in class in Room H221:
+<code class="bash">SELECT f.facId, f.name FROM Faculty f, Class c
+    WHERE f.facId=c.facId AND c.room = "H221";</code></p>
+
+<p>OR with JOIN  </p>
+
+<p><code class="bash">SELECT f.facId, f.name FROM Faculty f 
+    JOIN Class c ON f.facId=c.facId WHERE c.room = "H221";
+</code></p>
+
+<p>Get an alphabetical list of names and IDs of all students in any class taught by F110.
+<code class="bash">
+SELECT s.stuId, s.lastName FROM Student s, ENROLL e, Class c
+WHERE s.stuId=e.stuId AND e.classNumber=c.classNumber 
+AND c.facId="F110" GROUP BY s.lastName ORDER BY s.lastName;</code></p>
+
+<p>OR using IN</p>
+
+<p><code class="bash">SELECT lastName, firstName, stuId
+ FROM Student
+ WHERE stuId IN (SELECT stuId
+ FROM ENROLL 
+WHERE classNumber IN 
+(SELECT classNumber 
+FROM Class 
+WHERE facId='F110')) 
+ORDER by lastName, firstName ASC; 
+</code></p>
+
+<p>Find the name of all students enrolled in CSC201A. Using Exists:
+<code class="bash">
+SELECT s.lastName, s.firstName FROM Student s 
+    WHERE Exists (SELECT * FROM ENROLL e
+    WHERE e.stuId=s.stuId And e.classNumber ='CSC201A');</code></p>
+
+<p>OR with a JOIN (can&#8217;t use IN since the tables have been joined)</p>
+
+<p><code class="bash">SELECT s.lastName, s.firstName FROM Student s JOIN ENROLL e ON s.stuId=e.stuId WHERE e.classNumber="CSC201A";</code></p>
+
+<p>Find the names of all students who are not enrolled in CSC201A. (Can&#8217;t use a join or an IN subquery)
+<code class="bash">
+SELECT lastName, firstName FROM Student
+ WHERE Not Exists (SELECT * FROM ENROLL
+WHERE Student.stuId = ENROLL.stuId And classNumber ='CSC201A');
+</code></p>
+
+        </article>
+
+              <p class="tags">
+        Tags:
+                <a href="/blog/tags/SQL">SQL</a>,                 <a href="/blog/tags/MySQL">MySQL</a>                </p>
+      
+        <nav><a href="/"><< Home</a></nav>
+
+              <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'ajace'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+			</div>
+   </div>
+  </div>
+
+<footer>
+	<div class="container">
+					</div>
+    <a href="/status" class="status hide-on-mobile">Blog Status</a>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+    <meta name="keywords" content="php, javascript, pdf">    <title>Procedural PHP part 4b-Javascript</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+</head>
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search_results" method="GET">
+        <div class="form-group">
+          <input class="form-control" name="q" placeholder="Search...">
+        </div>
+      </form>      
+    </div>
+  </div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <span class="post-date">Aug 30, 2013</span>
+            <h3 class="article-title">Procedural PHP part 4b-Javascript</h3>
+        	</header>
+          <p>The last part mixes in Javascript in order to activate the last script. I used Javascript so that the pdf button is not included in the pdf.</p>
+
+<p><a href="https://github.com/ajace/asanareporting/blob/master/cron_report.php">Cron_report.php</a>  </p>
+
+<pre class="javascript">
+    (function() { 
+usly generated html file
+    $dompdf->load_html(file_get_contents($input));
+    $dompdf->render();
+
+    // save the output temporarily
+    $output = $dompdf->output();
+
+        // create the button & add to the page
+        var printBtn = document.createElement('button');
+        printBtn.setAttribute('id', 'pdf_button');
+        printBtn.textContent = 'PDF';
+
+        document.getElementById('container').appendChild(printBtn);
+
+        var filename = printBtn.getAttribute('value');
+
+        // add the event listener for the click
+        printBtn.onclick = function() { generatePDF(); };  
+
+        // send a GET request (no need for a POST since we are just activating a script)
+        var httpRequest;
+        function generatePDF() {
+            if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 8 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            if (!httpRequest) {
+              console.log("Can't do ajax");
+              return false;
+            }
+
+            httpRequest.onreadystatechange = alertContents;
+            httpRequest.open('GET', 'generate_pdf.php');
+            httpRequest.send();
+        }
+
+        // upon return, save the path to the new file as a new button
+        function alertContents() {
+            if (httpRequest.readyState === 4) {
+                if (httpRequest.status === 200) {
+                    var pdfBtn = document.getElementById('pdf_button');
+                    pdfBtn.parentNode.removeChild(pdfBtn);
+
+                    var downloadLink = document.createElement('a');
+                    downloadLink.setAttribute('href', httpRequest.responseText);
+                    downloadLink.innerHTML = '&lt;button id="pdf_button"&gt;Save PDF&lt;/button&gt;';
+
+                    document.getElementById('container').appendChild(downloadLink);
+                } else {
+                    console.log('There was a problem with the request.');
+                }
+            }
+        }
+    })(); // iife
+</pre>
+
+<p>And here is the script to generate the pdf. The reason for this is that there cannot be any output prior to dompdf.  </p>
+
+<p><a href="https://github.com/ajace/asanareporting/blob/master/generate_pdf.php">generate_pdf.php</a>
+<pre class="php">
+// require dompdf
+require<em>once("vendor/dompdf/dompdf/dompdf</em>config.inc.php");
+$dompdf = new DOMPDF();  </p>
+
+<p>function generate<em>pdf($input){
+    global  $dompdf;<br />
+    date</em>default<em>timezone</em>set('America/New<em>York');
+    $date = date('M j Y');
+    $filename = 'report</em>' . $date . '.pdf';<br />
+    // load the previously generated html file
+    $dompdf->load<em>html(file</em>get<em>contents($input));
+    $dompdf->render();
+    // save the output temporarily
+    $output = $dompdf->output();<br />
+    // save the file
+  file</em>put<em>contents('tmp/'.$filename, $output);<br />
+    // send back the path to the ajax request
+    echo 'tmp/'.$filename;<br />
+}<br />
+// call the function
+generate</em>pdf('tmp/report.html');
+</pre></p>
+
+<p>This concludes the creation of the reporting tool. I came into this with an OOP mindset and had to adjust a little bit. The mixture of logic and html still take a bit of getting used to since I&#8217;ve built other projects in mvc frameworks. I did go ahead and build <a href="https://github.com/ajace/asanareporting/tree/master/oop_version">OO version</a> though to compare. It took much longer to build, but can be extended easier should BU&#8217;s users wish to re-arrange projects and tasks in the future.</p>
+
+        </article>
+
+              <p class="tags">
+        Tags:
+                <a href="/blog/tags/php">php</a>,                 <a href="/blog/tags/javascript">javascript</a>,                 <a href="/blog/tags/pdf">pdf</a>                </p>
+      
+        <nav><a href="/"><< Home</a></nav>
+
+              <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'ajace'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+			</div>
+   </div>
+  </div>
+
+<footer>
+	<div class="container">
+					</div>
+    <a href="/status" class="status hide-on-mobile">Blog Status</a>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+</body>
+</html>

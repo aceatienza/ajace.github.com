@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+    <meta name="keywords" content="lamp, php, apache">    <title>Installing LAMP on a fresh Ubuntu 12.10 install</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+</head>
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Ace Atienza</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Blog</a></li>
+        <li ><a href="/projects">Projects</a></li>
+        <li ><a href="/about">About</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" action="/search_results" method="GET">
+        <div class="form-group">
+          <input class="form-control" name="q" placeholder="Search...">
+        </div>
+      </form>      
+    </div>
+  </div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <span class="post-date">Mar 09, 2013</span>
+            <h3 class="article-title">Installing LAMP on a fresh Ubuntu 12.10 install</h3>
+        	</header>
+          <h2>update 8/18/2013</h2>
+
+<p>I&#8217;ve been having issues accessing index.php and figured out that my folder permissions were set incorrectly. I was getting &#8221; SoftException in &#8230;/index.php is writeable by group,&#8221; errors.  The fix:</p>
+
+<p><code>bash
+$ sudo chmod -R 755 ~/public_html/</code></p>
+
+<p>I recently bought a new <a href="http://www.samsung.com/us/computer/laptops/NP520U4C-A01UB">laptop</a>, good value (bought it for about $400 refurb from BestBuy), and I won&#8217;t feel {too} bad if someone steals it or it breaks from a fall. After setting up for Ruby and Rails, I setup LAMP. Last time I installed it was on my previous Thinkpad SL410 over a year ago which I haven&#8217;t had to touch since. On Ubuntu, the easiest way is to use tasksel.  </p>
+
+<pre><code>sudo apt-get install tasksel
+</code></pre>
+
+<p>&#8230;and then LAMP.</p>
+
+<pre><code>sudo tasksel install lamp-server
+</code></pre>
+
+<p>This time around I set it up to work inside my user directory and it was reading the code inside of my php files rather than parsing. To fix, open up &#8220;/etc/apache2/mods-enabled/php5.conf&#8221; and comment out the lines below. Change &#8216;Directory&#8217; folder accordingly if not in public_html.</p>
+
+<p>Comment out these lines:<br />
+    <IfModule mod_userdir.c>
+        <Directory /home/*/public_html>
+            php<em>admin</em>value engine Off
+        </Directory>
+    </IfModule></p>
+
+        </article>
+
+              <p class="tags">
+        Tags:
+                <a href="/blog/tags/lamp">lamp</a>,                 <a href="/blog/tags/php">php</a>,                 <a href="/blog/tags/apache">apache</a>                </p>
+      
+        <nav><a href="/"><< Home</a></nav>
+
+              <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'ajace'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+			</div>
+   </div>
+  </div>
+
+<footer>
+	<div class="container">
+					</div>
+    <a href="/status" class="status hide-on-mobile">Blog Status</a>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+</body>
+</html>
