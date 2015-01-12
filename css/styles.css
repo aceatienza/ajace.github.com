@@ -21,7 +21,6 @@
 }
 
 .post-date {
-    font-size: .9em;
     color: #aaa;
     margin: 0
 }
@@ -35,10 +34,20 @@
 
 .article-title {
 	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .homepage article {
 	margin-bottom: 20px;
+}
+
+.homepage .tags {
+	margin-left: 30px;
+}
+
+.homepage .tags small {
+	margin-right: 6px;
+	color: orange;
 }
 
 .projects {
