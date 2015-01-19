@@ -12,7 +12,7 @@
 	border-left: 1px solid #ddd;
 }
 
-.status-table .btn {
+.btn {
 	white-space: normal;
 }
 
@@ -87,6 +87,27 @@
 
 .status-title {
 	text-align: center;
+}
+
+.status-board .list {
+	width: 25%;
+	display: inline-table;
+	border-top: 1px solid lightgray;
+}
+
+.status-board .list-header {
+	padding: 10px 0;
+	border-bottom: 1px solid lightgray;
+	margin: 5px 0;
+}
+
+.list .cards {
+	margin: 0 10px;
+}
+
+.cards .btn {
+	margin-bottom: 5px;
+	width: 100%;
 }
 
 #disqus_thread, .tags {
