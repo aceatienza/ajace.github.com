@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ace Atienza&#039;s Web Development blog">
+    <meta name="keywords" content="linux, ubuntu, webmin, apache">    <title>Managing local development environment with Webmin (Linux)</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Search -->
+    <script>
+      (function() {
+        var cx = '000861553144757390361:ilf0n_kvp6c';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+</head>
+<body>
+  
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Ace Atienza: in development</a>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Blog</a></li>
+      <li ><a href="/projects">Projects</a></li>
+      <li ><a href="/about">About</a></li>
+    </ul>
+    <form class="navbar-form navbar-right" action="/search_results" method="GET">
+      <div class="form-group">
+        <input class="form-control" name="q" placeholder="Search...">
+      </div>
+    </form>      
+  </div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 center-block">
+        <article>
+          <header>
+            <span class="post-date">Dec 02, 2014</span>
+            <h3 class="article-title">Managing local development environment with Webmin (Linux)</h3>
+        	</header>
+          <p>At Vector Media, I use Mamp Pro for local dev since it has the ability to set individual versions of PHP for a couple of the sites that I work on. At home, I&#8217;ve gotten tired of manually editing php.ini, the virtual hosts file, and my hosts file and just want an easy to use control panel. Here&#8217;s a good <a href="http://stackoverflow.com/a/14910717">list</a>. I was going to go with Ispconfig which looked the most polished but it seemed like overkill after looking at the screenshots so I went with Webmin.  </p>
+
+<p><a href="http://www.webmin.com/deb.html">Install Webmin</a>  </p>
+
+<pre class="bash">
+sudo add-apt-repository 'deb http://download.webmin.com/download/repository sarge contrib'  
+sudo add-apt-repository 'deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib'  
+wget http://www.webmin.com/jcameron-key.asc  
+sudo apt-key add jcameron-key.asc  
+sudo apt-get update  
+sudo apt-get install webmin 
+</pre>  
+
+<p>(optional) Apply a <a href="http://www.webmin.com/cgi-bin/search_third.cgi?themes=1">theme</a> 
+-  download locally and install from Webmin Configuration > Webmin Themes 
+activate at Webmin > Change Language and Theme  </p>
+
+<p>(optional) Install module <a href="http://www.webmin.com/cgi-bin/search_third.cgi?modules=1">phpMyAdmin link</a> 
+-  download locally and install from Webmin Configuration > Webmin Modules </p>
+
+<p>Then fire up Webmin by going to https://localhost:10000/   </p>
+
+<p>Note: if you&#8217;re using Chrome it will complain about an invalid certificate (other browsers may also give this warning). Just click through or you can fix the issue - <a href="http://www.webmin.com/faq.html">FAQ</a>. Also in the FAQ is how to allow remote connections under &#8220;How can I change Webmin&#8217;s list of allowed IP addresses from the shell?&#8221; </p>
+
+<p>I already had my LAMP stack setup so I didn&#8217;t have to do any additional configuration in Webmin.</p>
+
+        </article>
+
+              <p class="tags">
+        Tags:
+                <a href="/blog/tags/linux">linux</a>,                 <a href="/blog/tags/ubuntu">ubuntu</a>,                 <a href="/blog/tags/webmin">webmin</a>,                 <a href="/blog/tags/apache">apache</a>                </p>
+      
+        <nav><a href="/"><< Home</a></nav>
+
+              <div id="disqus_thread"></div>
+                
+			</div>
+   </div>
+  </div>
+
+    <footer>
+    	<div class="container">
+    		    		    	</div>
+        <a href="/status" class="status hide-on-mobile">Blog Status</a>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'ajace'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    <script src="/js/main.js"></script>
+
+
+
+</body>
+</html>

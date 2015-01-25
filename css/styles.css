@@ -25,11 +25,12 @@
     margin: 0
 }
 
-.article-title {
-	margin-top: 26px;
+article header {
+	margin-bottom: 10px;
 }
 
-.description {
+.article-title {
+	margin-top: 26px;
 }
 
 .article-title {
