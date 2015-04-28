@@ -1,0 +1,37 @@
+{
+    "clients":[
+        {
+            "dummy_name":"****** (a NY university)",
+            "name":"Adelphi University",
+            "client_url":"adelphi.edu",
+            "client_status":"inactive",
+            "projects":[
+                {
+                    "title":"Responsive theme integration",
+                    "date":"Dec 2014 - Feb 2015",
+                    "status":"complete",
+                    "summary":"Updated responsive themes in a Git repository were integrated with client repository which was in Mercurial.",
+                    "image":"",
+                    "tags":["Multisite Wordpress", "PHP", "Mercurial", "Git"]
+                }
+            ]
+        },
+        {
+            "dummy_name":"****** (mid-size jewelry company)",
+            "name":"Capwell",
+            "client_url":"capwell.co",
+            "client_status":"inactive",
+            "client_summary":"CMS updates and additional functionality, front end responsive and redesign updates.",
+            "projects":[
+                {
+                    "title":"UPS shipping module",
+                    "date":"Jan 2015 - Apr 2015",
+                    "status":"complete",
+                    "summary":"UPS shipping label integration to replace UPS WorldShip and customer confirmation emails",
+                    "image":"",
+                    "tags":["Expression Engine", "PHP", "Javascript", "UPS api"]                    
+                }
+            ]        
+        }
+    ]
+}
